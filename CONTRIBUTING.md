@@ -1,37 +1,84 @@
-## **CONTRIBUTING.md**  
-This file outlines how contributors can get involved in your project, including coding standards, branching strategies, and PR guidelines.
+# Contributing to Propifix  
 
-```markdown
-# Contributing to Propifix 
-Thank you for considering contributing to our project! Here’s how you can help:
+Thank you for contributing to Propifix! This guide explains how to set up your environment, follow our development workflow, and submit changes effectively.  
 
-## Getting Started  
-1. Fork the repository and clone it locally.  
-2. Create a new branch for your feature or bug fix:  
+---
+
+## 🛠️ Setting Up Your Environment  
+
+1. **Clone the repository**  
+   Since you are a collaborator, you don’t need to fork the repo. Instead, clone it directly:  
+   ```bash
+   git clone https://github.com/Propifix/Frontend.git
+   cd Frontend
+   ```  
+2. **Set up the upstream branch** (if you haven’t already):  
+   ```bash
+   git remote add upstream https://github.com/Propifix/Frontend.git
+   ```  
+3. **Install dependencies**  
+   ```bash
+   npm install
+   ```  
+
+---
+
+## 🔄 Branching Strategy  
+
+We use the **dev branch workflow**, meaning all development happens on `dev`.  
+
+- `main` → **Stable, production-ready code.**  
+- `dev` → **Active development branch.**  
+- `feature/your-feature-name` → **Feature or bug fix branches (created from `dev`).**  
+
+### Creating a New Branch  
+1. Always pull the latest changes from `dev` before starting:  
+   ```bash
+   git checkout dev
+   git pull origin dev
+   ```  
+2. Create a new branch on top of `dev`:  
    ```bash
    git checkout -b feature/your-feature-name
-Follow the coding standards and commit your changes.
+   ```  
 
-Push your branch and open a Pull Request (PR) to the dev branch.
+---
 
-Branching Strategy
-main: Stable, production-ready code.
+## 💡 Coding Standards  
 
-dev: Active development branch. All feature branches should merge here.
+- Follow our **ESLint and Prettier** configurations.  
+- Write **meaningful commit messages** using [Conventional Commits](https://www.conventionalcommits.org/):  
+  - `feat: add login form` (New feature)  
+  - `fix: resolve button alignment` (Bug fix)  
+  - `chore: update dependencies` (Maintenance)  
 
-feature/your-feature-name: Use this format for new features or bug fixes.
+---
 
-Code Style
-Follow the ESLint and Prettier configurations.
+## 🔄 Submitting a Pull Request (PR)  
 
-Write meaningful commit messages (e.g., feat: add login form, fix: resolve button alignment).
+1. **Push your branch**:  
+   ```bash
+   git push origin feature/your-feature-name
+   ```  
+2. **Create a PR** to merge into `dev`.  
+3. **Ensure your code is tested** before submitting.  
+4. **Use the PR template** and describe your changes clearly.  
+5. **Link related issues** (if applicable):  
+   ```markdown
+   Closes #issue-number
+   ```  
+6. Wait for **code review** before merging.  
 
-Pull Requests
-Ensure your code is tested locally before submitting a PR.
+---
 
-Use the PR template to describe your changes.
+## 🐞 Reporting Issues  
 
-Link your PR to any related issues using Closes #issue-number.
+- If you find a bug or have a feature request, open an **issue** with:  
+  - A clear title and description.  
+  - Steps to reproduce (if applicable).  
+  - Screenshots or logs (if helpful).  
 
-Reporting Issues
-If you find a bug or have a feature request, please open an issue using the issue template.
+---
+
+Thank you for helping make Propifix better! 🚀
+
