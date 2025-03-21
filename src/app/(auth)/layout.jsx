@@ -3,7 +3,6 @@ export default function AuthLayout({
 }) {
   return (
     <div>
-      <nav>Auth Navigation</nav>
       <main>{children}</main>
     </div>
   );
