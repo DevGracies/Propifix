@@ -10,7 +10,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "../ui/select";
-import Form from "./Form";
+import Form from "../forms/Form";
 
 const SELECTOPTIONS = [
   {
@@ -98,7 +98,7 @@ const SELECTOPTIONS = [
 
 const Hero = () => {
   return (
-    <section className="w-full h-[830px] md:h-[870px]  relative text-white flex flex-col pt-28 md:pt-32">
+    <section className="w-full h-[870px] md:h-[940px]  relative text-white flex flex-col pt-28 md:pt-32">
       <Image
         src={"/home-images/bg3.svg"}
         width={100}
@@ -144,7 +144,7 @@ const Hero = () => {
         </p>
         <Form SELECTOPTIONS={SELECTOPTIONS} />
       </div>
-      <div className="absolute bottom-5 right-0 pr-[50px] hidden lg:block">
+      <div className="absolute bottom-20 right-0 pr-[50px] hidden lg:block">
         <div>
           <h1 className="text-[#9D71C6] text-right text-[30px] font-semibold">
             Trusted Agents <br />{" "}
@@ -161,7 +161,7 @@ const Hero = () => {
           </p>
         </div>
       </div>
-      <div className="flex gap-[10px] items-center w-fit absolute bottom-5 left-0 pl-[20px]">
+      <div className="flex gap-[10px] items-center w-fit absolute bottom-10 md:bottom-16 left-0 pl-[20px]">
         <Image
           src={"/icons/playIcon.svg"}
           width={44}

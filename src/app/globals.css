@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@import "leaflet/dist/leaflet.css";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -129,6 +131,19 @@
 
   -webkit-mask-position: left top;
   mask-position: left top;
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+.clip {
+  -webkit-mask-image: url('/home-images/FindAgentbg3.svg');
+  mask-image: url('/home-images/FindAgentbg3.svg');
+  
+  -webkit-mask-size: cover;
+  mask-size: cover;
+
+  -webkit-mask-position: center;
+  mask-position: center;
 
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
