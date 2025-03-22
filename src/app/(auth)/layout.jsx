@@ -1,10 +1,18 @@
-export default function AuthLayout({
-  children,
-}) {
+import { Poppins } from "next/font/google";
+
+const poppins = Poppins({
+  subsets: ["latin"],
+  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
+  display: "swap",
+});
+
+export default function AuthLayout({ children }) {
   return (
-    <div>
+    <div className={`${poppins.className} antialiased auth_bg h-screen`}>
       <nav>Auth Navigation</nav>
-      <main>{children}</main>
+      <main className="mx-auto my-[3rem] md:w-[580px] w-full p-4">
+        {children}
+      </main>
     </div>
   );
 }
