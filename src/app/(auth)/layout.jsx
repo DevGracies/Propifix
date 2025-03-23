@@ -10,7 +10,7 @@ export default function AuthLayout({ children }) {
   return (
     <div className={`${poppins.className} antialiased auth_bg h-screen`}>
       <nav>Auth Navigation</nav>
-      <main className="mx-auto my-[3rem] md:w-[580px] w-full p-4">
+      <main className="mx-auto my-[3rem] md:w-[580px] w-full p-4 h-[-webkit-fill-available]">
         {children}
       </main>
     </div>

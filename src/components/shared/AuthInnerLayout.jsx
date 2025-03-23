@@ -39,7 +39,7 @@ export const AuthInnerLayout = ({
       {children}
 
       <div className="mt-3 sm:w-[65%] w-full flex justify-between gap-4">
-        {/* Back to Homepage (Hidden on small screens) */}
+        {/* Back to Homepage  */}
         <div
           className="flex items-center cursor-pointer text-[11.34px] font-normal whitespace-nowrap"
           onClick={() => router.push("/")}
