@@ -34,6 +34,9 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
   --color-popover-foreground: var(--popover-foreground);
+  --color-thick-grey:#D5D5D5;
+  --color-input-border:rgba(0, 0, 0, 0.35);
+  --color-primary-color:#6A1CA9;
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
@@ -48,6 +51,7 @@
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
+
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
@@ -78,6 +82,15 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
+.bg_linear-purple{
+  background: linear-gradient(90deg, #5D14AD 0%, #9747FF 100%);
+}
+.auth_bg{
+  background-image: url("../../public/auth_bg.jpeg");
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-position: center;
+}
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
