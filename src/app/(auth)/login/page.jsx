@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import Link from "next/link";
 import { Eye, EyeOff, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import { assets } from "../../../../public/assets/assets";
 import SideComponent from "@/components/auth/SideComponent";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [selectedRole, setSelectedRole] = useState(null);
@@ -14,10 +14,11 @@ export default function LoginPage() {
   const roles = ["User", "House Agent", "Caretaker", "Artisan", "Landlord"];
   const { register, handleSubmit } = useForm();
 
+  const router = useRouter();
   const onSubmit = (data) => {
-    console.log(data);
+    data.preventDefault();
+    router.push("/");
   };
-
   return (
     <div className="relative h-screen w-full">
       <Image
@@ -71,7 +72,7 @@ export default function LoginPage() {
               />
               <button
                 type="button"
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
+                className="absolute cursor-pointer right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                 onClick={() => setShowPassword((prev) => !prev)}
               >
                 {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
@@ -99,27 +100,28 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="w-full p-3 bg-[#5D14AD] text-white rounded-lg"
+              className="w-full cursor-pointer p-3 bg-[#5D14AD] text-white rounded-lg"
             >
               Sign In
             </button>
           </form>
 
           <div className="flex justify-between items-center text-sm">
-            <Link href="/" legacyBehavior>
-              <a className="flex items-center text-[#5D14AD]">
+            <button onClick={() => router.push("/")}>
+              <a className="flex cursor-pointer items-center text-[#5D14AD]">
                 <ArrowLeft className="mr-2" size={16} /> Back to Homepage
               </a>
-            </Link>
+            </button>
             <p>
               Don't have an account?{" "}
-              <Link href="/register" legacyBehavior>
+              <button className="cursor-pointer" onClick={() => router.push("/register")}>
                 <a className="text-[#5D14AD]">Sign Up</a>
-              </Link>
+                {/* 2345279444 UBA Grace Temitope Adegunle */}
+              </button>
             </p>
-            <Link href="/forgot-password" legacyBehavior>
+            <button className="cursor-pointer" onClick={() => router.push("/forgot-password")}>
               <a className="text-[#5D14AD]">Forgot Password?</a>
-            </Link>
+            </button>
           </div>
         </div>
       </div>
