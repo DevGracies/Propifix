@@ -4,33 +4,10 @@ import { Button } from "./ui/button";
 import AnimatedLinks from "./AnimatedLinks";
 import { useEffect, useState } from "react";
 import { MenuIcon, XIcon } from "lucide-react";
+import Link from "next/link";
+import { NAVLINKS } from "@/lib/constants";
+import CustomLink from "./custom-ui/CustomLink";
 
-const NAVLINKS = [
-  {
-    title: "home",
-    url: "#home",
-  },
-  {
-    title: "find an agent",
-    url: "#find-an-agent",
-  },
-  {
-    title: "services",
-    url: "#services",
-  },
-  {
-    title: "how it works",
-    url: "#how-it-works",
-  },
-  {
-    title: "about us",
-    url: "#about",
-  },
-  {
-    title: "contact us",
-    url: "#contact",
-  },
-];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -71,7 +48,7 @@ const Navbar = () => {
                     className={"text-white capitalize font-medium text-[13px]"}
                     iconColor={"white"}
                   >
-                    <a href={link.url}>{link.title}</a>
+                    <CustomLink url={link.url}>{link.title}</CustomLink>
                   </AnimatedLinks>
                 </li>
               ))}
@@ -80,8 +57,9 @@ const Navbar = () => {
               <Button
                 variant="outline"
                 className="bg-transparent border text-white capitalize cursor-pointer "
+                asChild
               >
-                get started
+                <Link href={"/register"}>get started</Link>
               </Button>
             </div>
             <div className="lg:hidden relative z-50">
@@ -104,6 +82,7 @@ const Navbar = () => {
               </Button>
             </div>
           </nav>
+
           <div
             className={`fixed inset-0 bg-purple-600 bg-opacity-95 backdrop-blur-sm z-40 lg:hidden transition-all duration-300 ease-in-out ${
               isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
@@ -118,9 +97,16 @@ const Navbar = () => {
                     }
                     iconColor={"white"}
                   >
-                    <a href={link.url}>{link.title}</a>
+                    <CustomLink url={link.url}>{link.title}</CustomLink>
                   </AnimatedLinks>
                 ))}
+                <Button
+                  variant="outline"
+                  className="bg-transparent border text-white capitalize cursor-pointer "
+                  asChild
+                >
+                  <Link href={"/register"}>get started</Link>
+                </Button>
               </nav>
             </div>
           </div>
