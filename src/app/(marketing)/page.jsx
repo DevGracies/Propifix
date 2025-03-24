@@ -1,12 +1,14 @@
-import FeaturedLocations from "@/components/FeaturedLocations/FeaturedLocations";
-import FindAgent from "@/components/FindAnAgent/FindAgent";
-import Hero from "@/components/hero/Hero";
-import HowItWorks from "@/components/HowItWorks/HowItWorks";
-import MeetTopAgents from "@/components/MeetTopAgents/MeetTopAgents";
-import WhyPropifix from "@/components/WhyPropifix/WhyPropifix";
-import React from "react";
+import CallToAction from "@/components/sections/CallToAction";
+import DiscoverMore from "@/components/sections/DiscoverMore";
+import FeaturedLocations from "@/components/sections/FeaturedLocations";
+import FindAgent from "@/components/sections/FindAgent";
+import Hero from "@/components/sections/Hero";
+import HowItWorks from "@/components/sections/HowItWorks";
+import MeetTopAgents from "@/components/sections/MeetTopAgents";
+import WhyPropifix from "@/components/sections/WhyPropifix";
 
 const HomePage = () => {
+
   return (
     <>
       <Hero />
@@ -14,7 +16,9 @@ const HomePage = () => {
       <HowItWorks />
       <FeaturedLocations />
       <MeetTopAgents />
-      <WhyPropifix/>
+      <WhyPropifix />
+      <DiscoverMore />
+      <CallToAction/>
     </>
   );
 };

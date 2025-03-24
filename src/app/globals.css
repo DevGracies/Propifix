@@ -135,6 +135,9 @@
     @apply bg-background text-foreground;
   }
 }
+html {
+  scroll-behavior: smooth;
+}
 .clip-svg {
   -webkit-mask-image: url('/home-images/bg1.svg');
   mask-image: url('/home-images/bg1.svg');
