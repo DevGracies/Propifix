@@ -37,6 +37,9 @@
   --color-thick-grey:#D5D5D5;
   --color-input-border:rgba(0, 0, 0, 0.35);
   --color-primary-color:#6A1CA9;
+  --color-thick-grey:#D5D5D5;
+  --color-input-border:rgba(0, 0, 0, 0.35);
+  --color-primary-color:#6A1CA9;
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
@@ -51,6 +54,7 @@
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
+
 
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
