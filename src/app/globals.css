@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@import "leaflet/dist/leaflet.css";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -146,6 +148,9 @@
     @apply bg-background text-foreground;
   }
 }
+html {
+  scroll-behavior: smooth;
+}
 .clip-svg {
   -webkit-mask-image: url('/home-images/bg1.svg');
   mask-image: url('/home-images/bg1.svg');
@@ -159,6 +164,20 @@
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
 }
+.clip {
+  -webkit-mask-image: url('/home-images/FindAgentbg3.svg');
+  mask-image: url('/home-images/FindAgentbg3.svg');
+  
+  -webkit-mask-size: cover;
+  mask-size: cover;
+
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
 
 @media (min-width: 1024px) {
   .clip-svg {
