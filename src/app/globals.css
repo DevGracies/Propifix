@@ -85,12 +85,21 @@
 .bg_linear-purple{
   background: linear-gradient(90deg, #5D14AD 0%, #9747FF 100%);
 }
-.auth_bg{
-  background-image: url("../../public/auth_bg.jpeg");
+
+.user_auth_bg,.auth_bg{
   background-size:cover;
   background-repeat:no-repeat;
   background-position: center;
 }
+
+.user_auth_bg{
+  background-image: url("../../public/user_auth_bg.svg");
+}
+
+.auth_bg{
+  background-image: url("../../public/auth_bg.jpeg");
+}
+
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
