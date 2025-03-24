@@ -30,16 +30,16 @@ export default function LoginPage() {
       />
       <div className="absolute w-full p-6 md:p-14 flex flex-col md:flex-row items-center justify-between min-h-screen">
         <SideComponent />
-        <div className="p-6 md:p-8 shadow-lg flex flex-col gap-4 bg-[#FFFFFFCC] backdrop-blur-[18.92px] md:mt-0 rounded-[18.92px]">
-          <h2 className="text-lg text-center font-[Poppins] font-semibold text-[28.38px] leading-[39.42px] tracking-[0%] w-[506px] h-[78px] top-[39px] left-[39px]">
+        <div className="p-6 md:p-8 shadow-lg flex flex-col gap-4 bg-[#FFFFFFCC] backdrop-blur-[18.92px] md:mt-0 rounded-[18.92px] bg-opacity-80">
+          <h2 className="text-lg text-center font-[Poppins] font-semibold text-[28.38px] leading-[39.42px] tracking-[0%] max-w-fit h-[78px] top-[39px] left-[39px]">
             LogIn to Explore Homes and Artisan Services
           </h2>
 
           <div className="flex flex-wrap gap-2">
-            {roles.map((role) => (
+            {roles.map((role, index) => (
               <button
-                key={role}
-                className={`px-4 py-2 transition-colors w-[92px] h-[28px] rounded-[9.72px] border-[0.81px] border-solid ${
+                key={index}
+                className={`px-4 py-2 flex justify-center items-center transition-colors w-[92px] h-[28px] rounded-[9.72px] border-[0.81px] border-solid ${
                   selectedRole === role
                     ? "bg-[#5D14AD] text-white"
                     : "border border-[#00000059]"
@@ -114,12 +114,18 @@ export default function LoginPage() {
             </button>
             <p>
               Don't have an account?{" "}
-              <button className="cursor-pointer" onClick={() => router.push("/register")}>
+              <button
+                className="cursor-pointer"
+                onClick={() => router.push("/register")}
+              >
                 <a className="text-[#5D14AD]">Sign Up</a>
                 {/* 2345279444 UBA Grace Temitope Adegunle */}
               </button>
             </p>
-            <button className="cursor-pointer" onClick={() => router.push("/forgot-password")}>
+            <button
+              className="cursor-pointer"
+              onClick={() => router.push("/forgot-password")}
+            >
               <a className="text-[#5D14AD]">Forgot Password?</a>
             </button>
           </div>
