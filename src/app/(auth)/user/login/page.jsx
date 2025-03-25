@@ -6,7 +6,6 @@ import { Eye, EyeOff, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import { assets } from '../../../../../public/assets/assets'
 import SideComponent from "@/components/auth/SideComponent";
-<<<<<<< HEAD:src/app/(auth)/login/page.jsx
 import { useRouter } from "next/navigation";
 =======
 import { Button } from "@/components/ui/button";
@@ -126,7 +125,6 @@ export default function LoginPage() {
           </form>
 
           <div className="flex justify-between items-center text-sm">
-<<<<<<< HEAD:src/app/(auth)/login/page.jsx
             <button onClick={() => router.push("/")}>
               <a className="flex cursor-pointer items-center text-[#5D14AD]">
                 <ArrowLeft className="mr-2" size={16} /> Back to Homepage
@@ -158,7 +156,6 @@ export default function LoginPage() {
                 {/* 2345279444 UBA Grace Temitope Adegunle */}
               </button>
             </p>
-<<<<<<< HEAD:src/app/(auth)/login/page.jsx
             <button
               className="cursor-pointer"
               onClick={() => router.push("/forgot-password")}
