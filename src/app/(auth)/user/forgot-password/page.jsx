@@ -6,7 +6,7 @@ export default function ForgotPassword() {
   const router = useRouter();
 
   useEffect(() => {
-    router.push("/forgot-password/reset");
+    router.push("/user/forgot-password/reset");
   }, []);
 
   return <p>Redirecting...</p>;

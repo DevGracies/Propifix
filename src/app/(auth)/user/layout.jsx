@@ -11,7 +11,7 @@ export default function AuthLayout({ children }) {
     <div
       className={`${poppins.className} antialiased user_auth_bg h-screen overflow-auto`}
     >
-      <main className="m-[2rem]">{children}</main>
+      <main>{children}</main>
     </div>
   );
 }
