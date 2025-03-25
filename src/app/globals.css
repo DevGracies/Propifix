@@ -1,6 +1,8 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@import "leaflet/dist/leaflet.css";
+
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
@@ -34,6 +36,12 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
   --color-popover-foreground: var(--popover-foreground);
+  --color-thick-grey:#D5D5D5;
+  --color-input-border:rgba(0, 0, 0, 0.35);
+  --color-primary-color:#6A1CA9;
+  --color-thick-grey:#D5D5D5;
+  --color-input-border:rgba(0, 0, 0, 0.35);
+  --color-primary-color:#6A1CA9;
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
@@ -48,6 +56,8 @@
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
+
+
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
   --popover-foreground: oklch(0.145 0 0);
@@ -76,6 +86,24 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+}
+
+.bg_linear-purple{
+  background: linear-gradient(90deg, #5D14AD 0%, #9747FF 100%);
+}
+
+.user_auth_bg,.auth_bg{
+  background-size:cover;
+  background-repeat:no-repeat;
+  background-position: center;
+}
+
+.user_auth_bg{
+  background-image: url("../../public/user_auth_bg.svg");
+}
+
+.auth_bg{
+  background-image: url("../../public/auth_bg.jpeg");
 }
 
 .dark {
@@ -120,6 +148,9 @@
     @apply bg-background text-foreground;
   }
 }
+html {
+  scroll-behavior: smooth;
+}
 .clip-svg {
   -webkit-mask-image: url('/home-images/bg1.svg');
   mask-image: url('/home-images/bg1.svg');
@@ -133,6 +164,20 @@
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
 }
+.clip {
+  -webkit-mask-image: url('/home-images/FindAgentbg3.svg');
+  mask-image: url('/home-images/FindAgentbg3.svg');
+  
+  -webkit-mask-size: cover;
+  mask-size: cover;
+
+  -webkit-mask-position: center;
+  mask-position: center;
+
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}
+
 
 @media (min-width: 1024px) {
   .clip-svg {
