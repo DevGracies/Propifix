@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-export const UserFormSchema = z
+export const AdminSignUpFormSchema = z
   .object({
     full_name: z
       .string({

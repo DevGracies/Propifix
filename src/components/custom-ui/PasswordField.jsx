@@ -16,7 +16,7 @@ export const PasswordInput = ({
       prevState === "password" ? "text" : "password"
     );
   const inputCnStyle = cn(
-    `italic text-[11.04px] font-[400] border border-input-border h-[35px] rounded-[9.46px] flex items-center z-[1000]`,
+    `italic text-[11.04px] font-[400] border border-input-border h-[45px] rounded-[9.46px] flex items-center z-[1000]`,
     inputStyle
   );
   return (
@@ -39,7 +39,7 @@ export const PasswordInput = ({
             </span>
             <span
               onClick={handleChange}
-              className="w-[55px] text-[11.04px] font-[400] text-white rounded-[9.46px] absolute top-[4px] bottom-[4px] right-[4px] cursor-pointer flex justify-center items-center bg_linear-purple"
+              className="w-[55px] h-[36px] text-[11.04px] font-[400] text-white rounded-[9.46px] absolute top-[4px] bottom-[4px] right-[4px] cursor-pointer flex justify-center items-center bg_linear-purple"
             >
               {passwordType === "password" ? "Show" : "Hide"}
             </span>
