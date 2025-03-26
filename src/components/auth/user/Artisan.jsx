@@ -56,7 +56,7 @@ export const ArtisanForm = () => {
       email: '',
       skills: '',
       home_address: '',
-      years_of_experience: '',
+      years_of_experience: 0,
       available_on_demand: 'yes',
       next_of_kin_full_name: '',
       relationship: '',
