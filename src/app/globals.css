@@ -36,12 +36,12 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-primary: var(--primary);
   --color-popover-foreground: var(--popover-foreground);
-  --color-thick-grey:#D5D5D5;
-  --color-input-border:rgba(0, 0, 0, 0.35);
-  --color-primary-color:#6A1CA9;
-  --color-thick-grey:#D5D5D5;
-  --color-input-border:rgba(0, 0, 0, 0.35);
-  --color-primary-color:#6A1CA9;
+  --color-thick-grey: #d5d5d5;
+  --color-input-border: rgba(0, 0, 0, 0.35);
+  --color-primary-color: #6a1ca9;
+  --color-thick-grey: #d5d5d5;
+  --color-input-border: rgba(0, 0, 0, 0.35);
+  --color-primary-color: #6a1ca9;
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
@@ -56,7 +56,6 @@
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
-
 
   --card-foreground: oklch(0.145 0 0);
   --popover: oklch(1 0 0);
@@ -88,21 +87,22 @@
   --sidebar-ring: oklch(0.708 0 0);
 }
 
-.bg_linear-purple{
-  background: linear-gradient(90deg, #5D14AD 0%, #9747FF 100%);
+.bg_linear-purple {
+  background: linear-gradient(90deg, #5d14ad 0%, #9747ff 100%);
 }
 
-.user_auth_bg,.auth_bg{
-  background-size:cover;
-  background-repeat:no-repeat;
+.user_auth_bg,
+.auth_bg {
+  background-size: cover;
+  background-repeat: no-repeat;
   background-position: center;
 }
 
-.user_auth_bg{
+.user_auth_bg {
   background-image: url("../../public/user_auth_bg.svg");
 }
 
-.auth_bg{
+.auth_bg {
   background-image: url("../../public/auth_bg.jpeg");
 }
 
@@ -150,11 +150,13 @@
 }
 html {
   scroll-behavior: smooth;
+  scrollbar-color: #8337E2 rgba(81, 0, 255, 0.158);
+  scrollbar-width: thin;
 }
 .clip-svg {
-  -webkit-mask-image: url('/home-images/bg1.svg');
-  mask-image: url('/home-images/bg1.svg');
-  
+  -webkit-mask-image: url("/home-images/bg1.svg");
+  mask-image: url("/home-images/bg1.svg");
+
   -webkit-mask-size: cover;
   mask-size: cover;
 
@@ -165,9 +167,9 @@ html {
   mask-repeat: no-repeat;
 }
 .clip {
-  -webkit-mask-image: url('/home-images/FindAgentbg3.svg');
-  mask-image: url('/home-images/FindAgentbg3.svg');
-  
+  -webkit-mask-image: url("/home-images/FindAgentbg3.svg");
+  mask-image: url("/home-images/FindAgentbg3.svg");
+
   -webkit-mask-size: cover;
   mask-size: cover;
 
@@ -178,11 +180,9 @@ html {
   mask-repeat: no-repeat;
 }
 
-
 @media (min-width: 1024px) {
   .clip-svg {
     -webkit-mask-position: right top;
     mask-position: right top;
   }
 }
-
