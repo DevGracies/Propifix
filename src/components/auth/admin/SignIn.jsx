@@ -1,80 +1,91 @@
-"use client";
+'use client'
 
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Loader } from "lucide-react";
-import { AdminSignInFormSchema } from "@/lib/schema/AdminSignInFormSchema";
-import { InputField } from "../../custom-ui/InputField";
-import { PasswordInput } from "../../custom-ui/PasswordField";
-import { Form } from "@/components/ui/form";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Text } from "../../shared/Text";
+import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Loader } from 'lucide-react'
+import { AdminSignInFormSchema } from '@/lib/schema/AdminSignInFormSchema'
+import { InputField } from '../../custom-ui/InputField'
+import { PasswordInput } from '../../custom-ui/PasswordField'
+import { Form } from '@/components/ui/form'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Text } from '../../shared/Text'
+import ReCAPTCHA from 'react-google-recaptcha'
 
 export const SignInForm = () => {
-  const [isPending, setIsPending] = useState(false);
-  const [isTermsAccepted, setIsTermsAccepted] = useState(false);
+  const [isPending, setIsPending] = useState(false)
+  const [isTermsAccepted, setIsTermsAccepted] = useState(false)
+  const [isRobot, setIsRobot] = useState(true)
+
+  function onChange(value) {
+    console.log('Captcha value:', value)
+    setIsRobot(false)
+  }
 
   const form = useForm({
     resolver: zodResolver(AdminSignInFormSchema),
     defaultValues: {
-      full_name: "",
-      pwd: "",
-      cpwd: "",
-      email: "",
+      full_name: '',
+      pwd: '',
+      cpwd: '',
+      email: '',
     },
-  });
+  })
 
   const onSubmit = (values) => {
-    console.log(values);
-  };
+    console.log(values)
+  }
 
   return (
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full flex flex-col gap-4"
+        className='w-full flex flex-col gap-4'
       >
         <InputField
           control={form.control}
-          name="email"
-          placeholder="Enter your email address"
-          inputCategory="input"
-          inputType="email"
+          name='email'
+          placeholder='Enter your email address'
+          inputCategory='input'
+          inputType='email'
         />
         <PasswordInput
           control={form.control}
-          name="pwd"
-          placeholder="Create Password"
+          name='pwd'
+          placeholder='Create Password'
         />
 
-        <div className="flex flex-col gap-5 mt-3">
+        <div className='flex flex-col gap-5 mt-3'>
           <Button
-            disabled={!isTermsAccepted}
-            className="h-12 flex items-center justify-center rounded-full bg_linear-purple text-white font-medium text-lg w-full"
+            disabled={isTermsAccepted || isRobot}
+            className='h-12 flex items-center justify-center rounded-full bg_linear-purple text-white font-medium text-lg w-full mb-4'
           >
             {isPending ? (
-              <Loader className="w-5 h-5 text-white animate-spin" />
+              <Loader className='w-5 h-5 text-white animate-spin' />
             ) : (
-              "Log In"
+              'Log In'
             )}
           </Button>
-
-          <div className="text-[9.72px] font-[400] flex items-center">
+          <ReCAPTCHA
+            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+            onChange={onChange}
+            data-theme='dark'
+          />
+          <div className='text-[9.72px] font-[400] flex items-center mt-4'>
             <Checkbox
               onCheckedChange={() => setIsTermsAccepted((prev) => !prev)}
-              className="mr-2"
+              className='mr-2'
             />
             <Text>
-              I agree to the Propifix{" "}
-              <span className="text-primary-color">Terms</span> &{" "}
-              <span className="text-primary-color">Conditions</span> and confirm
+              I agree to the Propifix{' '}
+              <span className='text-primary-color'>Terms</span> &{' '}
+              <span className='text-primary-color'>Conditions</span> and confirm
               that my information is accurate.
             </Text>
           </div>
         </div>
       </form>
     </Form>
-  );
-};
+  )
+}

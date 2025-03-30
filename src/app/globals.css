@@ -98,7 +98,9 @@
   background-position: center;
 }
 
-.user_auth_bg {
+
+
+.user_auth_bg{
   background-image: url("../../public/user_auth_bg.svg");
 }
 
