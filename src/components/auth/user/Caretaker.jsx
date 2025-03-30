@@ -35,10 +35,10 @@ export const CaretakerForm = () => {
   const checkIfPhoneFieldIsValid = () => {
     let isValid = true
     if (!phone) {
-      setPhoneError('Phone number is required')
+      setError('Phone number is required')
       isValid = false
     } else {
-      setPhoneError('')
+      setError('')
     }
     if (!nextOfKinPhone) {
       setNextOfKinError(`Next Of Kin's Phone number is required`)
@@ -87,7 +87,7 @@ export const CaretakerForm = () => {
   }, [form.formState.errors])
 
   return (
-    <ScrollArea className='h-[527px] relatve'>
+    <ScrollArea className='h-[400px] relatve'>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}

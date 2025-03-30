@@ -14,6 +14,7 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { UploadButton } from '@/components/shared/UploadButton'
 import { UserFormSchema } from '@/lib/schema/UserFormSchema'
 import { PhoneNumberField } from '@/components/shared/PhoneNumberField'
+import { ScrollArea } from '@/components/ui/scroll-area'
 
 export const UserForm = () => {
   const [isPending, setIsPending] = useState(false)
@@ -30,10 +31,10 @@ export const UserForm = () => {
   const checkIfPhoneFieldIsValid = () => {
     let isValid = true
     if (!phone) {
-      setPhoneError('Phone number is required')
+      setError('Phone number is required')
       isValid = false
     } else {
-      setPhoneError('')
+      setError('')
     }
     return isValid
   }
@@ -60,78 +61,80 @@ export const UserForm = () => {
   }, [form.formState.errors])
 
   return (
-    <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className='w-full flex flex-col gap-4'
-      >
-        <InputField
-          control={form.control}
-          name='full_name'
-          placeholder='Enter your full name'
-          inputCategory='input'
-          inputType='text'
-        />
-        <InputField
-          control={form.control}
-          name='email'
-          placeholder='Enter your email address'
-          inputCategory='input'
-          inputType='email'
-        />
-        <PhoneNumberField
-          setPhone={setPhone}
-          phone={phone}
-          error={error}
-          setError={setError}
-          placeholder='Enter your phone number'
-        />
-        <PasswordInput
-          control={form.control}
-          name='pwd'
-          placeholder='Create a secure password'
-        />
-        <PasswordInput
-          control={form.control}
-          name='cpwd'
-          placeholder='Confirm Password'
-        />
-        <div className='flex flex-col gap-5'>
-          <div className='flex flex-wrap gap-2 justify-between items-start'>
-            <ReCAPTCHA
-              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-              onChange={onChange}
-            />
-            <UploadButton
-              handleChange={(e) => console.log(e)}
-              label={`e.g., National ID, NIN, Driver’s License`}
-              uploadBtnText={'Upload Identification'}
-            />
+    <ScrollArea className='h-[400px] relatve'>
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className='w-full flex flex-col gap-4'
+        >
+          <InputField
+            control={form.control}
+            name='full_name'
+            placeholder='Enter your full name'
+            inputCategory='input'
+            inputType='text'
+          />
+          <InputField
+            control={form.control}
+            name='email'
+            placeholder='Enter your email address'
+            inputCategory='input'
+            inputType='email'
+          />
+          <PhoneNumberField
+            setPhone={setPhone}
+            phone={phone}
+            error={error}
+            setError={setError}
+            placeholder='Enter your phone number'
+          />
+          <PasswordInput
+            control={form.control}
+            name='pwd'
+            placeholder='Create a secure password'
+          />
+          <PasswordInput
+            control={form.control}
+            name='cpwd'
+            placeholder='Confirm Password'
+          />
+          <div className='flex flex-col gap-5'>
+            <div className='flex flex-wrap gap-2 justify-between items-start'>
+              <ReCAPTCHA
+                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                onChange={onChange}
+              />
+              <UploadButton
+                handleChange={(e) => console.log(e)}
+                label={`e.g., National ID, NIN, Driver’s License`}
+                uploadBtnText={'Upload Identification'}
+              />
+            </div>
+            <div className='text-[9.72px] font-[400] flex items-center '>
+              <Checkbox
+                onCheckedChange={() => setIsTermsAccepted((prev) => !prev)}
+                className='mr-2'
+              />
+              <Text>
+                I agree to the Propifix{' '}
+                <span className='text-primary-color'>Terms</span> &{' '}
+                <span className='text-primary-color'>Conditions</span> and
+                confirm that my information is accurate.
+              </Text>
+            </div>
+            <Button
+              disabled={!isTermsAccepted || isRobot}
+              className='h-12 flex items-center justify-center rounded-[12px] bg_linear-purple text-white font-medium text-lg w-full'
+            >
+              {isPending ? (
+                <Loader className='w-5 h-5 text-white animate-spin' />
+              ) : (
+                'Sign Up'
+              )}
+            </Button>
           </div>
-          <div className='text-[9.72px] font-[400] flex items-center '>
-            <Checkbox
-              onCheckedChange={() => setIsTermsAccepted((prev) => !prev)}
-              className='mr-2'
-            />
-            <Text>
-              I agree to the Propifix{' '}
-              <span className='text-primary-color'>Terms</span> &{' '}
-              <span className='text-primary-color'>Conditions</span> and confirm
-              that my information is accurate.
-            </Text>
-          </div>
-          <Button
-            disabled={!isTermsAccepted || isRobot}
-            className='h-12 flex items-center justify-center rounded-[12px] bg_linear-purple text-white font-medium text-lg w-full'
-          >
-            {isPending ? (
-              <Loader className='w-5 h-5 text-white animate-spin' />
-            ) : (
-              'Sign Up'
-            )}
-          </Button>
-        </div>
-      </form>
-    </Form>
+        </form>
+      </Form>
+    </ScrollArea>
   )
 }

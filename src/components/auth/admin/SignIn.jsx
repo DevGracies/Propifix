@@ -70,7 +70,6 @@ export const SignInForm = () => {
           <ReCAPTCHA
             sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
             onChange={onChange}
-            data-theme='dark'
           />
           <div className='text-[9.72px] font-[400] flex items-center mt-4'>
             <Checkbox

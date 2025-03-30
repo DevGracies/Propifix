@@ -80,7 +80,7 @@ export const HouseAgentForm = () => {
   }, [form.formState.errors])
 
   return (
-    <ScrollArea className='h-[527px] relatve'>
+    <ScrollArea className='h-[400px] relatve'>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
