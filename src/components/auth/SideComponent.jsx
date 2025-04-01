@@ -1,6 +1,13 @@
 import React from "react";
 import { assets } from "../../../public/assets/assets";
 import Image from "next/image";
+import { Montserrat } from "next/font/google";
+
+const montserrat = Montserrat({
+  weight: ["500"],
+  style: ["italic"],
+  subsets: ["latin"],
+});
 
 const SideComponent = () => {
   return (
@@ -13,9 +20,17 @@ const SideComponent = () => {
         className="absolute top-0 right-0"
       />
 
-      <Image src={assets.icon1} alt="Propifix Icon" width={150} height={54} />
+      <Image
+        src={assets.icon1}
+        alt="Propifix Icon"
+        width={150}
+        height={54}
+        className="absolute top-[40px] left-[153px] w-[150px] h-[54px]"
+      />
 
-      <p className="mt-4 text-gray-700 text-center px-4">
+      <p
+        className={`${montserrat.className} text-[20px] leading-[100%] text-center absolute top-[114px] left-[40px] w-[375px] h-[72px]`}
+      >
         Seamless transactions, trusted professionals, and quality service every
         time.
       </p>

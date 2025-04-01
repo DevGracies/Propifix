@@ -1,16 +1,20 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { Eye, EyeOff, ArrowLeft } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import SideComponent from "@/components/auth/SideComponent";
 import { assets } from "../../../../../public/assets/assets";
+import ReCAPTCHA from "react-google-recaptcha";
+import { Button } from "@/components/ui/button";
 
 export default function LoginPage() {
-  const [selectedRole, setSelectedRole] = useState(null);
+  const [selectedRole, setSelectedRole] = useState("User");
   const [showPassword, setShowPassword] = useState(false);
+  const recaptchaRef = useRef(null);
+  const [isVerified, setIsVerified] = useState(false);
   const roles = ["User", "House Agent", "Caretaker", "Artisan", "Landlord"];
   const { register, handleSubmit } = useForm();
 
@@ -19,19 +23,46 @@ export default function LoginPage() {
     data.preventDefault();
     router.push("/");
   };
+
+  async function handleCaptchsubmission(token) {
+    try {
+      if (token) {
+        await fetch("/api", {
+          method: "POST",
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ token }),
+        });
+        setIsVerified(true);
+      }
+    } catch (e) {
+      setIsVerified(false);
+    }
+  }
+
+  const handleChange = (token) => {
+    handleCaptchsubmission(token);
+  };
+
+  function handleExpired() {
+    setIsVerified(false);
+  }
+
   return (
-    <div className="absolute w-full p-6 md:p-14 flex flex-col md:flex-row items-center justify-between min-h-screen">
+    <div className="absolute w-full p-4 md:p-14 flex flex-col md:flex-row items-center justify-between min-h-screen">
       <SideComponent />
-      <div className="p-6 md:p-8 shadow-lg flex flex-col gap-4 bg-[#FFFFFFCC] backdrop-blur-[18.92px] md:mt-0 rounded-[18.92px] bg-opacity-80">
-        <h2 className="text-lg text-center font-[Poppins] font-semibold text-[28.38px] leading-[39.42px] tracking-[0%] w-[506px] h-[78px] top-[39px] left-[39px]">
-          LogIn to Explore Homes and Artisan Services
+      <div className="p-6 md:p-8 shadow-lg flex flex-col gap-4 bg-[#FFFFFFCC] backdrop-blur-[18.92px] rounded-[18.92px] bg-opacity-80">
+        <h2 className="font-semibold text-[24px] md:w-[506px] md:text-[28.38px] leading-[32px] md:leading-[39.42px] tracking-[0%]">
+          Log In to Explore Homes and Artisan Services
         </h2>
 
         <div className="flex flex-wrap gap-2">
           {roles.map((role) => (
             <button
               key={role}
-              className={`px-4 py-2 transition-colors w-[92px] h-[28px] rounded-[9.72px] border-[0.81px] border-solid ${
+              className={`px-4 py-2 transition-colors w-[92px] h-[28px] flex justify-center items-center rounded-lg border-[0.81px] border-solid ${
                 selectedRole === role
                   ? "bg-[#5D14AD] text-white"
                   : "border border-[#00000059]"
@@ -68,8 +99,8 @@ export default function LoginPage() {
             </button>
           </div>
 
-          <div className="flex items-center bg-[#7777774F] w-1/2 justify-between rounded p-2">
-            <div className="gap-2 flex">
+          <div className="flex items-center justify-between bg-[#7777774F] w-full md:w-1/2 rounded-2xl p-2">
+            <div className="flex items-center gap-2">
               <input
                 type="checkbox"
                 id="recaptcha"
@@ -89,26 +120,27 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            className="w-full cursor-pointer p-3 bg-[#5D14AD] text-white rounded-lg"
+            className="w-full cursor-pointer p-3 bg-[#5D14AD] text-white h-11 rounded-lg transition duration-300 ease-linear transform hover:scale-105"
           >
             Sign In
           </button>
         </form>
 
-        <div className="flex justify-between items-center gap-4 text-sm">
-          <button onClick={() => router.push("/")}>
-            <a className="flex cursor-pointer items-center text-[#5D14AD]">
-              <ArrowLeft className="mr-2" size={16} /> Back to Homepage
-            </a>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-sm">
+          <button
+            onClick={() => router.push("/")}
+            className="flex cursor-pointer items-center text-[#5D14AD] transition duration-300 ease-linear hover:opacity-80"
+          >
+            <ArrowLeft className="mr-2" size={16} /> Back to Homepage
           </button>
+
           <p>
             Don't have an account?{" "}
             <button
-              className="cursor-pointer"
               onClick={() => router.push("/user/register")}
+              className="cursor-pointer text-[#5D14AD] transition duration-300 ease-linear transform hover:scale-105"
             >
-              <a className="text-[#5D14AD]">Sign Up</a>
-              {/* 2345279444 UBA Grace Temitope Adegunle */}
+              Sign Up
             </button>
           </p>
           <button

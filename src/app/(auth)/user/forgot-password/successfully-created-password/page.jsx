@@ -15,9 +15,9 @@ const Success = () => {
     router.push("/user/login");
   };
   return (
-    <div className="relative h-screen w-full flex justify-center items-center">
-      <div className="p-6 md:p-8 shadow-lg flex flex-col gap-4 bg-[#FFFFFFCC] backdrop-blur-[18.92px] md:mt-0 justify-center w-[600px] h-[367px] top-[50px] left-[410px] rounded-[18.92px]">
-        <h2 className="text-lg text-center font-[Poppins] font-semibold text-[28.38px] leading-[39.42px] tracking-[0%] w-[506px] h-[78px] top-[39px] left-[39px]">
+    <div className="relative h-screen w-full flex justify-center items-center p-4 md:p-0">
+      <div className="p-6 shadow-lg flex flex-col gap-4 bg-[#FFFFFFCC] backdrop-blur-[18.92px] justify-center w-full max-w-[600px] h-auto md:h-[367px] rounded-[18.92px]">
+        <h2 className="font-semibold text-[24px] md:text-[28.38px] leading-[32px] md:leading-[39.42px] tracking-[0%]">
           Password updated!
         </h2>
         <p>Your password has been updated.</p>
@@ -31,29 +31,30 @@ const Success = () => {
           </button>
         </form>
 
-        <div className="flex justify-between items-center gap-4 text-sm">
-            <button onClick={() => router.push("/")}>
-              <a className="flex cursor-pointer items-center text-[#5D14AD]">
-                <ArrowLeft className="mr-2" size={16} /> Back to Homepage
-              </a>
-            </button>
-            <p>
-              Don't have an account?{" "}
-              <button
-                className="cursor-pointer"
-                onClick={() => router.push("/user/register")}
-              >
-                <a className="text-[#5D14AD]">Sign Up</a>
-                {/* 2345279444 UBA Grace Temitope Adegunle */}
-              </button>
-            </p>
+        <div className="flex flex-col md:flex-row justify-between items-center gap-2 md:gap-4 text-sm">
+          <button
+            onClick={() => router.push("/")}
+            className="flex cursor-pointer items-center text-[#5D14AD] transition duration-300 ease-linear hover:opacity-80"
+          >
+            <ArrowLeft className="mr-2" size={16} /> Back to Homepage
+          </button>
+
+          <p>
+            Don't have an account?{" "}
             <button
-              className="cursor-pointer"
-              onClick={() => router.push("/user/forgot-password")}
+              onClick={() => router.push("/user/register")}
+              className="cursor-pointer text-[#5D14AD] transition duration-300 ease-linear transform hover:scale-105"
             >
-              <a className="text-[#5D14AD]">Forgot Password?</a>
+              Sign Up
             </button>
-          </div>
+          </p>
+          <button
+            className="cursor-pointer"
+            onClick={() => router.push("/user/forgot-password")}
+          >
+            <a className="text-[#5D14AD]">Forgot Password?</a>
+          </button>
+        </div>
       </div>
     </div>
   );
