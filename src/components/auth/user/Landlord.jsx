@@ -15,9 +15,11 @@ import { UploadButton } from '@/components/shared/UploadButton'
 import { LandlordFormSchema } from '@/lib/schema/LandlordFormSchema'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { PhoneNumberField } from '@/components/shared/PhoneNumberField'
+import { useCreateLandlord } from '@/hooks/auth/regsiter.hook'
+import { userTypes } from '@/utils/ConstantEnums'
 
 export const LandlordForm = () => {
-  const [isPending, setIsPending] = useState(false)
+  const { mutate: registerLandlord, isPending } = useCreateLandlord()
   const [isTermsAccepted, setIsTermsAccepted] = useState(false)
   const [isRobot, setIsRobot] = useState(true)
   const [phone, setPhone] = useState('')
@@ -26,6 +28,9 @@ export const LandlordForm = () => {
   const [error, setError] = useState('')
   const [nextOfKinError, setNextOfKinError] = useState('')
   const [caretakerError, setCaretakerError] = useState('')
+  const [identifierImage, setIdentifierImage] = useState('')
+  const [utilityBillImage, setUtilityBillImage] = useState('')
+  const [nextOfKinIdentifierImage, setNextOfKinIdentifierImage] = useState('')
 
   function onChange(value) {
     console.log('Captcha value:', value)
@@ -55,6 +60,17 @@ export const LandlordForm = () => {
     return isValid
   }
 
+  const documentsSelected = () => {
+    let isSelected = false
+    const allRequiredAreUploaded = identifierImage && utilityBillImage
+    if (allRequiredAreUploaded) {
+      isSelected = true
+    } else {
+      toast.error('Upload all required document!')
+    }
+    return isSelected
+  }
+
   const form = useForm({
     resolver: zodResolver(LandlordFormSchema),
     defaultValues: {
@@ -77,7 +93,31 @@ export const LandlordForm = () => {
 
   const onSubmit = (values) => {
     const phoneFieldIsValid = checkIfPhoneFieldIsValid
-    if (phoneFieldIsValid) console.log(values)
+    const imageIsUploaded = documentsSelected()
+
+    if (phoneFieldIsValid && imageIsUploaded) {
+      registerLandlord({
+        fullName: values.full_name,
+        email: values.email,
+        password: values.pwd,
+        phone: `+${phone}`,
+        identifierImage: identifierImage,
+        __t: userTypes.landlord,
+        numberOfHousesOwned: values.number_of_house,
+        utilityBillImage: utilityBillImage,
+        homeAddress: values.home_address,
+        yoe: values.years_of_experience,
+        availableOnDemand: values.available_on_demand,
+        next_of_kin: {
+          fullName: values.next_of_kin_full_name,
+          relationship: values.relationship,
+          phone: `+${nextOfKinPhone}`,
+          email: values.next_of_kin_email,
+          address: values.next_of_kin_address,
+          identifierImage: nextOfKinIdentifierImage,
+        },
+      })
+    }
   }
 
   useEffect(() => {
@@ -87,7 +127,7 @@ export const LandlordForm = () => {
   }, [form.formState.errors])
 
   return (
-    <ScrollArea className='h-[400px] relatve'>
+    <ScrollArea className='h-[400px] relative'>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -147,12 +187,12 @@ export const LandlordForm = () => {
           />
           <div className='flex flex-col gap-5'>
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setIdentifierImage(e)}
               topLabel={'Upload Identification and Government ID'}
               label={`Upload a valid ID (e.g., National ID, Driver’s License)`}
             />
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setUtilityBillImage(e)}
               topLabel={'Upload Utility bills to confirm property ownership'}
             />
           </div>
@@ -233,7 +273,7 @@ export const LandlordForm = () => {
           </div>
           <div className='flex flex-col gap-5'>
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setNextOfKinIdentifierImage(e)}
               label={`Upload a valid ID for verification`}
               uploadBtnText={'Upload Identification'}
               topLabel={'Upload Identification (Optional)'}

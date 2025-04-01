@@ -15,15 +15,22 @@ import { UploadButton } from '@/components/shared/UploadButton'
 import { HouseAgentFormSchema } from '@/lib/schema/HouseAgentFormSchema'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { PhoneNumberField } from '@/components/shared/PhoneNumberField'
+import { useCreateAgent } from '@/hooks/auth/regsiter.hook'
+import { userTypes } from '@/utils/ConstantEnums'
 
 export const HouseAgentForm = () => {
-  const [isPending, setIsPending] = useState(false)
+  const { mutate: registerAgent, isPending } = useCreateAgent()
   const [isTermsAccepted, setIsTermsAccepted] = useState(false)
   const [isRobot, setIsRobot] = useState(true)
   const [phone, setPhone] = useState('')
   const [nextOfKinPhone, setNextOfKinPhone] = useState('')
   const [error, setError] = useState('')
   const [nextOfKinError, setNextOfKinError] = useState('')
+  const [identifierImage, setIdentifierImage] = useState('')
+  const [businessRegImage, setbusinessRegImage] = useState('')
+  const [nextOfKinIdentifierImage, setNextOfKinIdentifierImage] = useState('')
+  const [professionalCertImage, setProfessionalCertImage] = useState('')
+  const [relevantImage, setrelevantImage] = useState('')
 
   function onChange(value) {
     console.log('Captcha value:', value)
@@ -45,6 +52,18 @@ export const HouseAgentForm = () => {
       setNextOfKinError('')
     }
     return isValid
+  }
+
+  const documentsSelected = () => {
+    let isSelected = false
+    const allRequiredAreUploaded =
+      identifierImage && businessRegImage && professionalCertImage
+    if (allRequiredAreUploaded) {
+      isSelected = true
+    } else {
+      toast.error('Upload all required document!')
+    }
+    return isSelected
   }
 
   const form = useForm({
@@ -70,7 +89,36 @@ export const HouseAgentForm = () => {
 
   const onSubmit = (values) => {
     const phoneFieldIsValid = checkIfPhoneFieldIsValid
-    if (phoneFieldIsValid) console.log(values)
+    const imageIsUploaded = documentsSelected()
+
+    if (phoneFieldIsValid && imageIsUploaded) {
+      registerAgent({
+        fullName: values.full_name,
+        email: values.email,
+        password: values.pwd,
+        phone: `+${phone}`,
+        identifierImage: identifierImage,
+        __t: userTypes.agent,
+        agentType: values.agent_type,
+        agentAssociation: values.business_name,
+        businessLocation: values.business_location,
+        license_number: values.license_number,
+        businessRegImage: businessRegImage,
+        professionalCertImage: professionalCertImage,
+        homeAddress: values.home_address,
+        yoe: values.years_of_experience,
+        availableOnDemand: values.available_on_demand,
+        referenceLetters: [relevantImage],
+        next_of_kin: {
+          fullName: values.next_of_kin_full_name,
+          relationship: values.relationship,
+          phone: `+${nextOfKinPhone}`,
+          email: values.next_of_kin_email,
+          address: values.next_of_kin_address,
+          identifierImage: nextOfKinIdentifierImage,
+        },
+      })
+    }
   }
 
   useEffect(() => {
@@ -80,7 +128,7 @@ export const HouseAgentForm = () => {
   }, [form.formState.errors])
 
   return (
-    <ScrollArea className='h-[400px] relatve'>
+    <ScrollArea className='h-[400px] relative'>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -150,18 +198,17 @@ export const HouseAgentForm = () => {
           />
           <div className='flex flex-col gap-5'>
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setbusinessRegImage(e)}
               topLabel={'Upload Business Registration'}
               label={`Upload a scanned copy of your business registration  document`}
             />
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setProfessionalCertImage(e)}
               topLabel={'Upload Professional Certification'}
               label={`Upload relevant certification for your field`}
             />
             <UploadButton
-              handleChange={(e) => console.log(e)}
-              topLabel={'Upload Business Registration'}
+              handleChange={(e) => setIdentifierImage(e)}
               label={`Upload Identification and Government ID`}
             />
           </div>

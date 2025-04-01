@@ -1,6 +1,8 @@
 import { Montserrat } from 'next/font/google'
 import './globals.css'
 import NextTopLoader from 'nextjs-toploader'
+import ReactQueryProvider from '@/utils/context/ReactQueryProvider'
+import { Toaster } from '@/components/ui/sonner'
 // import { Toaster } from '@/components/ui/sonner'
 
 const montserrat = Montserrat({
@@ -19,9 +21,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang='en'>
       <body className={`${montserrat.variable} antialiased`}>
-        <NextTopLoader color='#0096FF' showSpinner={false} />
-        {/* <Toaster richColors /> */}
-        {children}
+        <ReactQueryProvider>
+          <NextTopLoader color='#0096FF' showSpinner={false} />
+          {children}
+        </ReactQueryProvider>
+        <Toaster richColors />
       </body>
     </html>
   )

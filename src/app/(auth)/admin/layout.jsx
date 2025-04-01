@@ -16,6 +16,7 @@ export default function AuthLayout({ children }) {
       <div className='absolute top-0 bottom-0 left-0 right-0'>
         <CustomImage
           src={authBgImg}
+          priority={true}
           style={'w-full h-full z-[-1]'}
           imgStyle={'object-cover'}
         />

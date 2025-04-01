@@ -15,9 +15,11 @@ import { UploadButton } from '@/components/shared/UploadButton'
 import { CaretakerFormSchema } from '@/lib/schema/CaretakerFormSchema'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { PhoneNumberField } from '@/components/shared/PhoneNumberField'
+import { useCreateCaretaker } from '@/hooks/auth/regsiter.hook'
+import { userTypes } from '@/utils/ConstantEnums'
 
 export const CaretakerForm = () => {
-  const [isPending, setIsPending] = useState(false)
+  const { mutate: registerCaretaker, isPending } = useCreateCaretaker()
   const [isTermsAccepted, setIsTermsAccepted] = useState(false)
   const [isRobot, setIsRobot] = useState(true)
   const [phone, setPhone] = useState('')
@@ -26,6 +28,10 @@ export const CaretakerForm = () => {
   const [error, setError] = useState('')
   const [landlordError, setLandlordError] = useState('')
   const [nextOfKinError, setNextOfKinError] = useState('')
+  const [identifierImage, setIdentifierImage] = useState('')
+  const [businessRegImage, setbusinessRegImage] = useState('')
+  const [nextOfKinIdentifierImage, setNextOfKinIdentifierImage] = useState('')
+  const [professionalCertImage, setProfessionalCertImage] = useState('')
 
   function onChange(value) {
     console.log('Captcha value:', value)
@@ -55,6 +61,18 @@ export const CaretakerForm = () => {
     return isValid
   }
 
+  const documentsSelected = () => {
+    let isSelected = false
+    const allRequiredAreUploaded =
+      identifierImage && businessRegImage && professionalCertImage
+    if (allRequiredAreUploaded) {
+      isSelected = true
+    } else {
+      toast.error('Upload all required document!')
+    }
+    return isSelected
+  }
+
   const form = useForm({
     resolver: zodResolver(CaretakerFormSchema),
     defaultValues: {
@@ -77,7 +95,34 @@ export const CaretakerForm = () => {
 
   const onSubmit = (values) => {
     const phoneFieldIsValid = checkIfPhoneFieldIsValid
-    if (phoneFieldIsValid) console.log(values)
+    const imageIsUploaded = documentsSelected()
+
+    if (phoneFieldIsValid && imageIsUploaded) {
+      registerCaretaker({
+        fullName: values.full_name,
+        email: values.email,
+        password: values.pwd,
+        phone: `+${phone}`,
+        identifierImage: identifierImage,
+        __t: userTypes.caretaker,
+        caretaker_association: values.association,
+        businessLocation: values.business_location,
+        license_number: values.license_number,
+        businessRegImage: businessRegImage,
+        professionalCertImage: professionalCertImage,
+        homeAddress: values.home_address,
+        yoe: values.years_of_experience,
+        availableOnDemand: values.available_on_demand,
+        next_of_kin: {
+          fullName: values.next_of_kin_full_name,
+          relationship: values.relationship,
+          phone: `+${nextOfKinPhone}`,
+          email: values.next_of_kin_email,
+          address: values.next_of_kin_address,
+          identifierImage: nextOfKinIdentifierImage,
+        },
+      })
+    }
   }
 
   useEffect(() => {
@@ -87,7 +132,7 @@ export const CaretakerForm = () => {
   }, [form.formState.errors])
 
   return (
-    <ScrollArea className='h-[400px] relatve'>
+    <ScrollArea className='h-[400px] relative'>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -153,17 +198,17 @@ export const CaretakerForm = () => {
           />
           <div className='flex flex-col gap-5'>
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setProfessionalCertImage(e)}
               topLabel={'Upload Authorization Letter'}
               label={`Upload proof of authorization from the landlord of each  houses`}
             />
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setIdentifierImage(e)}
               topLabel={'Upload Identification and Government ID'}
               label={`Upload a valid ID (e.g., National ID, Driver’s License)`}
             />
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setbusinessRegImage(e)}
               topLabel={'Upload Utility bills to confirm property ownership'}
             />
           </div>
@@ -251,7 +296,7 @@ export const CaretakerForm = () => {
           </div>
           <div className='flex flex-col gap-5'>
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setNextOfKinIdentifierImage(e)}
               label={`Upload a valid ID for verification`}
               uploadBtnText={'Upload Identification'}
               topLabel={'Upload Identification (Optional)'}

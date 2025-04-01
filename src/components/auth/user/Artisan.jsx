@@ -15,15 +15,20 @@ import { UploadButton } from '@/components/shared/UploadButton'
 import { ArtisanFormSchema } from '@/lib/schema/ArtisanFormSchema'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { PhoneNumberField } from '@/components/shared/PhoneNumberField'
+import { useCreateArtisan } from '@/hooks/auth/regsiter.hook'
+import { userTypes } from '@/utils/ConstantEnums'
 
 export const ArtisanForm = () => {
-  const [isPending, setIsPending] = useState(false)
+  const { mutate: registerArtisan, isPending } = useCreateArtisan()
   const [isTermsAccepted, setIsTermsAccepted] = useState(false)
   const [isRobot, setIsRobot] = useState(true)
   const [phone, setPhone] = useState('')
   const [nextOfKinPhone, setNextOfKinPhone] = useState('')
   const [error, setError] = useState('')
   const [nextOfKinError, setNextOfKinError] = useState('')
+  const [identifierImage, setIdentifierImage] = useState('')
+  const [portfolioImage, setportfolioImage] = useState('')
+  const [nextOfKinIdentifierImage, setNextOfKinIdentifierImage] = useState('')
 
   function onChange(value) {
     console.log('Captcha value:', value)
@@ -47,6 +52,17 @@ export const ArtisanForm = () => {
     return isValid
   }
 
+  const documentsSelected = () => {
+    let isSelected = false
+    const allRequiredAreUploaded = identifierImage && portfolioImage
+    if (allRequiredAreUploaded) {
+      isSelected = true
+    } else {
+      toast.error('Upload all required document!')
+    }
+    return isSelected
+  }
+
   const form = useForm({
     resolver: zodResolver(ArtisanFormSchema),
     defaultValues: {
@@ -67,7 +83,31 @@ export const ArtisanForm = () => {
 
   const onSubmit = (values) => {
     const phoneFieldIsValid = checkIfPhoneFieldIsValid
-    if (phoneFieldIsValid) console.log(values)
+    const imageIsUploaded = documentsSelected()
+
+    if (phoneFieldIsValid && imageIsUploaded) {
+      registerArtisan({
+        fullName: values.full_name,
+        email: values.email,
+        password: values.pwd,
+        phone: `+${phone}`,
+        identifierImage: identifierImage,
+        __t: userTypes.artisan,
+        skill: values.skills,
+        portfolioImages: [portfolioImage],
+        homeAddress: values.home_address,
+        yoe: values.years_of_experience,
+        availableOnDemand: values.available_on_demand,
+        next_of_kin: {
+          fullName: values.next_of_kin_full_name,
+          relationship: values.relationship,
+          phone: `+${nextOfKinPhone}`,
+          email: values.next_of_kin_email,
+          address: values.next_of_kin_address,
+          identifierImage: nextOfKinIdentifierImage,
+        },
+      })
+    }
   }
 
   useEffect(() => {
@@ -77,7 +117,7 @@ export const ArtisanForm = () => {
   }, [form.formState.errors])
 
   return (
-    <ScrollArea className='h-[400px] relatve'>
+    <ScrollArea className='h-[400px] relative'>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -143,12 +183,12 @@ export const ArtisanForm = () => {
           />
           <div className='flex flex-col gap-5'>
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setIdentifierImage(e)}
               topLabel={'Upload Identification and Government ID'}
               label={`Upload a valid ID (e.g., National ID, Driver’s License)`}
             />
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setportfolioImage(e)}
               topLabel={'Upload Work Portfolio (Optional)'}
               label={`Upload  images of past work or projects`}
             />
@@ -206,7 +246,7 @@ export const ArtisanForm = () => {
           </div>
           <div className='flex flex-col gap-5'>
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setNextOfKinIdentifierImage(e)}
               label={`Upload a valid ID for verification`}
               uploadBtnText={'Upload Identification'}
               topLabel={'Upload Identification (Optional)'}

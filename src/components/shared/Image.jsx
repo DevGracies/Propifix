@@ -14,18 +14,16 @@ export const CustomImage = ({
 }) => {
   const [isLoading, setIsLoading] = useState(true)
   return (
-    <div className={cn('relative', style)} onClick={clickFunc && clickFunc}>
+    <div className={cn('relative', style)} onClick={clickFunc}>
       {isLoading && (
-        <div
-          className={cn('w-full animate-pulse bg-hick-grey', style, imgStyle)}
-        ></div>
+        <div className={cn('animate-pulse bg-gray-200', style)}></div>
       )}
       <Image
         src={src}
         alt={alt}
         className={cn('w-full', imgStyle)}
         onLoad={() => setIsLoading(false)}
-        layout='fill'
+        fill={true}
         priority={priority}
       />
     </div>
