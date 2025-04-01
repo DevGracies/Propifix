@@ -1,7 +1,10 @@
+'use client'
+
 import { useImageUpload } from '@/hooks/UploadImage.hook'
 import { UploadSvg } from '../svg'
 import { Text } from './Text'
 import { Loader } from 'lucide-react'
+import { useState } from 'react'
 
 export const UploadButton = ({
   handleChange,
@@ -10,11 +13,14 @@ export const UploadButton = ({
   topLabel,
 }) => {
   const { mutate: uploadFile, isPending } = useImageUpload()
-
+  const [isUploaded, setIsUploaded] = useState(false)
   const handleFileOnChange = (file) => {
     if (!file) return
     uploadFile(file, {
-      onSuccess: (data) => handleChange?.(data?.url),
+      onSuccess: (data) => {
+        handleChange?.(data?.url)
+        setIsUploaded(true)
+      },
     })
   }
 
@@ -23,7 +29,7 @@ export const UploadButton = ({
       {topLabel && <Text style='text-[14px] font-[500]'>{topLabel}</Text>}
       <div className='flex flex-col gap-1'>
         <label
-          htmlFor='icon'
+          htmlFor={`${label}icon`}
           className='cursor-pointer flex flex-col gap-1 w-fit'
         >
           <div className='w-fit h-[38px] px-6 rounded-[12px] flex items-center gap-3 bg-light-purple text-white'>
@@ -35,10 +41,14 @@ export const UploadButton = ({
             <span>{uploadBtnText || 'Click to upload'}</span>
           </div>
         </label>
-        {label && <Text style='text-[10px] italic font-normal'>{label}</Text>}
+        {isUploaded ? (
+          <Text style='text-[10px] italic font-normal'>File Uploaded</Text>
+        ) : (
+          label && <Text style='text-[10px] italic font-normal'>{label}</Text>
+        )}
       </div>
       <input
-        id='icon'
+        id={`${label}icon`}
         type='file'
         onChange={(e) => handleFileOnChange(e.target.files?.[0])}
         className='hidden'
