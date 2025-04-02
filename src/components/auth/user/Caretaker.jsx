@@ -85,7 +85,7 @@ export const CaretakerForm = () => {
       property_address: '',
       landlord_full_name: '',
       years_of_experience: 0,
-      available_on_demand: 'yes',
+      available_on_demand: true,
       next_of_kin_full_name: '',
       relationship: '',
       next_of_kin_email: '',
@@ -144,11 +144,24 @@ export const CaretakerForm = () => {
             placeholder='Choose your association'
             inputCategory='select'
             selectList={[
-              'ERCAAN (Estate Rent and Commission Agents Association of Nigeria)',
-              'REDAN (Real Estate Developers Association of Nigeria)',
-              'Remassos- The  Real Estate Managers’ Association in Ondo State',
-              'AEAN (Association of Estate Agents in Nigeria)',
-              'Independent caretaker',
+              {
+                title:
+                  'ERCAAN (Estate Rent and Commission Agents Association of Nigeria)',
+                value: 'ERCAAN',
+              },
+              {
+                title: 'REDAN (Real Estate Developers Association of Nigeria)',
+                value: 'REDAN',
+              },
+              {
+                title:
+                  'Remassos- The  Real Estate Managers’ Association in Ondo State',
+                value: 'Remassos',
+              },
+              {
+                title: 'AEAN (Association of Estate Agents in Nigeria)',
+                value: 'AEAN',
+              },
             ]}
           />
           <InputField
@@ -225,8 +238,8 @@ export const CaretakerForm = () => {
             label={'Are you Available On-demand?'}
             inputCategory='radio'
             radioList={[
-              { label: 'Yes', value: 'yes' },
-              { label: 'No', value: 'no' },
+              { label: 'Yes', value: true },
+              { label: 'No', value: false },
             ]}
           />
           <InputField

@@ -20,11 +20,9 @@ export const ArtisanFormSchema = z
         required_error: 'Property Address field is required.',
       })
       .min(3, { message: 'Home address must be at least 2 characters.' }),
-    available_on_demand: z
-      .string({
-        required_error: 'This field is required.',
-      })
-      .min(3, { message: 'This must be at least 2 characters.' }),
+    available_on_demand: z.boolean({
+      required_error: 'This field is required.',
+    }),
     next_of_kin_full_name: z
       .string({
         required_error: 'This field is required.',

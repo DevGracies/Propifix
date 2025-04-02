@@ -83,7 +83,7 @@ export const LandlordForm = () => {
       property_address: '',
       years_of_ownership: 0,
       caretaker_full_name: '',
-      have_a_caretaker: 'yes',
+      have_a_caretaker: true,
       next_of_kin_full_name: '',
       relationship: '',
       next_of_kin_email: '',
@@ -209,8 +209,8 @@ export const LandlordForm = () => {
             label={'Do you have a caretaker?'}
             inputCategory='radio'
             radioList={[
-              { label: 'Yes', value: 'yes' },
-              { label: 'No', value: 'no' },
+              { label: 'Yes', value: true },
+              { label: 'No', value: false },
             ]}
           />
           <div className='flex flex-col gap-4 p-4 border border-thick-purple rounded-[12px]'>

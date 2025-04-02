@@ -115,8 +115,8 @@ export const InputField = ({
                 <SelectContent>
                   {selectList !== undefined &&
                     selectList?.map((item, index) => (
-                      <SelectItem value={item} key={index}>
-                        {item}
+                      <SelectItem value={item.value} key={index}>
+                        {item.title}
                       </SelectItem>
                     ))}
                 </SelectContent>

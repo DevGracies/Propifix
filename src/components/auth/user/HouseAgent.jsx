@@ -30,7 +30,7 @@ export const HouseAgentForm = () => {
   const [businessRegImage, setbusinessRegImage] = useState('')
   const [nextOfKinIdentifierImage, setNextOfKinIdentifierImage] = useState('')
   const [professionalCertImage, setProfessionalCertImage] = useState('')
-  const [relevantImage, setrelevantImage] = useState('')
+  const [ReferenceLetters, setReferenceLetters] = useState('')
 
   function onChange(value) {
     console.log('Captcha value:', value)
@@ -57,7 +57,10 @@ export const HouseAgentForm = () => {
   const documentsSelected = () => {
     let isSelected = false
     const allRequiredAreUploaded =
-      identifierImage && businessRegImage && professionalCertImage
+      identifierImage &&
+      businessRegImage &&
+      professionalCertImage &&
+      ReferenceLetters
     if (allRequiredAreUploaded) {
       isSelected = true
     } else {
@@ -74,12 +77,12 @@ export const HouseAgentForm = () => {
       cpwd: '',
       email: '',
       agent_type: '',
-      business_name: '',
+      association: '',
       business_location: '',
       license_number: '',
       home_address: '',
       years_of_experience: 0,
-      available_on_demand: 'yes',
+      available_on_demand: true,
       next_of_kin_full_name: '',
       relationship: '',
       next_of_kin_email: '',
@@ -100,7 +103,7 @@ export const HouseAgentForm = () => {
         identifierImage: identifierImage,
         __t: userTypes.agent,
         agentType: values.agent_type,
-        agentAssociation: values.business_name,
+        agentAssociation: values.association,
         businessLocation: values.business_location,
         license_number: values.license_number,
         businessRegImage: businessRegImage,
@@ -108,7 +111,7 @@ export const HouseAgentForm = () => {
         homeAddress: values.home_address,
         yoe: values.years_of_experience,
         availableOnDemand: values.available_on_demand,
-        referenceLetters: [relevantImage],
+        referenceLetters: [values.referenceLetters],
         next_of_kin: {
           fullName: values.next_of_kin_full_name,
           relationship: values.relationship,
@@ -140,8 +143,14 @@ export const HouseAgentForm = () => {
             placeholder='Agent Type'
             inputCategory='select'
             selectList={[
-              'Independent Agent (Not part of any association)',
-              'Affiliated Agent (Belongs to an association)',
+              {
+                title: 'Independent Agent (Not part of any association)',
+                value: 'independent',
+              },
+              {
+                title: 'Affiliated Agent (Belongs to an association)',
+                value: 'affiliated',
+              },
             ]}
           />
           <InputField
@@ -153,10 +162,29 @@ export const HouseAgentForm = () => {
           />
           <InputField
             control={form.control}
-            name='business_name'
-            placeholder='Enter your registered business name'
-            inputCategory='input'
-            inputType='text'
+            name='association'
+            placeholder='Choose your association'
+            inputCategory='select'
+            selectList={[
+              {
+                title:
+                  'ERCAAN (Estate Rent and Commission Agents Association of Nigeria)',
+                value: 'ERCAAN',
+              },
+              {
+                title: 'REDAN (Real Estate Developers Association of Nigeria)',
+                value: 'REDAN',
+              },
+              {
+                title:
+                  'Remassos- The  Real Estate Managers’ Association in Ondo State',
+                value: 'Remassos',
+              },
+              {
+                title: 'AEAN (Association of Estate Agents in Nigeria)',
+                value: 'AEAN',
+              },
+            ]}
           />
           <InputField
             control={form.control}
@@ -211,6 +239,10 @@ export const HouseAgentForm = () => {
               handleChange={(e) => setIdentifierImage(e)}
               label={`Upload Identification and Government ID`}
             />
+            <UploadButton
+              handleChange={(e) => setReferenceLetters(e)}
+              label={`Upload Reference Letter`}
+            />
           </div>
           <InputField
             control={form.control}
@@ -232,8 +264,8 @@ export const HouseAgentForm = () => {
             label={'Are you Available On-demand?'}
             inputCategory='radio'
             radioList={[
-              { label: 'Yes', value: 'yes' },
-              { label: 'No', value: 'no' },
+              { label: 'Yes', value: true },
+              { label: 'No', value: false },
             ]}
           />
           <div className='flex flex-col gap-4'>
@@ -279,7 +311,7 @@ export const HouseAgentForm = () => {
           </div>
           <div className='flex flex-col gap-5'>
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setNextOfKinIdentifierImage(e)}
               label={`Upload a valid ID for verification`}
               uploadBtnText={'Upload Identification'}
               topLabel={'Upload Identification (Optional)'}

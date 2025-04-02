@@ -73,7 +73,7 @@ export const ArtisanForm = () => {
       skills: '',
       home_address: '',
       years_of_experience: 0,
-      available_on_demand: 'yes',
+      available_on_demand: true,
       next_of_kin_full_name: '',
       relationship: '',
       next_of_kin_email: '',
@@ -199,8 +199,8 @@ export const ArtisanForm = () => {
             label={'Are you Available On-demand?'}
             inputCategory='radio'
             radioList={[
-              { label: 'Yes', value: 'yes' },
-              { label: 'No', value: 'no' },
+              { label: 'Yes', value: true },
+              { label: 'No', value: false },
             ]}
           />
           <div className='flex flex-col gap-4'>
