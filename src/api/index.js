@@ -1,3 +1,4 @@
+import { REFRESH_TOKEN_KEY, TOKEN_KEY } from '@/lib/constants'
 import { getBaseUrl } from '@/utils/envHandler'
 import axios from 'axios'
 import Cookies from 'js-cookie'
@@ -10,9 +11,11 @@ const API = axios.create({
 })
 
 API.interceptors.request.use((req) => {
-  const token = Cookies.get('Token')
-  if (token) {
-    req.headers.Authorization = `Bearer ${token}`
+  const token = Cookies.get(TOKEN_KEY)
+  const parsedToken = token ? JSON.parse(token) : null
+  const accessToken = parsedToken?.accessToken
+  if (accessToken) {
+    req.headers.Authorization = `Bearer ${accessToken}`
   }
   return req
 })
@@ -23,7 +26,7 @@ let refreshSubscribers = []
 const refreshToken = async () => {
   try {
     console.log('Attempting to refresh token...')
-    const refreshToken = Cookies.get('RefreshToken')
+    const refreshToken = Cookies.get(REFRESH_TOKEN_KEY)
 
     if (!refreshToken) {
       console.error('No refresh token available')
@@ -31,9 +34,9 @@ const refreshToken = async () => {
     }
 
     const response = await API.post(`${url}/auth/refresh`, { refreshToken })
-    const newAccessToken = response.data.accessToken
+    const newAccessToken = JSON.stringify(response?.data?.data?.data)
 
-    Cookies.set('AccessToken', newAccessToken, {
+    Cookies.set(TOKEN_KEY, newAccessToken, {
       expires: 1 / 24, // 1 hour
       secure: true,
       sameSite: 'Strict',
@@ -43,8 +46,8 @@ const refreshToken = async () => {
     return newAccessToken
   } catch (error) {
     console.error('Refresh token failed:', error)
-    Cookies.remove('AccessToken')
-    Cookies.remove('RefreshToken')
+    Cookies.remove(TOKEN_KEY)
+    Cookies.remove(REFRESH_TOKEN_KEY)
     window.location.href = '/user/login'
     throw error
   }

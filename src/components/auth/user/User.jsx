@@ -18,8 +18,11 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { useCreateUser } from '@/hooks/auth/regsiter.hook'
 import { userTypes } from '@/utils/ConstantEnums'
 import { toast } from 'sonner'
+import { useRouter } from 'nextjs-toploader/app'
 
 export const UserForm = () => {
+  const router = useRouter()
+  const gotoDashboad = () => router.push('/dashboard')
   const { mutate: registerUser, isPending } = useCreateUser()
   const [error, setError] = useState('')
   const [isTermsAccepted, setIsTermsAccepted] = useState(false)
@@ -50,7 +53,7 @@ export const UserForm = () => {
     } else {
       toast.error('Upload National ID')
     }
-    return isValid
+    return isSelected
   }
 
   const form = useForm({
@@ -68,14 +71,19 @@ export const UserForm = () => {
     const imageIsUploaded = documentsSelected()
 
     if (phoneFieldIsValid && imageIsUploaded) {
-      registerUser({
-        __t: userTypes.user,
-        fullName: values.full_name, // Corrected
-        email: values.email, // Corrected
-        password: values.pwd, // Corrected
-        phone: `+${phone}`,
-        identifierImage: nationalId,
-      })
+      registerUser(
+        {
+          __t: userTypes.user,
+          fullName: values.full_name, // Corrected
+          email: values.email, // Corrected
+          password: values.pwd, // Corrected
+          phone: `+${phone}`,
+          identifierImage: nationalId,
+        },
+        {
+          onSuccess: gotoDashboad,
+        }
+      )
     }
   }
 

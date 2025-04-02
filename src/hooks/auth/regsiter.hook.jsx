@@ -4,11 +4,12 @@ import API from '@/api'
 import { useMutation } from '@tanstack/react-query'
 import { toast } from 'sonner'
 import Cookies from 'js-cookie'
+import { TOKEN_KEY } from '@/lib/constants'
 
 const handleMutationSuccess = (data) => {
   toast.success('Registration Successful!')
   console.log('Success:', data)
-  Cookies.set('AccessToken', data?.data?.data?.accessToken, {
+  Cookies.set(TOKEN_KEY, JSON.stringify(data?.data?.data), {
     expires: 1 / 24, // 1 hour
     secure: true,
     sameSite: 'Strict',

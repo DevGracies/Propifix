@@ -12,8 +12,8 @@ export const PhoneNumberField = ({
   placeholder,
 }) => {
   const handleChange = (phoneVal) => {
-    setPhone(phoneVal || '') // Ensure we always store a string
-    setError((prevState) => (prevState ? '' : prevState)) // Reset error if needed
+    setPhone(phoneVal || '') 
+    setError((prevState) => (prevState ? '' : prevState)) 
   }
 
   return (

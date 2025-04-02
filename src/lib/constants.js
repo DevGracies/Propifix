@@ -216,3 +216,6 @@ export const FOOTERLINKS = {
     },
   ],
 };
+
+export const TOKEN_KEY = '$propifix__auth__token';
+export const REFRESH_TOKEN_KEY = '$propifix__refresh_auth__token';
