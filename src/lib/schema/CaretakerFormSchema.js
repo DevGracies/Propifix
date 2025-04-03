@@ -12,21 +12,35 @@ export const CaretakerFormSchema = z
         required_error: 'Association field is required.',
       })
       .min(3, { message: 'Association must be at least 2 characters.' }),
-    number_of_house: z.number({
+    number_of_house: z.string({
       required_error: 'Number of houses field is required.',
     }),
-    years_of_experience: z.number({
+    years_of_experience: z.string({
       required_error: 'Years of experience field is required.',
     }),
+    business_location: z
+      .string({
+        required_error: 'Business Location field is required.',
+      })
+      .min(3, { message: 'Business Location must be at least 2 characters.' }),
+    license_number: z
+      .string({
+        required_error: 'License Number field is required.',
+      })
+      .min(3, { message: 'License Number must be at least 2 characters.' }),
+    home_address: z
+      .string({
+        required_error: 'Home address field is required.',
+      })
+      .min(3, { message: 'Home address must be at least 2 characters.' }),
     property_address: z
       .string({
         required_error: 'Property Address field is required.',
       })
       .min(3, { message: 'Home address must be at least 2 characters.' }),
-    available_on_demand: z
-      .boolean({
-        required_error: 'This field is required.',
-      }),
+    available_on_demand: z.boolean({
+      required_error: 'This field is required.',
+    }),
     landlord_full_name: z.string({
       required_error: 'This field is required.',
     }),

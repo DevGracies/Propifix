@@ -17,6 +17,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { PhoneNumberField } from '@/components/shared/PhoneNumberField'
 import { useCreateArtisan } from '@/hooks/auth/regsiter.hook'
 import { userTypes } from '@/utils/ConstantEnums'
+import { toast } from 'sonner'
 
 export const ArtisanForm = () => {
   const { mutate: registerArtisan, isPending } = useCreateArtisan()
@@ -72,7 +73,7 @@ export const ArtisanForm = () => {
       email: '',
       skills: '',
       home_address: '',
-      years_of_experience: 0,
+      years_of_experience: '0',
       available_on_demand: true,
       next_of_kin_full_name: '',
       relationship: '',
@@ -136,11 +137,18 @@ export const ArtisanForm = () => {
             placeholder='Trade/Skill'
             inputCategory='select'
             selectList={[
-              'ERCAAN (Estate Rent and Commission Agents skills of Nigeria)',
-              'REDAN (Real Estate Developers skills of Nigeria)',
-              'Remassos- The  Real Estate Managers’ skills in Ondo State',
-              'AEAN (skills of Estate Agents in Nigeria)',
-              'Independent Artisan',
+              { title: 'House Agent', value: 'House_Agent' },
+              { title: 'Carpentry', value: 'Carpentry' },
+              { title: 'Electrical Work', value: 'Electrical_Work' },
+              { title: 'Dry Cleaning', value: 'Dry_Cleaning' },
+              { title: 'House Cleaning', value: 'House_Cleaning' },
+              { title: 'Plumbing', value: 'Plumbing' },
+              { title: 'Painting', value: 'Painting' },
+              { title: 'Bricklaying', value: 'Bricklaying' },
+              { title: 'Tiling', value: 'Tiling' },
+              { title: 'Welding', value: 'Welding' },
+              { title: 'Roofing', value: 'Roofing' },
+              { title: 'HVAC Installation', value: ' HVAC_Installation' }
             ]}
           />
           <InputField
@@ -198,7 +206,7 @@ export const ArtisanForm = () => {
                     handleChange={(e) =>
                       setportfolioImage((prevState) => [...prevState, e])
                     }
-                    id={index}
+                    id={`artisan${index + 1}`}
                     label={`Upload  images of past work or projects`}
                   />
                 ))}

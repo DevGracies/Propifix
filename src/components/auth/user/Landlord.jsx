@@ -17,6 +17,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { PhoneNumberField } from '@/components/shared/PhoneNumberField'
 import { useCreateLandlord } from '@/hooks/auth/regsiter.hook'
 import { userTypes } from '@/utils/ConstantEnums'
+import { toast } from 'sonner'
 
 export const LandlordForm = () => {
   const { mutate: registerLandlord, isPending } = useCreateLandlord()
@@ -24,10 +25,10 @@ export const LandlordForm = () => {
   const [isRobot, setIsRobot] = useState(true)
   const [phone, setPhone] = useState('')
   const [nextOfKinPhone, setNextOfKinPhone] = useState('')
-  const [caretakerPhone, setcaretakerPhone] = useState('')
+  const [landlordPhone, setLandlordPhone] = useState('')
   const [error, setError] = useState('')
   const [nextOfKinError, setNextOfKinError] = useState('')
-  const [caretakerError, setCaretakerError] = useState('')
+  const [landlordError, setLandlordError] = useState('')
   const [identifierImage, setIdentifierImage] = useState('')
   const [utilityBillImage, setUtilityBillImage] = useState('')
   const [nextOfKinIdentifierImage, setNextOfKinIdentifierImage] = useState('')
@@ -51,8 +52,8 @@ export const LandlordForm = () => {
     } else {
       setNextOfKinError('')
     }
-    if (!caretakerPhone) {
-      setcaretakerPhone(`Landlord's Phone number is required`)
+    if (!landlordPhone) {
+      setLandlordError(`Landlord's Phone number is required`)
       isValid = false
     } else {
       setLandlordError('')
@@ -79,11 +80,12 @@ export const LandlordForm = () => {
       cpwd: '',
       email: '',
       property_name: '',
-      number_of_house: 0,
+      number_of_house: '0',
       property_address: '',
-      years_of_ownership: 0,
+      years_of_ownership: '0',
       caretaker_full_name: '',
       have_a_caretaker: true,
+      available_on_demand:true,
       next_of_kin_full_name: '',
       relationship: '',
       next_of_kin_email: '',
@@ -105,8 +107,8 @@ export const LandlordForm = () => {
         __t: userTypes.landlord,
         numberOfHousesOwned: values.number_of_house,
         utilityBillImage: utilityBillImage,
-        homeAddress: values.home_address,
-        yoe: values.years_of_experience,
+        homeAddress: values.property_address,
+        yoe: values.years_of_ownership,
         availableOnDemand: values.available_on_demand,
         next_of_kin: {
           fullName: values.next_of_kin_full_name,
@@ -218,15 +220,15 @@ export const LandlordForm = () => {
             <InputField
               control={form.control}
               name='caretaker_full_name'
-              placeholder={`Enter your caretaker’s full name`}
+              placeholder={`Enter your Caretaker’s full name`}
               inputCategory='input'
               inputType='text'
             />
             <PhoneNumberField
-              setPhone={setcaretakerPhone}
-              phone={caretakerPhone}
-              error={caretakerError}
-              setError={setCaretakerError}
+              setPhone={setLandlordPhone}
+              phone={landlordPhone}
+              error={landlordError}
+              setError={setLandlordError}
               placeholder={`Caretaker phone number`}
             />
           </div>
@@ -240,6 +242,16 @@ export const LandlordForm = () => {
               </span>
             </span>
           </Text>
+          <InputField
+            control={form.control}
+            name='available_on_demand'
+            label={'Are you Available On-demand?'}
+            inputCategory='radio'
+            radioList={[
+              { label: 'Yes', value: true },
+              { label: 'No', value: false },
+            ]}
+          />
           <div className='flex flex-col gap-4'>
             <Text style='text-[14px] font-[500]'>Next of Kin Information</Text>
             <InputField
@@ -249,6 +261,16 @@ export const LandlordForm = () => {
               inputCategory='input'
               inputType='text'
             />
+            <div className='flex flex-col gap-1'>
+              <InputField
+                control={form.control}
+                name='relationship'
+                placeholder='Relationship'
+                inputCategory='input'
+                inputType='text'
+              />
+              <Text style='text-[10px] italic font-normal'>{`Specify your relationship (e.g., Parent, Sibling, Spouse)`}</Text>
+            </div>
             <PhoneNumberField
               setPhone={setNextOfKinPhone}
               phone={nextOfKinPhone}

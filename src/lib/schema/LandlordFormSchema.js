@@ -12,14 +12,21 @@ export const LandlordFormSchema = z
         required_error: 'Property Name field is required.',
       })
       .min(3, { message: 'Property Name must be at least 2 characters.' }),
-    number_of_house: z.number({
+    number_of_house: z.string({
       required_error: 'Number of houses field is required.',
     }),
-    years_of_ownership: z.number({
+    years_of_ownership: z.string({
       required_error: 'Years of ownership field is required.',
     }),
-    caretaker_full_name: z.string(),
-    have_a_caretaker: z.string({
+    caretaker_full_name: z
+      .string({
+        required_error: 'Caretaker FullName field is required.',
+      })
+      .min(3, { message: 'Caretaker FullName must be at least 2 characters.' }),
+    have_a_caretaker: z.boolean({
+      required_error: 'This field is required.',
+    }),
+    available_on_demand: z.boolean({
       required_error: 'This field is required.',
     }),
     property_address: z
@@ -27,9 +34,6 @@ export const LandlordFormSchema = z
         required_error: 'Property Address field is required.',
       })
       .min(3, { message: 'Home address must be at least 2 characters.' }),
-    available_on_demand: z.boolean({
-      required_error: 'This field is required.',
-    }),
     next_of_kin_full_name: z
       .string({
         required_error: 'This field is required.',
@@ -39,7 +43,7 @@ export const LandlordFormSchema = z
       .string({
         required_error: 'Relationship field is required.',
       })
-      .min(3, { message: 'Home address must be at least 2 characters.' }),
+      .min(3, { message: 'Relationship must be at least 2 characters.' }),
     next_of_kin_email: z
       .string()
       .email({ message: 'Please enter a valid email address.' }) // Added email validation

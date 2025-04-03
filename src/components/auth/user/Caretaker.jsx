@@ -17,6 +17,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { PhoneNumberField } from '@/components/shared/PhoneNumberField'
 import { useCreateCaretaker } from '@/hooks/auth/regsiter.hook'
 import { userTypes } from '@/utils/ConstantEnums'
+import { toast } from 'sonner'
 
 export const CaretakerForm = () => {
   const { mutate: registerCaretaker, isPending } = useCreateCaretaker()
@@ -32,6 +33,7 @@ export const CaretakerForm = () => {
   const [businessRegImage, setbusinessRegImage] = useState('')
   const [nextOfKinIdentifierImage, setNextOfKinIdentifierImage] = useState('')
   const [professionalCertImage, setProfessionalCertImage] = useState('')
+  const [ReferenceLetters, setReferenceLetters] = useState([])
 
   function onChange(value) {
     console.log('Captcha value:', value)
@@ -64,7 +66,10 @@ export const CaretakerForm = () => {
   const documentsSelected = () => {
     let isSelected = false
     const allRequiredAreUploaded =
-      identifierImage && businessRegImage && professionalCertImage
+      identifierImage &&
+      businessRegImage &&
+      professionalCertImage &&
+      ReferenceLetters
     if (allRequiredAreUploaded) {
       isSelected = true
     } else {
@@ -81,11 +86,13 @@ export const CaretakerForm = () => {
       cpwd: '',
       email: '',
       association: '',
-      number_of_house: 0,
+      number_of_house: '0',
       property_address: '',
       landlord_full_name: '',
-      years_of_experience: 0,
+      years_of_experience: '0',
       available_on_demand: true,
+      license_number: '',
+      business_location: '',
       next_of_kin_full_name: '',
       relationship: '',
       next_of_kin_email: '',
@@ -113,6 +120,7 @@ export const CaretakerForm = () => {
         homeAddress: values.home_address,
         yoe: values.years_of_experience,
         availableOnDemand: values.available_on_demand,
+        referenceLetters: ReferenceLetters,
         next_of_kin: {
           fullName: values.next_of_kin_full_name,
           relationship: values.relationship,
@@ -161,6 +169,9 @@ export const CaretakerForm = () => {
               {
                 title: 'AEAN (Association of Estate Agents in Nigeria)',
                 value: 'AEAN',
+              },{
+                title: 'Independent caretaker',
+                value: 'Independent',
               },
             ]}
           />
@@ -197,6 +208,20 @@ export const CaretakerForm = () => {
           />
           <InputField
             control={form.control}
+            name='business_location'
+            placeholder='Enter your business location'
+            inputCategory='input'
+            inputType='text'
+          />
+          <InputField
+            control={form.control}
+            name='license_number'
+            placeholder='Enter your professional license number'
+            inputCategory='input'
+            inputType='text'
+          />
+          <InputField
+            control={form.control}
             name='number_of_house'
             placeholder='Enter the number of how houses you caretake?'
             inputCategory='input'
@@ -227,6 +252,13 @@ export const CaretakerForm = () => {
           </div>
           <InputField
             control={form.control}
+            name='home_address'
+            placeholder='Home address'
+            inputCategory='input'
+            inputType='text'
+          />
+          <InputField
+            control={form.control}
             name='years_of_experience'
             placeholder='Enter how many year have you being managing each of these  property'
             inputCategory='input'
@@ -242,6 +274,22 @@ export const CaretakerForm = () => {
               { label: 'No', value: false },
             ]}
           />
+          <div className='flex flex-col gap-4'>
+            <Text style='text-[14px] font-[500]'>
+              Upload 5 caretakers or landlord reference letter
+            </Text>
+            <div className='flex flex-wrap gap-3'>
+              {Array.from({ length: 5 }, (_, index) => (
+                <UploadButton
+                  key={index}
+                  handleChange={(e) =>
+                    setReferenceLetters((prevState) => [...prevState, e])
+                  }
+                  id={`caretaker${index+1}`}
+                />
+              ))}
+            </div>
+          </div>
           <InputField
             control={form.control}
             name='landlord_full_name'

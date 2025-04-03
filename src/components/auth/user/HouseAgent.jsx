@@ -17,6 +17,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { PhoneNumberField } from '@/components/shared/PhoneNumberField'
 import { useCreateAgent } from '@/hooks/auth/regsiter.hook'
 import { userTypes } from '@/utils/ConstantEnums'
+import { toast } from 'sonner'
 
 export const HouseAgentForm = () => {
   const { mutate: registerAgent, isPending } = useCreateAgent()
@@ -81,7 +82,7 @@ export const HouseAgentForm = () => {
       business_location: '',
       license_number: '',
       home_address: '',
-      years_of_experience: 0,
+      years_of_experience: '0',
       available_on_demand: true,
       next_of_kin_full_name: '',
       relationship: '',
@@ -111,7 +112,7 @@ export const HouseAgentForm = () => {
         homeAddress: values.home_address,
         yoe: values.years_of_experience,
         availableOnDemand: values.available_on_demand,
-        referenceLetters: [values.referenceLetters],
+        referenceLetters: ReferenceLetters,
         next_of_kin: {
           fullName: values.next_of_kin_full_name,
           relationship: values.relationship,
@@ -275,7 +276,7 @@ export const HouseAgentForm = () => {
                   handleChange={(e) =>
                     setReferenceLetters((prevState) => [...prevState, e])
                   }
-                  id={index}
+                  id={`houseagent${index + 1}`}
                 />
               ))}
             </div>

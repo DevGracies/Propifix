@@ -12,7 +12,7 @@ export const ArtisanFormSchema = z
         required_error: 'Skills field is required.',
       })
       .min(3, { message: 'Skills must be at least 2 characters.' }),
-    years_of_experience: z.number({
+    years_of_experience: z.string({
       required_error: 'Years of experience field is required.',
     }),
     home_address: z
