@@ -27,7 +27,7 @@ export const ArtisanForm = () => {
   const [error, setError] = useState('')
   const [nextOfKinError, setNextOfKinError] = useState('')
   const [identifierImage, setIdentifierImage] = useState('')
-  const [portfolioImage, setportfolioImage] = useState('')
+  const [portfolioImage, setportfolioImage] = useState([])
   const [nextOfKinIdentifierImage, setNextOfKinIdentifierImage] = useState('')
 
   function onChange(value) {
@@ -94,7 +94,7 @@ export const ArtisanForm = () => {
         identifierImage: identifierImage,
         __t: userTypes.artisan,
         skill: values.skills,
-        portfolioImages: [portfolioImage],
+        portfolioImages: portfolioImage,
         homeAddress: values.home_address,
         yoe: values.years_of_experience,
         availableOnDemand: values.available_on_demand,
@@ -187,11 +187,23 @@ export const ArtisanForm = () => {
               topLabel={'Upload Identification and Government ID'}
               label={`Upload a valid ID (e.g., National ID, Driver’s License)`}
             />
-            <UploadButton
-              handleChange={(e) => setportfolioImage(e)}
-              topLabel={'Upload Work Portfolio (Optional)'}
-              label={`Upload  images of past work or projects`}
-            />
+            <div className='flex flex-col gap-4'>
+              <Text style='text-[14px] font-[500]'>
+                Upload Work Portfolio (Optional)
+              </Text>
+              <div className='flex flex-wrap gap-3'>
+                {Array.from({ length: 5 }, (_, index) => (
+                  <UploadButton
+                    key={index}
+                    handleChange={(e) =>
+                      setportfolioImage((prevState) => [...prevState, e])
+                    }
+                    id={index}
+                    label={`Upload  images of past work or projects`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
           <InputField
             control={form.control}

@@ -44,6 +44,7 @@
   --color-input-border:rgba(0, 0, 0, 0.35);
   --color-light-purple:rgba(157, 113, 198, 1);
   --color-thick-purple:#5D14AD;
+  --color-medium-purple:#9747FF;
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);

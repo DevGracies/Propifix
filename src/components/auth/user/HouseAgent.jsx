@@ -30,7 +30,7 @@ export const HouseAgentForm = () => {
   const [businessRegImage, setbusinessRegImage] = useState('')
   const [nextOfKinIdentifierImage, setNextOfKinIdentifierImage] = useState('')
   const [professionalCertImage, setProfessionalCertImage] = useState('')
-  const [ReferenceLetters, setReferenceLetters] = useState('')
+  const [ReferenceLetters, setReferenceLetters] = useState([])
 
   function onChange(value) {
     console.log('Captcha value:', value)
@@ -239,10 +239,6 @@ export const HouseAgentForm = () => {
               handleChange={(e) => setIdentifierImage(e)}
               label={`Upload Identification and Government ID`}
             />
-            <UploadButton
-              handleChange={(e) => setReferenceLetters(e)}
-              label={`Upload Reference Letter`}
-            />
           </div>
           <InputField
             control={form.control}
@@ -268,6 +264,22 @@ export const HouseAgentForm = () => {
               { label: 'No', value: false },
             ]}
           />
+          <div className='flex flex-col gap-4'>
+            <Text style='text-[14px] font-[500]'>
+              Upload 5 caretakers or landlord refernece letter
+            </Text>
+            <div className='flex flex-wrap gap-3'>
+              {Array.from({ length: 5 }, (_, index) => (
+                <UploadButton
+                  key={index}
+                  handleChange={(e) =>
+                    setReferenceLetters((prevState) => [...prevState, e])
+                  }
+                  id={index}
+                />
+              ))}
+            </div>
+          </div>
           <div className='flex flex-col gap-4'>
             <Text style='text-[14px] font-[500]'>Next of Kin Information</Text>
             <InputField

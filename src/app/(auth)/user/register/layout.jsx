@@ -19,6 +19,7 @@ export default function AuthLayout({ children }) {
           src={authBgImg}
           style={'w-full h-full z-[-1]'}
           imgStyle={'object-cover'}
+          priority={true}
         />
       </div>
       <main className='md:mx-[2rem] mx-0 my-[2rem] flex md:flex-row flex-col gap-[90px] justify-center'>
