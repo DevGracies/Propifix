@@ -1,104 +1,13 @@
 import Image from "next/image";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
 import Form from "../forms/Form";
-
-const SELECTOPTIONS = [
-  {
-    label: "Type",
-    items: [
-      "flat & apartment",
-      "self contain",
-      "mini flats",
-      "houses",
-      "land",
-      "shop",
-      "office space",
-      "semi detached bungalow",
-      "semi detached duplex",
-      "detached bungalow",
-      "detached duplex",
-      "commercial property",
-    ],
-  },
-  {
-    label: "Bedroom",
-    items: [
-      "1 bedroom",
-      "2 bedroom",
-      "3 bedroom",
-      "4 bedroom",
-      "5 bedroom",
-      "6 bedroom",
-      "7 bedroom",
-      "8 bedroom",
-      "9 bedroom",
-      "10 bedroom",
-    ],
-  },
-  {
-    label: "Toilet",
-    items: [
-      "1 toilet",
-      "2 toilet",
-      "3 toilet",
-      "4 toilet",
-      "5 toilet",
-      "6 toilet",
-      "7 toilet",
-      "8 toilet",
-      "9 toilet",
-      "10 toilet",
-    ],
-  },
-  {
-    label: "Min. Price",
-    items: [
-      "50,000",
-      "100,000",
-      "200,000",
-      "300,000",
-      "400,000",
-      "500,000",
-      "600,000",
-      "700,000",
-      "800,000",
-      "900,000",
-      "1 million",
-      "2 million",
-    ],
-  },
-  {
-    label: "Max. Price",
-    items: [
-      "500,000",
-      "600,000",
-      "700,000",
-      "800,000",
-      "900,000",
-      "1 million",
-      "2 million",
-      "3 million",
-      "5 million",
-      "10 million",
-      "20 million",
-      "30 million",
-    ],
-  },
-];
+import { SELECTOPTIONS } from "@/lib/constants";
 
 const Hero = () => {
   return (
-    <section className="w-full h-[870px] md:h-[940px]  relative text-white flex flex-col pt-28 md:pt-32" id="hero">
+    <section
+      className="w-full h-[870px] md:h-[940px]  relative text-white flex flex-col pt-28 md:pt-32"
+      id="hero"
+    >
       <Image
         src={"/home-images/bg3.svg"}
         width={100}
@@ -161,7 +70,7 @@ const Hero = () => {
           </p>
         </div>
       </div>
-      <div className="flex gap-[10px] items-center w-fit absolute bottom-10 md:bottom-16 left-0 pl-[20px]">
+      <div className="flex gap-[10px] items-center w-fit absolute bottom-10 md:bottom-16 left-0 pl-[20px] cursor-pointer">
         <Image
           src={"/icons/playIcon.svg"}
           width={44}

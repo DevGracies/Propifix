@@ -25,6 +25,90 @@ export const NAVLINKS = [
   },
 ];
 
+export const SELECTOPTIONS = [
+  {
+    label: "Type",
+    items: [
+      "flat & apartment",
+      "self contain",
+      "mini flats",
+      "houses",
+      "land",
+      "shop",
+      "office space",
+      "semi detached bungalow",
+      "semi detached duplex",
+      "detached bungalow",
+      "detached duplex",
+      "commercial property",
+    ],
+  },
+  {
+    label: "Bedroom",
+    items: [
+      "1 bedroom",
+      "2 bedroom",
+      "3 bedroom",
+      "4 bedroom",
+      "5 bedroom",
+      "6 bedroom",
+      "7 bedroom",
+      "8 bedroom",
+      "9 bedroom",
+      "10 bedroom",
+    ],
+  },
+  {
+    label: "Toilet",
+    items: [
+      "1 toilet",
+      "2 toilet",
+      "3 toilet",
+      "4 toilet",
+      "5 toilet",
+      "6 toilet",
+      "7 toilet",
+      "8 toilet",
+      "9 toilet",
+      "10 toilet",
+    ],
+  },
+  {
+    label: "Min. Price",
+    items: [
+      "50,000",
+      "100,000",
+      "200,000",
+      "300,000",
+      "400,000",
+      "500,000",
+      "600,000",
+      "700,000",
+      "800,000",
+      "900,000",
+      "1 million",
+      "2 million",
+    ],
+  },
+  {
+    label: "Max. Price",
+    items: [
+      "500,000",
+      "600,000",
+      "700,000",
+      "800,000",
+      "900,000",
+      "1 million",
+      "2 million",
+      "3 million",
+      "5 million",
+      "10 million",
+      "20 million",
+      "30 million",
+    ],
+  },
+];
+
 export const HOWITWORKS = [
   {
     no: "01",
