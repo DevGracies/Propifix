@@ -27,7 +27,7 @@ const Footer = () => {
               <p className="text-[15px] leading-relaxed opacity-90">
                 Propifix is an innovative company and brand that transforms real
                 estate and artisan services by delivering customer-centric,
-                affordable, and seamless solutions. Our commitment is to make
+                affordable, and seamless solutions. Our commitnment is to make
                 life easier for our clients.—ensuring that whenever they need
                 our services, they can access them effortlessly and affordably.
               </p>

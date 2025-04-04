@@ -59,7 +59,7 @@ const Navbar = () => {
                 className="bg-transparent border text-white capitalize cursor-pointer "
                 asChild
               >
-                <Link href={"/register"}>get started</Link>
+                <Link href={"/user/register"}>get started</Link>
               </Button>
             </div>
             <div className="lg:hidden relative z-50">
@@ -105,7 +105,7 @@ const Navbar = () => {
                   className="bg-transparent border text-white capitalize cursor-pointer "
                   asChild
                 >
-                  <Link href={"/register"}>get started</Link>
+                  <Link href={"/user/register"}>get started</Link>
                 </Button>
               </nav>
             </div>
