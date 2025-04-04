@@ -2,7 +2,6 @@
 
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
-import { useState } from 'react'
 
 export const CustomImage = ({
   src,
@@ -12,10 +11,8 @@ export const CustomImage = ({
   priority = false,
   clickFunc,
 }) => {
-  const [isLoading, setIsLoading] = useState(true)
   return (
     <div className={cn('relative', style)} onClick={clickFunc}>
-      
       <Image
         src={src}
         alt={alt}

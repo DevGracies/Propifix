@@ -82,7 +82,7 @@ export const HouseAgentForm = () => {
       business_location: '',
       license_number: '',
       home_address: '',
-      years_of_experience: '0',
+      years_of_experience: '1',
       available_on_demand: true,
       next_of_kin_full_name: '',
       relationship: '',

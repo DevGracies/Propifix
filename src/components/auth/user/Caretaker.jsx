@@ -86,10 +86,10 @@ export const CaretakerForm = () => {
       cpwd: '',
       email: '',
       association: '',
-      number_of_house: '0',
+      number_of_house: '1',
       property_address: '',
       landlord_full_name: '',
-      years_of_experience: '0',
+      years_of_experience: '1',
       available_on_demand: true,
       license_number: '',
       business_location: '',
@@ -230,7 +230,7 @@ export const CaretakerForm = () => {
           <InputField
             control={form.control}
             name='property_address'
-            placeholder='EEnter address of the property you manage'
+            placeholder='Enter address of the property you manage'
             inputCategory='input'
             inputType='text'
           />

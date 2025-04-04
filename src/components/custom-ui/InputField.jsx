@@ -57,6 +57,15 @@ export const InputField = ({
                   placeholder={placeholder && placeholder}
                   onChange={handleValueChange}
                 />
+              ) : inputType === 'number' ? (
+                <Input
+                  readOnly={readOnly}
+                  type={inputType || 'text'}
+                  className={inputCnStyle}
+                  min={1}
+                  placeholder={placeholder}
+                  {...field}
+                />
               ) : (
                 <Input
                   readOnly={readOnly}

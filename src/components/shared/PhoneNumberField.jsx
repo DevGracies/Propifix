@@ -43,6 +43,7 @@ export const PhoneNumberField = ({
           width: '100%',
           background: 'white',
           fontStyle: 'italic',
+          paddingLeft:'10px',
           border: `1px solid ${error ? 'red' : 'rgba(0, 0, 0, 0.35)'}`,
         }}
         containerStyle={{
