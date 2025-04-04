@@ -6,4 +6,4 @@ const ComingSoonPage = () => {
   )
 }
 
-export default ComingSoonPagenn 
+export default ComingSoonPage
