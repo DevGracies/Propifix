@@ -1,10 +1,14 @@
+import Footer from "@/components/Footer";
+import Navbar from "@/components/Navbar";
+
 export default function HomeLayout({
   children,
 }) {
   return (
     <div>
-      <nav>Dashboard Navigation</nav>
+      <Navbar/>
       <main>{children}</main>
+      <Footer/>
     </div>
   );
 }
