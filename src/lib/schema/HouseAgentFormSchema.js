@@ -12,11 +12,11 @@ export const HouseAgentFormSchema = z
         required_error: 'Agent Type field is required.',
       })
       .min(3, { message: 'Agent Type must be at least 2 characters.' }),
-    business_name: z
+    association: z
       .string({
-        required_error: 'Business Name field is required.',
+        required_error: 'Association field is required.',
       })
-      .min(3, { message: 'Business Name must be at least 2 characters.' }),
+      .min(3, { message: 'Association must be at least 2 characters.' }),
     business_location: z
       .string({
         required_error: 'Business Location field is required.',
@@ -32,14 +32,12 @@ export const HouseAgentFormSchema = z
         required_error: 'Home address field is required.',
       })
       .min(3, { message: 'Home address must be at least 2 characters.' }),
-    years_of_experience: z.number({
+    years_of_experience: z.string({
       required_error: 'Years of experience field is required.',
     }),
-    available_on_demand: z
-      .string({
-        required_error: 'This field is required.',
-      })
-      .min(3, { message: 'This must be at least 2 characters.' }),
+    available_on_demand: z.boolean({
+      required_error: 'This field is required.',
+    }),
     next_of_kin_full_name: z
       .string({
         required_error: 'This field is required.',

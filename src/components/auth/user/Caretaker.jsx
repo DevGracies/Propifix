@@ -15,9 +15,12 @@ import { UploadButton } from '@/components/shared/UploadButton'
 import { CaretakerFormSchema } from '@/lib/schema/CaretakerFormSchema'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { PhoneNumberField } from '@/components/shared/PhoneNumberField'
+import { useCreateCaretaker } from '@/hooks/auth/regsiter.hook'
+import { userTypes } from '@/utils/ConstantEnums'
+import { toast } from 'sonner'
 
 export const CaretakerForm = () => {
-  const [isPending, setIsPending] = useState(false)
+  const { mutate: registerCaretaker, isPending } = useCreateCaretaker()
   const [isTermsAccepted, setIsTermsAccepted] = useState(false)
   const [isRobot, setIsRobot] = useState(true)
   const [phone, setPhone] = useState('')
@@ -26,6 +29,11 @@ export const CaretakerForm = () => {
   const [error, setError] = useState('')
   const [landlordError, setLandlordError] = useState('')
   const [nextOfKinError, setNextOfKinError] = useState('')
+  const [identifierImage, setIdentifierImage] = useState('')
+  const [businessRegImage, setbusinessRegImage] = useState('')
+  const [nextOfKinIdentifierImage, setNextOfKinIdentifierImage] = useState('')
+  const [professionalCertImage, setProfessionalCertImage] = useState('')
+  const [ReferenceLetters, setReferenceLetters] = useState([])
 
   function onChange(value) {
     console.log('Captcha value:', value)
@@ -35,10 +43,10 @@ export const CaretakerForm = () => {
   const checkIfPhoneFieldIsValid = () => {
     let isValid = true
     if (!phone) {
-      setPhoneError('Phone number is required')
+      setError('Phone number is required')
       isValid = false
     } else {
-      setPhoneError('')
+      setError('')
     }
     if (!nextOfKinPhone) {
       setNextOfKinError(`Next Of Kin's Phone number is required`)
@@ -55,6 +63,21 @@ export const CaretakerForm = () => {
     return isValid
   }
 
+  const documentsSelected = () => {
+    let isSelected = false
+    const allRequiredAreUploaded =
+      identifierImage &&
+      businessRegImage &&
+      professionalCertImage &&
+      ReferenceLetters
+    if (allRequiredAreUploaded) {
+      isSelected = true
+    } else {
+      toast.error('Upload all required document!')
+    }
+    return isSelected
+  }
+
   const form = useForm({
     resolver: zodResolver(CaretakerFormSchema),
     defaultValues: {
@@ -63,11 +86,13 @@ export const CaretakerForm = () => {
       cpwd: '',
       email: '',
       association: '',
-      number_of_house: 0,
+      number_of_house: '1',
       property_address: '',
       landlord_full_name: '',
-      years_of_experience: 0,
-      available_on_demand: 'yes',
+      years_of_experience: '1',
+      available_on_demand: true,
+      license_number: '',
+      business_location: '',
       next_of_kin_full_name: '',
       relationship: '',
       next_of_kin_email: '',
@@ -77,7 +102,35 @@ export const CaretakerForm = () => {
 
   const onSubmit = (values) => {
     const phoneFieldIsValid = checkIfPhoneFieldIsValid
-    if (phoneFieldIsValid) console.log(values)
+    const imageIsUploaded = documentsSelected()
+
+    if (phoneFieldIsValid && imageIsUploaded) {
+      registerCaretaker({
+        fullName: values.full_name,
+        email: values.email,
+        password: values.pwd,
+        phone: `+${phone}`,
+        identifierImage: identifierImage,
+        __t: userTypes.caretaker,
+        caretaker_association: values.association,
+        businessLocation: values.business_location,
+        license_number: values.license_number,
+        businessRegImage: businessRegImage,
+        professionalCertImage: professionalCertImage,
+        homeAddress: values.home_address,
+        yoe: values.years_of_experience,
+        availableOnDemand: values.available_on_demand,
+        referenceLetters: ReferenceLetters,
+        next_of_kin: {
+          fullName: values.next_of_kin_full_name,
+          relationship: values.relationship,
+          phone: `+${nextOfKinPhone}`,
+          email: values.next_of_kin_email,
+          address: values.next_of_kin_address,
+          identifierImage: nextOfKinIdentifierImage,
+        },
+      })
+    }
   }
 
   useEffect(() => {
@@ -87,7 +140,7 @@ export const CaretakerForm = () => {
   }, [form.formState.errors])
 
   return (
-    <ScrollArea className='h-[527px] relatve'>
+    <ScrollArea className='h-[400px] relative'>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -99,11 +152,27 @@ export const CaretakerForm = () => {
             placeholder='Choose your association'
             inputCategory='select'
             selectList={[
-              'ERCAAN (Estate Rent and Commission Agents Association of Nigeria)',
-              'REDAN (Real Estate Developers Association of Nigeria)',
-              'Remassos- The  Real Estate Managers’ Association in Ondo State',
-              'AEAN (Association of Estate Agents in Nigeria)',
-              'Independent caretaker',
+              {
+                title:
+                  'ERCAAN (Estate Rent and Commission Agents Association of Nigeria)',
+                value: 'ERCAAN',
+              },
+              {
+                title: 'REDAN (Real Estate Developers Association of Nigeria)',
+                value: 'REDAN',
+              },
+              {
+                title:
+                  'Remassos- The  Real Estate Managers’ Association in Ondo State',
+                value: 'Remassos',
+              },
+              {
+                title: 'AEAN (Association of Estate Agents in Nigeria)',
+                value: 'AEAN',
+              },{
+                title: 'Independent caretaker',
+                value: 'Independent',
+              },
             ]}
           />
           <InputField
@@ -139,6 +208,20 @@ export const CaretakerForm = () => {
           />
           <InputField
             control={form.control}
+            name='business_location'
+            placeholder='Enter your business location'
+            inputCategory='input'
+            inputType='text'
+          />
+          <InputField
+            control={form.control}
+            name='license_number'
+            placeholder='Enter your professional license number'
+            inputCategory='input'
+            inputType='text'
+          />
+          <InputField
+            control={form.control}
             name='number_of_house'
             placeholder='Enter the number of how houses you caretake?'
             inputCategory='input'
@@ -147,26 +230,33 @@ export const CaretakerForm = () => {
           <InputField
             control={form.control}
             name='property_address'
-            placeholder='EEnter address of the property you manage'
+            placeholder='Enter address of the property you manage'
             inputCategory='input'
             inputType='text'
           />
           <div className='flex flex-col gap-5'>
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setProfessionalCertImage(e)}
               topLabel={'Upload Authorization Letter'}
               label={`Upload proof of authorization from the landlord of each  houses`}
             />
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setIdentifierImage(e)}
               topLabel={'Upload Identification and Government ID'}
               label={`Upload a valid ID (e.g., National ID, Driver’s License)`}
             />
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setbusinessRegImage(e)}
               topLabel={'Upload Utility bills to confirm property ownership'}
             />
           </div>
+          <InputField
+            control={form.control}
+            name='home_address'
+            placeholder='Home address'
+            inputCategory='input'
+            inputType='text'
+          />
           <InputField
             control={form.control}
             name='years_of_experience'
@@ -180,10 +270,26 @@ export const CaretakerForm = () => {
             label={'Are you Available On-demand?'}
             inputCategory='radio'
             radioList={[
-              { label: 'Yes', value: 'yes' },
-              { label: 'No', value: 'no' },
+              { label: 'Yes', value: true },
+              { label: 'No', value: false },
             ]}
           />
+          <div className='flex flex-col gap-4'>
+            <Text style='text-[14px] font-[500]'>
+              Upload 5 caretakers or landlord reference letter
+            </Text>
+            <div className='flex flex-wrap gap-3'>
+              {Array.from({ length: 5 }, (_, index) => (
+                <UploadButton
+                  key={index}
+                  handleChange={(e) =>
+                    setReferenceLetters((prevState) => [...prevState, e])
+                  }
+                  id={`caretaker${index+1}`}
+                />
+              ))}
+            </div>
+          </div>
           <InputField
             control={form.control}
             name='landlord_full_name'
@@ -251,7 +357,7 @@ export const CaretakerForm = () => {
           </div>
           <div className='flex flex-col gap-5'>
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setNextOfKinIdentifierImage(e)}
               label={`Upload a valid ID for verification`}
               uploadBtnText={'Upload Identification'}
               topLabel={'Upload Identification (Optional)'}

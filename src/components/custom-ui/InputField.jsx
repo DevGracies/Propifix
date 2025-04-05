@@ -57,6 +57,15 @@ export const InputField = ({
                   placeholder={placeholder && placeholder}
                   onChange={handleValueChange}
                 />
+              ) : inputType === 'number' ? (
+                <Input
+                  readOnly={readOnly}
+                  type={inputType || 'text'}
+                  className={inputCnStyle}
+                  min={1}
+                  placeholder={placeholder}
+                  {...field}
+                />
               ) : (
                 <Input
                   readOnly={readOnly}
@@ -115,8 +124,8 @@ export const InputField = ({
                 <SelectContent>
                   {selectList !== undefined &&
                     selectList?.map((item, index) => (
-                      <SelectItem value={item} key={index}>
-                        {item}
+                      <SelectItem value={item.value} key={index}>
+                        {item.title}
                       </SelectItem>
                     ))}
                 </SelectContent>

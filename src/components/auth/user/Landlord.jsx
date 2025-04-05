@@ -15,17 +15,23 @@ import { UploadButton } from '@/components/shared/UploadButton'
 import { LandlordFormSchema } from '@/lib/schema/LandlordFormSchema'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { PhoneNumberField } from '@/components/shared/PhoneNumberField'
+import { useCreateLandlord } from '@/hooks/auth/regsiter.hook'
+import { userTypes } from '@/utils/ConstantEnums'
+import { toast } from 'sonner'
 
 export const LandlordForm = () => {
-  const [isPending, setIsPending] = useState(false)
+  const { mutate: registerLandlord, isPending } = useCreateLandlord()
   const [isTermsAccepted, setIsTermsAccepted] = useState(false)
   const [isRobot, setIsRobot] = useState(true)
   const [phone, setPhone] = useState('')
   const [nextOfKinPhone, setNextOfKinPhone] = useState('')
-  const [caretakerPhone, setcaretakerPhone] = useState('')
+  const [landlordPhone, setLandlordPhone] = useState('')
   const [error, setError] = useState('')
   const [nextOfKinError, setNextOfKinError] = useState('')
-  const [caretakerError, setCaretakerError] = useState('')
+  const [landlordError, setLandlordError] = useState('')
+  const [identifierImage, setIdentifierImage] = useState('')
+  const [utilityBillImage, setUtilityBillImage] = useState('')
+  const [nextOfKinIdentifierImage, setNextOfKinIdentifierImage] = useState('')
 
   function onChange(value) {
     console.log('Captcha value:', value)
@@ -46,13 +52,24 @@ export const LandlordForm = () => {
     } else {
       setNextOfKinError('')
     }
-    if (!caretakerPhone) {
-      setcaretakerPhone(`Landlord's Phone number is required`)
+    if (!landlordPhone) {
+      setLandlordError(`Landlord's Phone number is required`)
       isValid = false
     } else {
       setLandlordError('')
     }
     return isValid
+  }
+
+  const documentsSelected = () => {
+    let isSelected = false
+    const allRequiredAreUploaded = identifierImage && utilityBillImage
+    if (allRequiredAreUploaded) {
+      isSelected = true
+    } else {
+      toast.error('Upload all required document!')
+    }
+    return isSelected
   }
 
   const form = useForm({
@@ -63,11 +80,12 @@ export const LandlordForm = () => {
       cpwd: '',
       email: '',
       property_name: '',
-      number_of_house: 0,
+      number_of_house: '1',
       property_address: '',
-      years_of_ownership: 0,
+      years_of_ownership: '1',
       caretaker_full_name: '',
-      have_a_caretaker: 'yes',
+      have_a_caretaker: true,
+      available_on_demand:true,
       next_of_kin_full_name: '',
       relationship: '',
       next_of_kin_email: '',
@@ -77,7 +95,31 @@ export const LandlordForm = () => {
 
   const onSubmit = (values) => {
     const phoneFieldIsValid = checkIfPhoneFieldIsValid
-    if (phoneFieldIsValid) console.log(values)
+    const imageIsUploaded = documentsSelected()
+
+    if (phoneFieldIsValid && imageIsUploaded) {
+      registerLandlord({
+        fullName: values.full_name,
+        email: values.email,
+        password: values.pwd,
+        phone: `+${phone}`,
+        identifierImage: identifierImage,
+        __t: userTypes.landlord,
+        numberOfHousesOwned: values.number_of_house,
+        utilityBillImage: utilityBillImage,
+        homeAddress: values.property_address,
+        yoe: values.years_of_ownership,
+        availableOnDemand: values.available_on_demand,
+        next_of_kin: {
+          fullName: values.next_of_kin_full_name,
+          relationship: values.relationship,
+          phone: `+${nextOfKinPhone}`,
+          email: values.next_of_kin_email,
+          address: values.next_of_kin_address,
+          identifierImage: nextOfKinIdentifierImage,
+        },
+      })
+    }
   }
 
   useEffect(() => {
@@ -87,7 +129,7 @@ export const LandlordForm = () => {
   }, [form.formState.errors])
 
   return (
-    <ScrollArea className='h-[527px] relatve'>
+    <ScrollArea className='h-[400px] relative'>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -147,12 +189,12 @@ export const LandlordForm = () => {
           />
           <div className='flex flex-col gap-5'>
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setIdentifierImage(e)}
               topLabel={'Upload Identification and Government ID'}
               label={`Upload a valid ID (e.g., National ID, Driver’s License)`}
             />
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setUtilityBillImage(e)}
               topLabel={'Upload Utility bills to confirm property ownership'}
             />
           </div>
@@ -169,8 +211,8 @@ export const LandlordForm = () => {
             label={'Do you have a caretaker?'}
             inputCategory='radio'
             radioList={[
-              { label: 'Yes', value: 'yes' },
-              { label: 'No', value: 'no' },
+              { label: 'Yes', value: true },
+              { label: 'No', value: false },
             ]}
           />
           <div className='flex flex-col gap-4 p-4 border border-thick-purple rounded-[12px]'>
@@ -178,15 +220,15 @@ export const LandlordForm = () => {
             <InputField
               control={form.control}
               name='caretaker_full_name'
-              placeholder={`Enter your caretaker’s full name`}
+              placeholder={`Enter your Caretaker’s full name`}
               inputCategory='input'
               inputType='text'
             />
             <PhoneNumberField
-              setPhone={setcaretakerPhone}
-              phone={caretakerPhone}
-              error={caretakerError}
-              setError={setCaretakerError}
+              setPhone={setLandlordPhone}
+              phone={landlordPhone}
+              error={landlordError}
+              setError={setLandlordError}
               placeholder={`Caretaker phone number`}
             />
           </div>
@@ -200,6 +242,16 @@ export const LandlordForm = () => {
               </span>
             </span>
           </Text>
+          <InputField
+            control={form.control}
+            name='available_on_demand'
+            label={'Are you Available On-demand?'}
+            inputCategory='radio'
+            radioList={[
+              { label: 'Yes', value: true },
+              { label: 'No', value: false },
+            ]}
+          />
           <div className='flex flex-col gap-4'>
             <Text style='text-[14px] font-[500]'>Next of Kin Information</Text>
             <InputField
@@ -209,6 +261,16 @@ export const LandlordForm = () => {
               inputCategory='input'
               inputType='text'
             />
+            <div className='flex flex-col gap-1'>
+              <InputField
+                control={form.control}
+                name='relationship'
+                placeholder='Relationship'
+                inputCategory='input'
+                inputType='text'
+              />
+              <Text style='text-[10px] italic font-normal'>{`Specify your relationship (e.g., Parent, Sibling, Spouse)`}</Text>
+            </div>
             <PhoneNumberField
               setPhone={setNextOfKinPhone}
               phone={nextOfKinPhone}
@@ -233,7 +295,7 @@ export const LandlordForm = () => {
           </div>
           <div className='flex flex-col gap-5'>
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setNextOfKinIdentifierImage(e)}
               label={`Upload a valid ID for verification`}
               uploadBtnText={'Upload Identification'}
               topLabel={'Upload Identification (Optional)'}

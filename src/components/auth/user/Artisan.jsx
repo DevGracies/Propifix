@@ -15,15 +15,21 @@ import { UploadButton } from '@/components/shared/UploadButton'
 import { ArtisanFormSchema } from '@/lib/schema/ArtisanFormSchema'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { PhoneNumberField } from '@/components/shared/PhoneNumberField'
+import { useCreateArtisan } from '@/hooks/auth/regsiter.hook'
+import { userTypes } from '@/utils/ConstantEnums'
+import { toast } from 'sonner'
 
 export const ArtisanForm = () => {
-  const [isPending, setIsPending] = useState(false)
+  const { mutate: registerArtisan, isPending } = useCreateArtisan()
   const [isTermsAccepted, setIsTermsAccepted] = useState(false)
   const [isRobot, setIsRobot] = useState(true)
   const [phone, setPhone] = useState('')
   const [nextOfKinPhone, setNextOfKinPhone] = useState('')
   const [error, setError] = useState('')
   const [nextOfKinError, setNextOfKinError] = useState('')
+  const [identifierImage, setIdentifierImage] = useState('')
+  const [portfolioImage, setportfolioImage] = useState([])
+  const [nextOfKinIdentifierImage, setNextOfKinIdentifierImage] = useState('')
 
   function onChange(value) {
     console.log('Captcha value:', value)
@@ -33,18 +39,29 @@ export const ArtisanForm = () => {
   const checkIfPhoneFieldIsValid = () => {
     let isValid = true
     if (!phone) {
-      setPhoneError('Phone number is required')
+      setError('Phone number is required')
       isValid = false
     } else {
-      setPhoneError('')
+      setError('')
     }
     if (!nextOfKinPhone) {
-      setNextOfKinPhoneError(`Next Of Kin's Phone number is required`)
+      setNextOfKinError(`Next Of Kin's Phone number is required`)
       isValid = false
     } else {
-      setNextOfKinPhoneError('')
+      setNextOfKinError('')
     }
     return isValid
+  }
+
+  const documentsSelected = () => {
+    let isSelected = false
+    const allRequiredAreUploaded = identifierImage && portfolioImage
+    if (allRequiredAreUploaded) {
+      isSelected = true
+    } else {
+      toast.error('Upload all required document!')
+    }
+    return isSelected
   }
 
   const form = useForm({
@@ -56,8 +73,8 @@ export const ArtisanForm = () => {
       email: '',
       skills: '',
       home_address: '',
-      years_of_experience: 0,
-      available_on_demand: 'yes',
+      years_of_experience: '1',
+      available_on_demand: true,
       next_of_kin_full_name: '',
       relationship: '',
       next_of_kin_email: '',
@@ -67,7 +84,31 @@ export const ArtisanForm = () => {
 
   const onSubmit = (values) => {
     const phoneFieldIsValid = checkIfPhoneFieldIsValid
-    if (phoneFieldIsValid) console.log(values)
+    const imageIsUploaded = documentsSelected()
+
+    if (phoneFieldIsValid && imageIsUploaded) {
+      registerArtisan({
+        fullName: values.full_name,
+        email: values.email,
+        password: values.pwd,
+        phone: `+${phone}`,
+        identifierImage: identifierImage,
+        __t: userTypes.artisan,
+        skill: values.skills,
+        portfolioImages: portfolioImage,
+        homeAddress: values.home_address,
+        yoe: values.years_of_experience,
+        availableOnDemand: values.available_on_demand,
+        next_of_kin: {
+          fullName: values.next_of_kin_full_name,
+          relationship: values.relationship,
+          phone: `+${nextOfKinPhone}`,
+          email: values.next_of_kin_email,
+          address: values.next_of_kin_address,
+          identifierImage: nextOfKinIdentifierImage,
+        },
+      })
+    }
   }
 
   useEffect(() => {
@@ -77,7 +118,7 @@ export const ArtisanForm = () => {
   }, [form.formState.errors])
 
   return (
-    <ScrollArea className='h-[527px] relatve'>
+    <ScrollArea className='h-[400px] relative'>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -96,11 +137,18 @@ export const ArtisanForm = () => {
             placeholder='Trade/Skill'
             inputCategory='select'
             selectList={[
-              'ERCAAN (Estate Rent and Commission Agents skills of Nigeria)',
-              'REDAN (Real Estate Developers skills of Nigeria)',
-              'Remassos- The  Real Estate Managers’ skills in Ondo State',
-              'AEAN (skills of Estate Agents in Nigeria)',
-              'Independent Artisan',
+              { title: 'House Agent', value: 'House_Agent' },
+              { title: 'Carpentry', value: 'Carpentry' },
+              { title: 'Electrical Work', value: 'Electrical_Work' },
+              { title: 'Dry Cleaning', value: 'Dry_Cleaning' },
+              { title: 'House Cleaning', value: 'House_Cleaning' },
+              { title: 'Plumbing', value: 'Plumbing' },
+              { title: 'Painting', value: 'Painting' },
+              { title: 'Bricklaying', value: 'Bricklaying' },
+              { title: 'Tiling', value: 'Tiling' },
+              { title: 'Welding', value: 'Welding' },
+              { title: 'Roofing', value: 'Roofing' },
+              { title: 'HVAC Installation', value: ' HVAC_Installation' }
             ]}
           />
           <InputField
@@ -143,15 +191,27 @@ export const ArtisanForm = () => {
           />
           <div className='flex flex-col gap-5'>
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setIdentifierImage(e)}
               topLabel={'Upload Identification and Government ID'}
               label={`Upload a valid ID (e.g., National ID, Driver’s License)`}
             />
-            <UploadButton
-              handleChange={(e) => console.log(e)}
-              topLabel={'Upload Work Portfolio (Optional)'}
-              label={`Upload  images of past work or projects`}
-            />
+            <div className='flex flex-col gap-4'>
+              <Text style='text-[14px] font-[500]'>
+                Upload Work Portfolio (Optional)
+              </Text>
+              <div className='flex flex-wrap gap-3'>
+                {Array.from({ length: 5 }, (_, index) => (
+                  <UploadButton
+                    key={index}
+                    handleChange={(e) =>
+                      setportfolioImage((prevState) => [...prevState, e])
+                    }
+                    id={`artisan${index + 1}`}
+                    label={`Upload  images of past work or projects`}
+                  />
+                ))}
+              </div>
+            </div>
           </div>
           <InputField
             control={form.control}
@@ -159,8 +219,8 @@ export const ArtisanForm = () => {
             label={'Are you Available On-demand?'}
             inputCategory='radio'
             radioList={[
-              { label: 'Yes', value: 'yes' },
-              { label: 'No', value: 'no' },
+              { label: 'Yes', value: true },
+              { label: 'No', value: false },
             ]}
           />
           <div className='flex flex-col gap-4'>
@@ -206,7 +266,7 @@ export const ArtisanForm = () => {
           </div>
           <div className='flex flex-col gap-5'>
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setNextOfKinIdentifierImage(e)}
               label={`Upload a valid ID for verification`}
               uploadBtnText={'Upload Identification'}
               topLabel={'Upload Identification (Optional)'}
