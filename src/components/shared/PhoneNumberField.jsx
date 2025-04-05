@@ -4,16 +4,23 @@ import { Text } from './Text'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
 
-export const PhoneNumberField = ({ setPhone, phone = '', error, setError, placeholder }) => {
+export const PhoneNumberField = ({
+  setPhone,
+  phone = '',
+  error,
+  setError,
+  placeholder,
+}) => {
   const handleChange = (phoneVal) => {
-    setPhone(phoneVal || '') // Ensure we always store a string
-    setError((prevState) => (prevState ? '' : prevState)) // Reset error if needed
+    setPhone(phoneVal || '') 
+    setError((prevState) => (prevState ? '' : prevState)) 
   }
 
   return (
     <div className='flex flex-col gap-2'>
       <PhoneInput
         country={'ng'}
+        withCountryCallingCode={true}
         value={phone || ''} // Ensure PhoneInput never receives undefined/null
         placeholder={placeholder}
         onChange={handleChange}
@@ -36,6 +43,7 @@ export const PhoneNumberField = ({ setPhone, phone = '', error, setError, placeh
           width: '100%',
           background: 'white',
           fontStyle: 'italic',
+          paddingLeft:'10px',
           border: `1px solid ${error ? 'red' : 'rgba(0, 0, 0, 0.35)'}`,
         }}
         containerStyle={{
@@ -49,4 +57,3 @@ export const PhoneNumberField = ({ setPhone, phone = '', error, setError, placeh
     </div>
   )
 }
-

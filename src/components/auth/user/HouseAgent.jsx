@@ -15,15 +15,23 @@ import { UploadButton } from '@/components/shared/UploadButton'
 import { HouseAgentFormSchema } from '@/lib/schema/HouseAgentFormSchema'
 import { ScrollArea } from '@/components/ui/scroll-area'
 import { PhoneNumberField } from '@/components/shared/PhoneNumberField'
+import { useCreateAgent } from '@/hooks/auth/regsiter.hook'
+import { userTypes } from '@/utils/ConstantEnums'
+import { toast } from 'sonner'
 
 export const HouseAgentForm = () => {
-  const [isPending, setIsPending] = useState(false)
+  const { mutate: registerAgent, isPending } = useCreateAgent()
   const [isTermsAccepted, setIsTermsAccepted] = useState(false)
   const [isRobot, setIsRobot] = useState(true)
   const [phone, setPhone] = useState('')
   const [nextOfKinPhone, setNextOfKinPhone] = useState('')
   const [error, setError] = useState('')
   const [nextOfKinError, setNextOfKinError] = useState('')
+  const [identifierImage, setIdentifierImage] = useState('')
+  const [businessRegImage, setbusinessRegImage] = useState('')
+  const [nextOfKinIdentifierImage, setNextOfKinIdentifierImage] = useState('')
+  const [professionalCertImage, setProfessionalCertImage] = useState('')
+  const [ReferenceLetters, setReferenceLetters] = useState([])
 
   function onChange(value) {
     console.log('Captcha value:', value)
@@ -47,6 +55,21 @@ export const HouseAgentForm = () => {
     return isValid
   }
 
+  const documentsSelected = () => {
+    let isSelected = false
+    const allRequiredAreUploaded =
+      identifierImage &&
+      businessRegImage &&
+      professionalCertImage &&
+      ReferenceLetters
+    if (allRequiredAreUploaded) {
+      isSelected = true
+    } else {
+      toast.error('Upload all required document!')
+    }
+    return isSelected
+  }
+
   const form = useForm({
     resolver: zodResolver(HouseAgentFormSchema),
     defaultValues: {
@@ -55,12 +78,12 @@ export const HouseAgentForm = () => {
       cpwd: '',
       email: '',
       agent_type: '',
-      business_name: '',
+      association: '',
       business_location: '',
       license_number: '',
       home_address: '',
-      years_of_experience: 0,
-      available_on_demand: 'yes',
+      years_of_experience: '1',
+      available_on_demand: true,
       next_of_kin_full_name: '',
       relationship: '',
       next_of_kin_email: '',
@@ -70,7 +93,36 @@ export const HouseAgentForm = () => {
 
   const onSubmit = (values) => {
     const phoneFieldIsValid = checkIfPhoneFieldIsValid
-    if (phoneFieldIsValid) console.log(values)
+    const imageIsUploaded = documentsSelected()
+
+    if (phoneFieldIsValid && imageIsUploaded) {
+      registerAgent({
+        fullName: values.full_name,
+        email: values.email,
+        password: values.pwd,
+        phone: `+${phone}`,
+        identifierImage: identifierImage,
+        __t: userTypes.agent,
+        agentType: values.agent_type,
+        agentAssociation: values.association,
+        businessLocation: values.business_location,
+        license_number: values.license_number,
+        businessRegImage: businessRegImage,
+        professionalCertImage: professionalCertImage,
+        homeAddress: values.home_address,
+        yoe: values.years_of_experience,
+        availableOnDemand: values.available_on_demand,
+        referenceLetters: ReferenceLetters,
+        next_of_kin: {
+          fullName: values.next_of_kin_full_name,
+          relationship: values.relationship,
+          phone: `+${nextOfKinPhone}`,
+          email: values.next_of_kin_email,
+          address: values.next_of_kin_address,
+          identifierImage: nextOfKinIdentifierImage,
+        },
+      })
+    }
   }
 
   useEffect(() => {
@@ -80,7 +132,7 @@ export const HouseAgentForm = () => {
   }, [form.formState.errors])
 
   return (
-    <ScrollArea className='h-[527px] relatve'>
+    <ScrollArea className='h-[400px] relative'>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -92,8 +144,14 @@ export const HouseAgentForm = () => {
             placeholder='Agent Type'
             inputCategory='select'
             selectList={[
-              'Independent Agent (Not part of any association)',
-              'Affiliated Agent (Belongs to an association)',
+              {
+                title: 'Independent Agent (Not part of any association)',
+                value: 'independent',
+              },
+              {
+                title: 'Affiliated Agent (Belongs to an association)',
+                value: 'affiliated',
+              },
             ]}
           />
           <InputField
@@ -105,10 +163,29 @@ export const HouseAgentForm = () => {
           />
           <InputField
             control={form.control}
-            name='business_name'
-            placeholder='Enter your registered business name'
-            inputCategory='input'
-            inputType='text'
+            name='association'
+            placeholder='Choose your association'
+            inputCategory='select'
+            selectList={[
+              {
+                title:
+                  'ERCAAN (Estate Rent and Commission Agents Association of Nigeria)',
+                value: 'ERCAAN',
+              },
+              {
+                title: 'REDAN (Real Estate Developers Association of Nigeria)',
+                value: 'REDAN',
+              },
+              {
+                title:
+                  'Remassos- The  Real Estate Managers’ Association in Ondo State',
+                value: 'Remassos',
+              },
+              {
+                title: 'AEAN (Association of Estate Agents in Nigeria)',
+                value: 'AEAN',
+              },
+            ]}
           />
           <InputField
             control={form.control}
@@ -150,18 +227,17 @@ export const HouseAgentForm = () => {
           />
           <div className='flex flex-col gap-5'>
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setbusinessRegImage(e)}
               topLabel={'Upload Business Registration'}
               label={`Upload a scanned copy of your business registration  document`}
             />
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setProfessionalCertImage(e)}
               topLabel={'Upload Professional Certification'}
               label={`Upload relevant certification for your field`}
             />
             <UploadButton
-              handleChange={(e) => console.log(e)}
-              topLabel={'Upload Business Registration'}
+              handleChange={(e) => setIdentifierImage(e)}
               label={`Upload Identification and Government ID`}
             />
           </div>
@@ -185,10 +261,26 @@ export const HouseAgentForm = () => {
             label={'Are you Available On-demand?'}
             inputCategory='radio'
             radioList={[
-              { label: 'Yes', value: 'yes' },
-              { label: 'No', value: 'no' },
+              { label: 'Yes', value: true },
+              { label: 'No', value: false },
             ]}
           />
+          <div className='flex flex-col gap-4'>
+            <Text style='text-[14px] font-[500]'>
+              Upload 5 caretakers or landlord refernece letter
+            </Text>
+            <div className='flex flex-wrap gap-3'>
+              {Array.from({ length: 5 }, (_, index) => (
+                <UploadButton
+                  key={index}
+                  handleChange={(e) =>
+                    setReferenceLetters((prevState) => [...prevState, e])
+                  }
+                  id={`houseagent${index + 1}`}
+                />
+              ))}
+            </div>
+          </div>
           <div className='flex flex-col gap-4'>
             <Text style='text-[14px] font-[500]'>Next of Kin Information</Text>
             <InputField
@@ -232,7 +324,7 @@ export const HouseAgentForm = () => {
           </div>
           <div className='flex flex-col gap-5'>
             <UploadButton
-              handleChange={(e) => console.log(e)}
+              handleChange={(e) => setNextOfKinIdentifierImage(e)}
               label={`Upload a valid ID for verification`}
               uploadBtnText={'Upload Identification'}
               topLabel={'Upload Identification (Optional)'}
