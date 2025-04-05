@@ -78,7 +78,7 @@ export const SignIn = () => {
 
         <div
           className='cursor-pointer text-[11.34px] font-normal'
-          onClick={() => router.push(`/user/login`)}
+          onClick={() => router.push(`/user/reset-password`)}
         >
           <span className='text-primary-color'>Forgot password?</span>
         </div>

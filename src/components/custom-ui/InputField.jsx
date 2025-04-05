@@ -1,3 +1,5 @@
+'use client'
+
 import { cn } from '@/lib/utils'
 import {
   FormControl,
@@ -25,6 +27,7 @@ export const InputField = ({
   inputCategory,
   inputType,
   readOnly = false,
+  autoFocus = false,
   value,
   handleValueChange,
   inputStyle,
@@ -52,6 +55,7 @@ export const InputField = ({
                 <Input
                   defaultValue={value}
                   readOnly={readOnly}
+                  autoFocus={autoFocus}
                   type={inputType || 'text'}
                   className={inputCnStyle}
                   placeholder={placeholder && placeholder}
@@ -60,6 +64,7 @@ export const InputField = ({
               ) : inputType === 'number' ? (
                 <Input
                   readOnly={readOnly}
+                  autoFocus={autoFocus}
                   type={inputType || 'text'}
                   className={inputCnStyle}
                   min={1}
@@ -68,6 +73,7 @@ export const InputField = ({
                 />
               ) : (
                 <Input
+                  autoFocus={autoFocus}
                   readOnly={readOnly}
                   type={inputType || 'text'}
                   className={inputCnStyle}

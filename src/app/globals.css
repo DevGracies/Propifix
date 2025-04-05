@@ -152,6 +152,7 @@ html {
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
 }
+
 .clip {
   -webkit-mask-image: url('/home-images/FindAgentbg3.svg');
   mask-image: url('/home-images/FindAgentbg3.svg');

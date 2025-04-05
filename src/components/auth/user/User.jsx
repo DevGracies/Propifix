@@ -94,80 +94,83 @@ export const UserForm = () => {
   }, [form.formState.errors])
 
   return (
-    <ScrollArea className='h-[400px] relative'>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit(onSubmit)}
-          className='w-full flex flex-col gap-4'
-        >
-          <InputField
-            control={form.control}
-            name='full_name'
-            placeholder='Enter your full name'
-            inputCategory='input'
-            inputType='text'
-          />
-          <InputField
-            control={form.control}
-            name='email'
-            placeholder='Enter your email address'
-            inputCategory='input'
-            inputType='email'
-          />
-          <PhoneNumberField
-            setPhone={setPhone}
-            phone={phone}
-            error={error}
-            setError={setError}
-            placeholder='Enter your phone number'
-          />
-          <PasswordInput
-            control={form.control}
-            name='pwd'
-            placeholder='Create a secure password'
-          />
-          <PasswordInput
-            control={form.control}
-            name='cpwd'
-            placeholder='Confirm Password'
-          />
-          <div className='flex flex-col gap-5'>
-            <div className='flex flex-wrap gap-2 justify-between items-start'>
-              <ReCAPTCHA
-                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                onChange={onChange}
-              />
-              <UploadButton
-                handleChange={(e) => setNationalId(e)}
-                label={`e.g., National ID, NIN, Driver’s License`}
-                uploadBtnText={'Upload Identification'}
-              />
+    <div className='md:max-h-[40vh] max-h-[90vh] overflow-y-auto'>
+      <ScrollArea className='w-full'>
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className='w-full flex flex-col gap-4'
+          >
+            <InputField
+              control={form.control}
+              autoFocus
+              name='full_name'
+              placeholder='Enter your full name'
+              inputCategory='input'
+              inputType='text'
+            />
+            <InputField
+              control={form.control}
+              name='email'
+              placeholder='Enter your email address'
+              inputCategory='input'
+              inputType='email'
+            />
+            <PhoneNumberField
+              setPhone={setPhone}
+              phone={phone}
+              error={error}
+              setError={setError}
+              placeholder='Enter your phone number'
+            />
+            <PasswordInput
+              control={form.control}
+              name='pwd'
+              placeholder='Create a secure password'
+            />
+            <PasswordInput
+              control={form.control}
+              name='cpwd'
+              placeholder='Confirm Password'
+            />
+            <div className='flex flex-col gap-5'>
+              <div className='flex flex-wrap gap-2 justify-between items-start'>
+                <ReCAPTCHA
+                  sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                  onChange={onChange}
+                />
+                <UploadButton
+                  handleChange={(e) => setNationalId(e)}
+                  label={`e.g., National ID, NIN, Driver’s License`}
+                  uploadBtnText={'Upload Identification'}
+                />
+              </div>
+              <div className='text-[9.72px] font-[400] flex items-center '>
+                <Checkbox
+                  onCheckedChange={() => setIsTermsAccepted((prev) => !prev)}
+                  className='mr-2'
+                />
+                <Text>
+                  I agree to the Propifix{' '}
+                  <span className='text-primary-color'>Terms</span> &{' '}
+                  <span className='text-primary-color'>Conditions</span> and
+                  confirm that my information is accurate.
+                </Text>
+              </div>
+              <Button
+                disabled={!isTermsAccepted || isRobot}
+                className='h-12 flex items-center justify-center rounded-[12px] bg_linear-purple text-white font-medium text-lg w-full'
+              >
+                {isPending ? (
+                  <Loader className='w-5 h-5 text-white animate-spin' />
+                ) : (
+                  'Sign Up'
+                )}
+              </Button>
             </div>
-            <div className='text-[9.72px] font-[400] flex items-center '>
-              <Checkbox
-                onCheckedChange={() => setIsTermsAccepted((prev) => !prev)}
-                className='mr-2'
-              />
-              <Text>
-                I agree to the Propifix{' '}
-                <span className='text-primary-color'>Terms</span> &{' '}
-                <span className='text-primary-color'>Conditions</span> and
-                confirm that my information is accurate.
-              </Text>
-            </div>
-            <Button
-              disabled={!isTermsAccepted || isRobot}
-              className='h-12 flex items-center justify-center rounded-[12px] bg_linear-purple text-white font-medium text-lg w-full'
-            >
-              {isPending ? (
-                <Loader className='w-5 h-5 text-white animate-spin' />
-              ) : (
-                'Sign Up'
-              )}
-            </Button>
-          </div>
-        </form>
-      </Form>
-    </ScrollArea>
+          </form>
+        </Form>
+      </ScrollArea>
+    </div>
   )
 }

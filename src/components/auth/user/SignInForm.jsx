@@ -74,7 +74,7 @@ export const UserSignInForm = () => {
           <div className='text-[9.72px] font-[400] flex items-center'>
             <Checkbox
               onCheckedChange={() => setIsTermsAccepted((prev) => !prev)}
-              className='mr-2'
+              className='mr-2 border'
             />
             <Text>
               I agree to the Propifix{' '}

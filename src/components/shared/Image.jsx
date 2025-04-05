@@ -12,7 +12,10 @@ export const CustomImage = ({
   clickFunc,
 }) => {
   return (
-    <div className={cn('relative', style)} onClick={clickFunc}>
+    <div
+      className={cn('relative', style)}
+      onClick={clickFunc}
+    >
       <Image
         src={src}
         alt={alt}
