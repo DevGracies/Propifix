@@ -59,14 +59,16 @@ export const Register = () => {
           <LandlordForm />
         </TabsContent>
       </Tabs>
-      <div className='mt-3 sm:w-[65%] w-full flex justify-between gap-4'>
+      <div className='mt-3 sm:w-[65%] w-full flex justify-between gap-4 z-[1000]'>
         {/* Back to Homepage  */}
         <div
-          className='flex items-center cursor-pointer text-[11.34px] font-normal whitespace-nowrap'
-          onClick={() => router.push('/user/login')}
+          className='md:flex hidden items-center cursor-pointer text-[11.34px] font-normal whitespace-nowrap text-black group'
+          onClick={() => router.push('/')}
         >
-          <ChevronLeft className='w-[20.02px] h-[16.51px]' />
-          <span className='underline'>Back to homepage</span>
+          <ChevronLeft className='w-[20.02px] h-[16.51px] text-black transition-colors duration-500 group-hover:text-primary-color' />
+          <span className='underline text-black transition-colors duration-500 group-hover:text-primary-color ml-1'>
+            Back to homepage
+          </span>
         </div>
 
         {/* Footer Navigation */}

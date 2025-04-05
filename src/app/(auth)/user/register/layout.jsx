@@ -1,7 +1,7 @@
 import { CustomImage } from '@/components/shared/Image'
 import { Poppins } from 'next/font/google'
 import authImg from '../../../../../public/user_auth2_image.svg'
-import authBgImg from '../../../../../public//user_auth_bg.svg'
+import authBgImg from '../../../../../public/user_auth_bg.svg'
 
 const poppins = Poppins({
   subsets: ['latin'],

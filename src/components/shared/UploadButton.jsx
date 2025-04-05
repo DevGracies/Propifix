@@ -54,7 +54,7 @@ export const UploadButton = ({
               {isUploaded
                 ? 'File Uploaded'
                 : isPending
-                ? 'Uploading...'
+                ? 'Uploading File...'
                 : uploadBtnText}
             </span>
           </div>
