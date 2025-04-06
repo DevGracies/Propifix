@@ -19,7 +19,7 @@ export const SignIn = () => {
         Log In to Explore Homes and Essential Services.
       </Text>
       <Tabs defaultValue={userTypes.agent} className='w-full'>
-        <ScrollArea className='w-full whitespace-nowrap bg-none'>
+        <ScrollArea className='w-full whitespace-nowrap bg-none scrollbar-none'>
           <TabsList className='justify-start items-start flex w-full gap-4 h-fit mb-2 bg-none'>
             <TabsTrigger value={userTypes.agent} className={triggerStyle}>
               House Agent

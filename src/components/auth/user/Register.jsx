@@ -23,7 +23,7 @@ export const Register = () => {
         Create Your Account for Seamless Living Solutions
       </Text>
       <Tabs defaultValue={userTypes.agent} className='w-full bg-white'>
-        <ScrollArea className='w-full whitespace-nowrap'>
+        <ScrollArea className='w-full whitespace-nowrap scrollbar-none'>
           <TabsList className='justify-start items-start flex w-full gap-4 h-fit bg-white mb-2'>
             <TabsTrigger value={userTypes.agent} className={triggerStyle}>
               House Agent

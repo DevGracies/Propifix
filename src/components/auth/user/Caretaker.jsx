@@ -140,8 +140,8 @@ export const CaretakerForm = () => {
   }, [form.formState.errors])
 
   return (
-    <div className='md:max-h-[40vh] max-h-[90vh] overflow-y-auto'>
-      <ScrollArea className='w-full'>
+    <div className='md:max-h-[40vh] max-h-[90vh] overflow-y-auto scrollbar-none'>
+      <ScrollArea className='w-full scrollbar-none'>
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
