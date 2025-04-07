@@ -139,7 +139,7 @@
 html {
   scroll-behavior: smooth;
   scrollbar-color: #7f37ded5 transparent;
-  scrollbar-width: thin;
+  scrollbar-width: none;
 }
 .clip-svg {
   -webkit-mask-image: url('/home-images/bg1.svg');
@@ -167,7 +167,6 @@ html {
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
 }
-
 
 @media (min-width: 1024px) {
   .clip-svg {

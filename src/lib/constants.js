@@ -301,5 +301,135 @@ export const FOOTERLINKS = {
   ],
 };
 
+
+export const MEMBERS = [
+  {
+    name: "Jame corper",
+    role: "developer",
+    link: [
+      {
+        title: "facebook",
+        icon: "/icons/facebook.svg",
+        ref: "",
+      },
+      {
+        title: "instagram",
+        icon: "/icons/instagram.svg",
+        ref: "",
+      },
+      {
+        title: "twitter",
+        icon: "/icons/twitter.svg",
+        ref: "",
+      },
+    ],
+  },
+  {
+    name: "Jame corper",
+    role: "developer",
+    link: [
+      {
+        title: "facebook",
+        icon: "/icons/facebook.svg",
+        ref: "",
+      },
+      {
+        title: "instagram",
+        icon: "/icons/instagram.svg",
+        ref: "",
+      },
+      {
+        title: "twitter",
+        icon: "/icons/twitter.svg",
+        ref: "",
+      },
+    ],
+  },
+  {
+    name: "Jame corper",
+    role: "developer",
+    link: [
+      {
+        title: "facebook",
+        icon: "/icons/facebook.svg",
+        ref: "",
+      },
+      {
+        title: "instagram",
+        icon: "/icons/instagram.svg",
+        ref: "",
+      },
+      {
+        title: "twitter",
+        icon: "/icons/twitter.svg",
+        ref: "",
+      },
+    ],
+  },
+  {
+    name: "Jame corper",
+    role: "developer",
+    link: [
+      {
+        title: "facebook",
+        icon: "/icons/facebook.svg",
+        ref: "",
+      },
+      {
+        title: "instagram",
+        icon: "/icons/instagram.svg",
+        ref: "",
+      },
+      {
+        title: "twitter",
+        icon: "/icons/twitter.svg",
+        ref: "",
+      },
+    ],
+  },
+  {
+    name: "Jame corper",
+    role: "developer",
+    link: [
+      {
+        title: "facebook",
+        icon: "/icons/facebook.svg",
+        ref: "",
+      },
+      {
+        title: "instagram",
+        icon: "/icons/instagram.svg",
+        ref: "",
+      },
+      {
+        title: "twitter",
+        icon: "/icons/twitter.svg",
+        ref: "",
+      },
+    ],
+  },
+  {
+    name: "Jame corper",
+    role: "developer",
+    link: [
+      {
+        title: "facebook",
+        icon: "/icons/facebook.svg",
+        ref: "",
+      },
+      {
+        title: "instagram",
+        icon: "/icons/instagram.svg",
+        ref: "",
+      },
+      {
+        title: "twitter",
+        icon: "/icons/twitter.svg",
+        ref: "",
+      },
+    ],
+  },
+];
+
 export const TOKEN_KEY = '$propifix__auth__token';
 export const REFRESH_TOKEN_KEY = '$propifix__refresh_auth__token';

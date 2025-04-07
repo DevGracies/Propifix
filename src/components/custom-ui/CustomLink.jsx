@@ -9,9 +9,14 @@ const CustomLink = ({ url, children, className = "" }) => {
     <Link href={url} className={className}>{children}</Link>
   ) : (
     <ScrollLink
-      to={url}
-      offset={-80}
-      className={className}
+        to={url}
+        offset={-80}
+        className={className}
+        onClick={(e) => {
+          if (url === "#") {
+            e.preventDefault();
+          }
+        }}
     >
       {children}
     </ScrollLink>
