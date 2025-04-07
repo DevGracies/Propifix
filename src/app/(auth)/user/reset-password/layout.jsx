@@ -1,7 +1,6 @@
 import { CustomImage } from '@/components/shared/Image'
 import { Poppins } from 'next/font/google'
-import authImg from '../../../../../public/user_auth2_image.svg'
-import authBgImg from '../../../../../public/user_regauth_bg.png'
+import authBgImg from '../../../../../public/user_signupbg.jpg'
 
 const poppins = Poppins({
   subsets: ['latin'],
@@ -25,10 +24,6 @@ export default function AuthLayout({ children }) {
 
       <main className='md:mx-8 mx-0 my-8 flex md:flex-row flex-col gap-[90px] justify-center'>
         <div className='md:w-[655px] max-w-full w-full p-4'>{children}</div>
-        <CustomImage
-          src={authImg}
-          style='w-[455px] h-[280px] md:block hidden md:mt-[11rem]'
-        />
       </main>
     </div>
   )

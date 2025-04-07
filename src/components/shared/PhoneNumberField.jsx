@@ -12,8 +12,8 @@ export const PhoneNumberField = ({
   placeholder,
 }) => {
   const handleChange = (phoneVal) => {
-    setPhone(phoneVal || '') 
-    setError((prevState) => (prevState ? '' : prevState)) 
+    setPhone(phoneVal || '')
+    setError((prevState) => (prevState ? '' : prevState))
   }
 
   return (
@@ -21,13 +21,14 @@ export const PhoneNumberField = ({
       <PhoneInput
         country={'ng'}
         withCountryCallingCode={true}
+        autoFocus={false}
         value={phone || ''} // Ensure PhoneInput never receives undefined/null
         placeholder={placeholder}
         onChange={handleChange}
         inputProps={{
           name: 'phone',
           required: true,
-          autoFocus: true,
+          autoFocus: false,
         }}
         buttonStyle={{
           borderRadius: '9.46px',
@@ -43,7 +44,7 @@ export const PhoneNumberField = ({
           width: '100%',
           background: 'white',
           fontStyle: 'italic',
-          paddingLeft:'10px',
+          paddingLeft: '10px',
           border: `1px solid ${error ? 'red' : 'rgba(0, 0, 0, 0.35)'}`,
         }}
         containerStyle={{

@@ -152,6 +152,7 @@ html {
   -webkit-mask-repeat: no-repeat;
   mask-repeat: no-repeat;
 }
+
 .clip {
   -webkit-mask-image: url('/home-images/FindAgentbg3.svg');
   mask-image: url('/home-images/FindAgentbg3.svg');
@@ -166,10 +167,15 @@ html {
   mask-repeat: no-repeat;
 }
 
-
 @media (min-width: 1024px) {
   .clip-svg {
     -webkit-mask-position: right top;
     mask-position: right top;
+  }
+}
+
+@media (max-width: 767px) {
+  .scrollbar-none::-webkit-scrollbar{
+    display:none;
   }
 }
