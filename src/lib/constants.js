@@ -621,8 +621,7 @@ export const FAQ = [
           "Yes! We use secure encryption to protect your data, and we do not share your details with third parties.",
       },
       {
-        question:
-          "Yes! We use secure encryption to protect your data, and we do not share your details with third parties.",
+        question: "How do I report a fraudulent listing or profile?",
         answer:
           "If you suspect fraudulent activity, please report it using the “Report” button on the listing or contact our support team.",
       },
