@@ -6,7 +6,7 @@ import CustomLink from "../custom-ui/CustomLink";
 const CallToAction = () => {
   return (
     <section className="md:px-[72px] py-[50px] ">
-      <div className="relative w-full max-w-[1200px] py-[96px] flex justify-center items-center px-5 md:rounded-2xl overflow-hidden">
+      <div className="relative w-full max-w-[1200px] mx-auto py-[96px] flex justify-center items-center px-5 md:rounded-2xl overflow-hidden">
         <Image
           src={"/backgrounds/call-to-action-bg-image.jpg"}
           fill
