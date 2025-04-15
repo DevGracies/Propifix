@@ -5,7 +5,7 @@ import Card from "../custom-ui/Card";
 
 const FeaturedLocations = () => {
   return (
-    <section class="bg-gradient-to-r from-[#5D14AD] to-[#9747FF] py-[50px] px-5 md:px-[72px] pb-[109px] relative text-white" id="featured-location">
+    <section className="bg-gradient-to-r from-[#5D14AD] to-[#9747FF] py-[50px] px-5 md:px-[72px] pb-[109px] relative text-white" id="featured-location">
       <Image
         src={"/GridTop.svg"}
         height={274}
