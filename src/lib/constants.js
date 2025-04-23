@@ -25,6 +25,90 @@ export const NAVLINKS = [
   },
 ];
 
+export const SELECTOPTIONS = [
+  {
+    label: "Type",
+    items: [
+      "flat & apartment",
+      "self contain",
+      "mini flats",
+      "houses",
+      "land",
+      "shop",
+      "office space",
+      "semi detached bungalow",
+      "semi detached duplex",
+      "detached bungalow",
+      "detached duplex",
+      "commercial property",
+    ],
+  },
+  {
+    label: "Bedroom",
+    items: [
+      "1 bedroom",
+      "2 bedroom",
+      "3 bedroom",
+      "4 bedroom",
+      "5 bedroom",
+      "6 bedroom",
+      "7 bedroom",
+      "8 bedroom",
+      "9 bedroom",
+      "10 bedroom",
+    ],
+  },
+  {
+    label: "Toilet",
+    items: [
+      "1 toilet",
+      "2 toilet",
+      "3 toilet",
+      "4 toilet",
+      "5 toilet",
+      "6 toilet",
+      "7 toilet",
+      "8 toilet",
+      "9 toilet",
+      "10 toilet",
+    ],
+  },
+  {
+    label: "Min. Price",
+    items: [
+      "50,000",
+      "100,000",
+      "200,000",
+      "300,000",
+      "400,000",
+      "500,000",
+      "600,000",
+      "700,000",
+      "800,000",
+      "900,000",
+      "1 million",
+      "2 million",
+    ],
+  },
+  {
+    label: "Max. Price",
+    items: [
+      "500,000",
+      "600,000",
+      "700,000",
+      "800,000",
+      "900,000",
+      "1 million",
+      "2 million",
+      "3 million",
+      "5 million",
+      "10 million",
+      "20 million",
+      "30 million",
+    ],
+  },
+];
+
 export const HOWITWORKS = [
   {
     no: "01",
@@ -216,3 +300,352 @@ export const FOOTERLINKS = {
     },
   ],
 };
+
+
+export const MEMBERS = [
+  {
+    name: "Jame corper",
+    role: "developer",
+    link: [
+      {
+        title: "facebook",
+        icon: "/icons/facebook.svg",
+        ref: "",
+      },
+      {
+        title: "instagram",
+        icon: "/icons/instagram.svg",
+        ref: "",
+      },
+      {
+        title: "twitter",
+        icon: "/icons/twitter.svg",
+        ref: "",
+      },
+    ],
+  },
+  {
+    name: "Jame corper",
+    role: "developer",
+    link: [
+      {
+        title: "facebook",
+        icon: "/icons/facebook.svg",
+        ref: "",
+      },
+      {
+        title: "instagram",
+        icon: "/icons/instagram.svg",
+        ref: "",
+      },
+      {
+        title: "twitter",
+        icon: "/icons/twitter.svg",
+        ref: "",
+      },
+    ],
+  },
+  {
+    name: "Jame corper",
+    role: "developer",
+    link: [
+      {
+        title: "facebook",
+        icon: "/icons/facebook.svg",
+        ref: "",
+      },
+      {
+        title: "instagram",
+        icon: "/icons/instagram.svg",
+        ref: "",
+      },
+      {
+        title: "twitter",
+        icon: "/icons/twitter.svg",
+        ref: "",
+      },
+    ],
+  },
+  {
+    name: "Jame corper",
+    role: "developer",
+    link: [
+      {
+        title: "facebook",
+        icon: "/icons/facebook.svg",
+        ref: "",
+      },
+      {
+        title: "instagram",
+        icon: "/icons/instagram.svg",
+        ref: "",
+      },
+      {
+        title: "twitter",
+        icon: "/icons/twitter.svg",
+        ref: "",
+      },
+    ],
+  },
+  {
+    name: "Jame corper",
+    role: "developer",
+    link: [
+      {
+        title: "facebook",
+        icon: "/icons/facebook.svg",
+        ref: "",
+      },
+      {
+        title: "instagram",
+        icon: "/icons/instagram.svg",
+        ref: "",
+      },
+      {
+        title: "twitter",
+        icon: "/icons/twitter.svg",
+        ref: "",
+      },
+    ],
+  },
+  {
+    name: "Jame corper",
+    role: "developer",
+    link: [
+      {
+        title: "facebook",
+        icon: "/icons/facebook.svg",
+        ref: "",
+      },
+      {
+        title: "instagram",
+        icon: "/icons/instagram.svg",
+        ref: "",
+      },
+      {
+        title: "twitter",
+        icon: "/icons/twitter.svg",
+        ref: "",
+      },
+    ],
+  },
+];
+
+export const FAQ = [
+  {
+    title: "General Questions",
+    items: [
+      {
+        question: "What is Propifix?",
+        answer:
+          "Propifix is a real estate platform designed to connect property owners, agents, caretakers, and artisans with potential clients. We offer verified property listings, subscription plans for agents, and a marketplace for artisans and caretakers.",
+      },
+      {
+        question: "How does Propifix work?",
+        answerType: "List",
+        answer: [
+          {
+            subtitle: "For Agents:",
+            answer:
+              "List properties, manage inquiries, and choose from our subscription plans.",
+          },
+          {
+            subtitle: "For Property Owners:",
+            answer:
+              "Find verified agents, caretakers, and artisans for your needs.",
+          },
+          {
+            subtitle: "For Artisans & Caretakers:",
+            answer:
+              "Create a profile, showcase skills, and get hired for maintenance or repairs.",
+          },
+        ],
+      },
+      {
+        question: "Is Propifix free to use?",
+        answer:
+          "Browsing properties and services is free, but agents need a subscription plan to list properties, and artisans/caretakers may have premium profile options.",
+      },
+    ],
+  },
+  {
+    title: "For Property Seekers & Owners",
+    items: [
+      {
+        question: "How do I search for a property?",
+        answer:
+          "Use our advanced search filters to find properties based on location, price, type, and amenities.",
+      },
+      {
+        question: "How do I connect with an agent?",
+        answer:
+          "Send your property specification as a request directly to all agents on the homepage by clicking “send request” after filling out your property spec.",
+      },
+      {
+        question: " Are the property listings verified?",
+        answer:
+          "Yes, we ensure listings are verified and only trusted agents can post properties on Propifix.",
+      },
+    ],
+  },
+  {
+    title: "For House Agents",
+    items: [
+      {
+        question: "How do I list a property?",
+        answerType: "List",
+        answer: [
+          {
+            subtitle: 1,
+            answer: "Register as an agent.",
+          },
+          {
+            subtitle: 2,
+            answer: "Choose a subscription plan.",
+          },
+          {
+            subtitle: 3,
+            answer: "Upload property details, images, and pricing.",
+          },
+          {
+            subtitle: 4,
+            answer:
+              "Publish your listing for potential buyers and renters to see.",
+          },
+        ],
+      },
+      {
+        question: "What are the subscription plans for agents?",
+        answerDescription: "We offer three subscription plans:",
+        answerType: "List",
+
+        answer: [
+          {
+            subtitle: "Basic Plan:",
+            answer: "Limited listings with basic features.",
+          },
+          {
+            subtitle: "Standard Plan:",
+            answer: "More listings and advanced features.",
+          },
+          {
+            subtitle: "Premium Plan:",
+            answer: "Maximumm exposure with top-tier features",
+          },
+        ],
+      },
+      {
+        question: "Can I edit or remove my listings?",
+        answer:
+          "Yes, you can edit, update or remove listings anytime from your agent dashboard.",
+      },
+    ],
+  },
+  {
+    title: "For Artisans & Caretakers",
+    items: [
+      {
+        question: "How do I register as an artisans or caretaker?",
+        answerType: "List",
+        answer: [
+          {
+            subtitle: 1,
+            answer: "Go to the registration page and select your profession.",
+          },
+          {
+            subtitle: 2,
+            answer:
+              "Fill in your details and upload work samples (if available).",
+          },
+          {
+            subtitle: 3,
+            answer: "Submit your profile for approval.",
+          },
+        ],
+      },
+      {
+        question: "How do client find me?",
+        answer:
+          "Clients searching for specific services can view your profile, check your portfolio, and contact you directly.",
+      },
+      {
+        question: "How do I improve my visibility?",
+        answerType: "List",
+        answer: [
+          {
+            subtitle: 1,
+            answer: " Keep your profile updated and detailed.",
+          },
+          {
+            subtitle: 2,
+            answer: "Upload high-quality images of your work.",
+          },
+          {
+            subtitle: 3,
+            answer: "Respond quickly to client inquiries.",
+          },
+          {
+            subtitle: 3,
+            answer: "Maintain high ratings and reviews from clients.",
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: "Payment & Subscription",
+    items: [
+      {
+        question: "How do I pay for a subscription plan?",
+        answer:
+          "You can pay securely online via debit/credit card, bank transfer, or mobile payment options.",
+      },
+      {
+        question: "Can I cancel my subscription?",
+        answer:
+          "Yes, you can cancel anytime, but active listening will remain until your plan expires.",
+      },
+      {
+        question: "Are there refunds for subscription fees?",
+        answer:
+          "No, subscriptions are non-refundable, but you can upgrade or downgrade at any time.",
+      },
+    ],
+  },
+  {
+    title: "Security & Support",
+    items: [
+      {
+        question: "Is my data secure?",
+        answer:
+          "Yes! We use secure encryption to protect your data, and we do not share your details with third parties.",
+      },
+      {
+        question: "How do I report a fraudulent listing or profile?",
+        answer:
+          "If you suspect fraudulent activity, please report it using the “Report” button on the listing or contact our support team.",
+      },
+      {
+        question: "How do I contact Propifix support?",
+        answerType: "List",
+        answer: [
+          {
+            subtitle: "📧Email:",
+            answer: "support@propifix.com",
+          },
+          {
+            subtitle: "📞Phone:",
+            answer: "+234 356-780-2058",
+          },
+          {
+            subtitle: "💬Live Chat:",
+            answer: ": Available on our website",
+          },
+        ],
+      },
+    ],
+  },
+];
+
+export const TOKEN_KEY = '$propifix__auth__token';
+export const REFRESH_TOKEN_KEY = '$propifix__refresh_auth__token';

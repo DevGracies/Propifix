@@ -1,33 +1,28 @@
-"use client";
+'use client'
 
-import { cn } from "@/lib/utils";
-import Image from "next/legacy/image";
-import { useState } from "react";
+import { cn } from '@/lib/utils'
+import Image from 'next/image'
 
 export const CustomImage = ({
   src,
-  alt = "object not found",
+  alt = 'object not found',
   style,
   imgStyle,
   priority = false,
   clickFunc,
 }) => {
-  const [isLoading, setIsLoading] = useState(true);
   return (
-    <div className={cn("relative", style)} onClick={clickFunc && clickFunc}>
-      {isLoading && (
-        <div
-          className={cn("w-full animate-pulse bg-hick-grey", style, imgStyle)}
-        ></div>
-      )}
+    <div
+      className={cn('relative', style)}
+      onClick={clickFunc}
+    >
       <Image
         src={src}
         alt={alt}
-        className={cn("w-full", imgStyle)}
-        onLoadingComplete={() => setIsLoading(false)}
-        layout="fill"
+        className={cn('w-full', imgStyle)}
+        fill={true}
         priority={priority}
       />
     </div>
-  );
-};
+  )
+}

@@ -1,20 +1,23 @@
-import { cn } from "@/lib/utils";
+'use client'
+
+import { cn } from '@/lib/utils'
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "../ui/form";
-import { Input } from "../ui/input";
+} from '../ui/form'
+import { Input } from '../ui/input'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
-import { Textarea } from "../ui/textarea";
+} from '../ui/select'
+import { Textarea } from '../ui/textarea'
+import { RadioGroup, RadioGroupItem } from '../ui/radio-group'
 
 export const InputField = ({
   control,
@@ -24,16 +27,20 @@ export const InputField = ({
   inputCategory,
   inputType,
   readOnly = false,
+  autoFocus = false,
   value,
   handleValueChange,
   inputStyle,
   placeholder,
   selectList,
+  radioList,
 }) => {
   const inputCnStyle = cn(
-    `italic text-[11.04px] font-[400] border border-input-border h-[35px] rounded-[9.46px] flex items-center`,
+    `italic text-[11.04px] font-[400] border border-input-border h-[45px] rounded-[9.46px] flex items-center`,
     inputStyle
-  );
+  )
+
+  const inputLabelStyle = cn(`text-[14px] font-[500]`, labelStyle)
 
   return (
     <FormField
@@ -41,22 +48,34 @@ export const InputField = ({
       name={name}
       render={({ field }) => (
         <FormItem>
-          {label && <FormLabel className={`${labelStyle}`}>{label}</FormLabel>}
-          {inputCategory === "input" && (
+          {label && <FormLabel className={inputLabelStyle}>{label}</FormLabel>}
+          {inputCategory === 'input' && (
             <FormControl>
               {handleValueChange ? (
                 <Input
                   defaultValue={value}
                   readOnly={readOnly}
-                  type={inputType || "text"}
+                  autoFocus={autoFocus}
+                  type={inputType || 'text'}
                   className={inputCnStyle}
                   placeholder={placeholder && placeholder}
                   onChange={handleValueChange}
                 />
-              ) : (
+              ) : inputType === 'number' ? (
                 <Input
                   readOnly={readOnly}
-                  type={inputType || "text"}
+                  autoFocus={autoFocus}
+                  type={inputType || 'text'}
+                  className={inputCnStyle}
+                  min={1}
+                  placeholder={placeholder}
+                  {...field}
+                />
+              ) : (
+                <Input
+                  autoFocus={autoFocus}
+                  readOnly={readOnly}
+                  type={inputType || 'text'}
                   className={inputCnStyle}
                   placeholder={placeholder}
                   {...field}
@@ -64,7 +83,7 @@ export const InputField = ({
               )}
             </FormControl>
           )}
-          {inputCategory === "textArea" && (
+          {inputCategory === 'textArea' && (
             <FormControl>
               <Textarea
                 readOnly={readOnly}
@@ -74,8 +93,27 @@ export const InputField = ({
               />
             </FormControl>
           )}
-          {inputCategory === "select" && (
-            <div className="relative mb-2">
+          {inputCategory === 'radio' && radioList && (
+            <RadioGroup
+              onValueChange={field.onChange}
+              defaultValue={field.value}
+              className='flex space-x-4'
+            >
+              {radioList?.map((radio, index) => (
+                <FormItem
+                  className='flex items-center space-x-3 space-y-0'
+                  key={index}
+                >
+                  <FormControl>
+                    <RadioGroupItem value={radio.value} />
+                  </FormControl>
+                  <FormLabel className='font-normal'>{radio.label}</FormLabel>
+                </FormItem>
+              ))}
+            </RadioGroup>
+          )}
+          {inputCategory === 'select' && (
+            <div className='relative'>
               <Select
                 onValueChange={field.onChange}
                 defaultValue={field.value}
@@ -85,15 +123,15 @@ export const InputField = ({
                   <SelectTrigger className={inputCnStyle}>
                     <SelectValue
                       placeholder={placeholder}
-                      className="flex items-center"
+                      className='flex items-center text-[11.04px] font-[400]'
                     />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
                   {selectList !== undefined &&
-                    selectList.map((item, index) => (
-                      <SelectItem value={item} key={index}>
-                        {item}
+                    selectList?.map((item, index) => (
+                      <SelectItem value={item.value} key={index}>
+                        {item.title}
                       </SelectItem>
                     ))}
                 </SelectContent>
@@ -104,5 +142,5 @@ export const InputField = ({
         </FormItem>
       )}
     />
-  );
-};
+  )
+}

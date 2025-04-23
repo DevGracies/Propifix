@@ -1,26 +1,32 @@
-import { Montserrat } from "next/font/google";
-import "./globals.css";
-import NextTopLoader from "nextjs-toploader";
+import { Montserrat } from 'next/font/google'
+import './globals.css'
+import NextTopLoader from 'nextjs-toploader'
+import ReactQueryProvider from '@/utils/context/ReactQueryProvider'
+import { Toaster } from '@/components/ui/sonner'
+// import { Toaster } from '@/components/ui/sonner'
 
 const montserrat = Montserrat({
-  subsets: ["latin"],
-  weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
-  display: "swap",
-});
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  display: 'swap',
+})
 
 export const metadata = {
-  title: "PropiFix",
+  title: 'PropiFix',
   description:
-    "PropiFix – Your go-to platform for real estate solutions and skilled artisans, making property management effortless.",
-};
+    'PropiFix – Your go-to platform for real estate solutions and skilled artisans, making property management effortless.',
+}
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang='en'>
       <body className={`${montserrat.variable} antialiased`}>
-        <NextTopLoader color="#0096FF" showSpinner={false} />
-        {children}
+        <ReactQueryProvider>
+          <NextTopLoader color='#0096FF' showSpinner={false} />
+          {children}
+        </ReactQueryProvider>
+        <Toaster richColors />
       </body>
     </html>
-  );
+  )
 }

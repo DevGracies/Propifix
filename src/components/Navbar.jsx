@@ -8,8 +8,7 @@ import Link from "next/link";
 import { NAVLINKS } from "@/lib/constants";
 import CustomLink from "./custom-ui/CustomLink";
 
-
-const Navbar = () => {
+const Navbar = ({ transparent }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
@@ -27,46 +26,55 @@ const Navbar = () => {
   }, []);
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 px-6 md:px-[50px] py-[15px] md:py-[23px] ${
-        scrolled ? "bg-[#7f37de] shadow" : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-[15px] md:py-[23px] px-5 md:px-[50px] ${
+        scrolled && transparent ? "bg-[#7f37de] shadow" : "bg-transparent"
+      }
+      ${!transparent && "bg-white shadow"}`}
     >
-      <div className="container mx-auto">
+      <div>
         <div className="flex items-center justify-between">
-          <Image
-            src={"/logo.svg"}
-            height={30}
-            width={83}
-            alt="propifix logo"
-          />
+          <Link href={"/"}>
+            <Image
+              src={!transparent ? "/icons/blue-logo.svg" : "/logo.svg"}
+              className="cursor-pointer"
+              height={30}
+              width={83}
+              alt="propifix logo"
+            />
+          </Link>
 
           <nav className=" items-center space-x-10 flex">
             <ul className="gap-8 justify-center items-center w-fit hidden lg:flex">
               {NAVLINKS.map((link) => (
                 <li>
                   <AnimatedLinks
-                    className={"text-white capitalize font-medium text-[13px]"}
-                    iconColor={"white"}
+                    className={`${
+                      transparent ? "text-white" : "text-black hover:text-blue-900"
+                    } capitalize font-medium text-[13px]`}
+                    iconColor={transparent ? "white" : "black"}
                   >
                     <CustomLink url={link.url}>{link.title}</CustomLink>
                   </AnimatedLinks>
                 </li>
               ))}
             </ul>
-            <div className="hidden lg:block">
+            <div className="hidden lg:flex">
               <Button
                 variant="outline"
-                className="bg-transparent border text-white capitalize cursor-pointer "
+                className={`bg-transparent border  capitalize cursor-pointer text-white ${
+                  !transparent &&
+                  "border-black text-black hover:bg-gradient-to-r hover:from-[#5D14AD] hover:to-[#9747FF] hover:text-white transition-all duration-300"
+                }`}
                 asChild
               >
-                <Link href={"/register"}>get started</Link>
+                <Link href={"/user/register"}>get started</Link>
               </Button>
             </div>
             <div className="lg:hidden relative z-50">
               <Button
                 variant={"ghost"}
                 onClick={() => setIsOpen(!isOpen)}
-                className="text-white py-3"
+                className={`${transparent ? "text-white" : "text-black"} py-3`}
               >
                 {isOpen ? (
                   <XIcon
@@ -105,7 +113,7 @@ const Navbar = () => {
                   className="bg-transparent border text-white capitalize cursor-pointer "
                   asChild
                 >
-                  <Link href={"/register"}>get started</Link>
+                  <Link href={"/user/register"}>get started</Link>
                 </Button>
               </nav>
             </div>
