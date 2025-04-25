@@ -31,13 +31,15 @@ export const InputField = ({
   value,
   handleValueChange,
   inputStyle,
+  hideTopBorder = false,
   placeholder,
   selectList,
   radioList,
 }) => {
   const inputCnStyle = cn(
     `italic text-[11.04px] font-[400] border border-input-border h-[45px] rounded-[9.46px] flex items-center`,
-    inputStyle
+    inputStyle,
+    hideTopBorder && 'border-t-0 border-x-0 shadow-none px-0 focus-visible:border-t-0 focus-visible:border-x-0 focus-visible:ring-0'
   )
 
   const inputLabelStyle = cn(`text-[14px] font-[500]`, labelStyle)
@@ -97,11 +99,11 @@ export const InputField = ({
             <RadioGroup
               onValueChange={field.onChange}
               defaultValue={field.value}
-              className='flex space-x-4'
+              className='flex space-x-4 flex-wrap'
             >
               {radioList?.map((radio, index) => (
                 <FormItem
-                  className='flex items-center space-x-3 space-y-0'
+                  className='flex items-center space-x-3 space-y-0 mt-4'
                   key={index}
                 >
                   <FormControl>
