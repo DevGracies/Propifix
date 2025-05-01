@@ -52,6 +52,7 @@ export const UserAccount = () => {
                   name='user_name'
                   inputCategory='input'
                   label={`User's name`}
+                  labelStyle='text-[16px] font-[600]'
                   placeholder='Olori Grace'
                 />
                 <InputField
@@ -62,7 +63,7 @@ export const UserAccount = () => {
                   placeholder='Enter your new password'
                   label={
                     <div className='flex items-center gap-1 flex-wrap'>
-                      <span>Password*</span>
+                      <span className="text-[16px] font-[600]">Password*</span>
                       <span className='text-destructive text-[12px] font-[400]'>
                         N.B: Enter password only if you are changing it
                       </span>
@@ -83,6 +84,7 @@ export const UserAccount = () => {
                   inputStyle='border border-black h-[35px] rounded-[33px]  mb-4'
                   control={form.control}
                   name='country_code'
+                  labelStyle='text-[16px] font-[600]'
                   label={`Country Code`}
                   placeholder='Nigeria (+234)'
                   inputType='text'
@@ -92,6 +94,7 @@ export const UserAccount = () => {
                   inputStyle='border border-black h-[35px] rounded-[33px]  mb-4'
                   control={form.control}
                   name='phone_number'
+                  labelStyle='text-[16px] font-[600]'
                   label={`Phone Number*`}
                   placeholder='08157488586'
                   inputType='text'
@@ -103,6 +106,7 @@ export const UserAccount = () => {
                       inputStyle='border border-black h-[35px] rounded-[33px] w-full'
                       control={form.control}
                       name='email'
+                      labelStyle='text-[16px] font-[600]'
                       placeholder='www.graceolori55@gmail.com'
                       label='Email Address*'
                       inputCategory='input'
