@@ -5,7 +5,6 @@ import {
   Accordion,
   AccordionContent,
   AccordionItem,
-  AccordionTrigger,
 } from "@/components/ui/accordion";
 import { CustomAccordionTrigger } from "@/components/custom-ui/CustomAccordianTrigger";
 import { useState } from "react";

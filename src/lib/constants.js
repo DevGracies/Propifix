@@ -296,7 +296,7 @@ export const FOOTERLINKS = {
     },
     {
       title: "FAQs",
-      url: "/FAQs",
+      url: "/faq",
     },
   ],
 };
