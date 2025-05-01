@@ -16,6 +16,7 @@ import {
 import { Text } from '@/components/shared/Text'
 import { CustomImage } from '@/components/shared/Image'
 import { Button } from '@/components/ui/button'
+import { useRouter } from 'next/navigation'
 
 const Labelledicon = ({ text, icon }) => (
   <div className='flex items-start gap-5'>
@@ -27,8 +28,9 @@ const Labelledicon = ({ text, icon }) => (
 )
 
 export const ContactUs = () => {
+  const router = useRouter()
   return (
-    <section className='bg-[ghostwhite] p-3 flex flex-col justify-center items-center gap-10'>
+    <section data-force-dark-text="true" className='bg-[ghostwhite] p-3 flex flex-col justify-center items-center gap-10'>
       <Text
         as='h1'
         style='text-center text-[40px] text_linear-purple font-[700] leading-[120%] pt-28 md:pt-32'
@@ -78,7 +80,7 @@ export const ContactUs = () => {
             <CustomImage
               src={topEllipse}
               style='md:w-[138px] w-[100px] md:h-[138px] h-[100px]'
-              imgStyle='object-contain z-[1000]'
+              imgStyle='object-contain z-[10]'
             />
           </div>
           <div className='absolute bottom-0 right-0'>
@@ -95,7 +97,10 @@ export const ContactUs = () => {
         style='md:w-[640px] w-full h-[18px] m-auto'
         imgStyle='object-contain'
       />
-      <Button className='flex items-center w-[163px] h-[36px] rounded-[12px] bg_linear-purple font-[500] text-[15px] mb-10'>
+      <Button
+        onClick={() => router.push('/customer-care')}
+        className='cursor-pointer flex items-center w-[163px] h-[36px] rounded-[12px] bg_linear-purple font-[500] text-[15px] mb-10'
+      >
         <CustomerCareSvg />
         Customer Care
       </Button>

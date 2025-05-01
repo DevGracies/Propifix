@@ -42,7 +42,9 @@ export const HowItWorksText = () => (
 
 export const HowItWorks = () => {
   return (
-    <section className='xl:overflow-auto overflow-none p-3 flex flex-col justify-center items-center gap-10 pt-28 md:pt-32 md:w-full xl:w-[1444px] w-auto'>
+    <section
+      className='bg-white xl:overflow-auto overflow-none p-3 flex flex-col justify-center items-center gap-10 pt-28 md:pt-32 md:w-full xl:w-[1444px] w-auto'
+    >
       <style jsx>{`
         @keyframes float {
           0%,
