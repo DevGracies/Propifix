@@ -13,7 +13,7 @@ export const NAVLINKS = [
   },
   {
     title: "how it works",
-    url: "how-it-works",
+    url: "/how-it-works",
   },
   {
     title: "about us",
