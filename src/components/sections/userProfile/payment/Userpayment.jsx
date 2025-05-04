@@ -14,7 +14,7 @@ import { PaymentHistory } from './PaymentHistory'
 
 export const UserPayment = () => {
   return (
-    <MaxWidth className='bg-white pt-28 md:px-[50px] px-4 flex flex-col md:gap-0 gap-4'>
+    <MaxWidth className='bg-white md:pt-28 pt-23 md:px-[50px] px-4 flex flex-col md:gap-0 gap-4'>
       <PaymentBackButton />
       <PaymentHeader />
       <div className='flex flex-wrap gap-5'>
@@ -22,7 +22,7 @@ export const UserPayment = () => {
           <Text as='h5' style='text-[16px] font-[400]'>
             Total Spents
           </Text>
-          <Text as='h3' style='text-[22px] font-[500]'>
+          <Text as='h3' style='text-[22px] font-[500] text-thick-purple'>
             ₦430,000,000.00
           </Text>
           <Text as='h6' style='text-[10px] font-[400]'>
@@ -33,7 +33,7 @@ export const UserPayment = () => {
           <Text as='h5' style='text-[16px] font-[400]'>
           Pending Payments
           </Text>
-          <Text as='h3' style='text-[22px] font-[500]'>
+          <Text as='h3' style='text-[22px] font-[500] text-thick-purple'>
             ₦430,000,000.00
           </Text>
           <Text as='h6' style='text-[10px] font-[400]'>

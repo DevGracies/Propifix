@@ -30,7 +30,7 @@ export const UserAccount = () => {
   const isPending = false
 
   return (
-    <MaxWidth className='bg-white pt-28 md:px-[50px] px-4 mb-20'>
+    <MaxWidth className='bg-white md:pt-28 pt-23 md:px-[50px] px-4 mb-20'>
       <div className='md:w-[515px] w-full'>
         <AccountHeader />
         <div className='rounded-[12px] md:p-6 p-4 shadow-[0_0_0_2px_transparent,0_0_0_4px_rgba(1,147,253,0.3)]'>

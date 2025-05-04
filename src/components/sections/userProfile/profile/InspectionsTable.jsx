@@ -68,19 +68,19 @@ export const InspectionsTable = () => {
               {[id, property, user, agent, date, status].map((info, index) => (
                 <TableCell
                   className={cn(
-                    'font-[400] text-[16px] bg-light-grey text-neutral-grey',
+                    'font-[400] text-sm bg-light-grey text-neutral-grey',
                     hideIndexOnMobile?.includes(index) && 'md:table-cell hidden'
                   )}
-                  key={index}
+                  key={`${index}_${id}`}
                 >
                   {truncateMiddle(info)}
                 </TableCell>
               ))}
               <TableCell
-                className='font-[600] text-[16px] bg-light-grey'
+                className='font-[600] text-sm bg-light-grey'
                 key={index}
               >
-                <Button className='cursor-pointer flex items-center w-[58px] h-[31px] rounded bg_linear-purple font-[400] text-[16px]'>
+                <Button className='cursor-pointer flex items-center w-[58px] h-[31px] rounded bg_linear-purple font-[400] text-sm'>
                   View
                 </Button>
               </TableCell>

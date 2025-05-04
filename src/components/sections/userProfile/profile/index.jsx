@@ -10,7 +10,7 @@ import { AccountCard } from '../account/AccountCard'
 
 export const UserProfile = () => {
   return (
-    <MaxWidth className='bg-white pt-28 md:px-[50px] px-4'>
+    <MaxWidth className='bg-white md:pt-28 pt-23 md:px-[50px] px-4'>
       <BackButton />
       <ProfileHeader />
       <div className='grid lg:grid-cols-2 grid-cols-1 md:gap-[40px] gap-[15px]'>

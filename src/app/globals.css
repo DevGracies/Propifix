@@ -37,11 +37,13 @@
   --color-primary: var(--primary);
   --color-popover-foreground: var(--popover-foreground);
   --color-input-border:rgba(0, 0, 0, 0.35);
+  --color-success-100:#0EAD69;
   --color-primary-color:#6A1CA9;
   --color-thick-grey:#D5D5D5;
   --color-light-grey:#F4F4F4;
   --color-primary-blue:#413B89;
   --color-grey-border:#EDEBEE;
+  --color-inactive-state-color:#49454FCC;
   --color-light-purple-200:#EDDCFA;
   --color-neutral-grey:#666666;
   --color-white-80:#FFFFFFCC;
