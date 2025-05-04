@@ -8,7 +8,7 @@ import { PaymentsTable } from './PaymentTable'
 import { Text } from '@/components/shared/Text'
 
 const triggerStyle =
-  'h-[46px] w-[128px] font-[500] text-[17px] rounded-[30px] data-[state=active]:border-grey-border border border-primary-blue transition-colors duration-1000'
+  'md:h-[46px] h-[35px] md:w-[120px] w-[100px] font-[500] text-[17px] rounded-[30px] data-[state=active]:border-primary-blue border border-grey-border transition-colors duration-1000'
 
 const tabs = [
   { title: 'All', value: 'all' },
@@ -19,7 +19,7 @@ const tabs = [
 
 export const PaymentHistory = () => {
   return (
-    <div className='sm:p-8 p-4 bg-white border rounded-lg flex flex-col gap-4'>
+    <div className=' flex flex-col'>
       <Text as='h1' style='text-[22px] font-[500]'>
         Payment History
       </Text>
@@ -27,16 +27,16 @@ export const PaymentHistory = () => {
         <ScrollArea className='w-full whitespace-nowrap scrollbar-none'>
           <TabsList className='justify-start items-start flex w-full gap-4 h-fit bg-white mb-2'>
             <TabsTrigger value={tabs[0].value} className={triggerStyle}>
-              tabs[0].title
+              {tabs[0].title}
             </TabsTrigger>
             <TabsTrigger value={tabs[1].value} className={triggerStyle}>
-              tabs[1].title
+              {tabs[1].title}
             </TabsTrigger>
             <TabsTrigger value={tabs[2].value} className={triggerStyle}>
-              tabs[2].title
+              {tabs[2].title}
             </TabsTrigger>
             <TabsTrigger value={tabs[3].value} className={triggerStyle}>
-              tabs[3].title
+              {tabs[3].title}
             </TabsTrigger>
           </TabsList>
           <ScrollBar orientation='horizontal' />

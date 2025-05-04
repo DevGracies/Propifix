@@ -10,11 +10,11 @@ import {
   SettingsSvg,
 } from '@/components/svg'
 import { PaymentHeader } from './PaymentHeader'
-import { PaymentsTable } from './PaymentTable'
+import { PaymentHistory } from './PaymentHistory'
 
 export const UserPayment = () => {
   return (
-    <MaxWidth className='bg-white pt-28 md:px-[50px] px-4'>
+    <MaxWidth className='bg-white pt-28 md:px-[50px] px-4 flex flex-col md:gap-0 gap-4'>
       <PaymentBackButton />
       <PaymentHeader />
       <div className='flex flex-wrap gap-5'>
@@ -59,7 +59,7 @@ export const UserPayment = () => {
           </div>
         </div>
       </div>
-      <PaymentsTable />
+      <PaymentHistory />
     </MaxWidth>
   )
 }
