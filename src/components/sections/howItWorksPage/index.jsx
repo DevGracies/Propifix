@@ -59,7 +59,9 @@ export const HowItWorks = () => {
           }
         `}</style>
 
-        <div className='relative w-full h-[65rem] mb-14'> <HowItWorksText />
+        <div className='relative w-full h-[65rem] mb-14'>
+          {' '}
+          <HowItWorksText />
           <div className='absolute top-[1rem] left-0'>
             <HowItWorksCard
               title='Find Your Dream Property'
