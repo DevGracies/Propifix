@@ -442,7 +442,6 @@ export const PreviousPagination = () => (
     />
   </svg>
 )
-<<<<<<< HEAD
 
 export const CirclePlusSvg = () => (
   <svg
@@ -560,5 +559,3 @@ export const DeleteSvg = () => (
     />
   </svg>
 )
-=======
->>>>>>> 1b87c3149483b589248f01529de3f84f691583ce
