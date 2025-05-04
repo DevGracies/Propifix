@@ -3,13 +3,12 @@
 import { MaxWidth } from '@/components/shared/MaxWidth'
 import { BackButton } from './BackButton'
 import { ProfileHeader } from './ProfileHeader'
-import { AccountCard } from './AccountCard'
 import { VerificationBanner } from './VerificationBanner'
 import { ProfileStats } from './ProfileStats'
 import { InspectionsTable } from './InspectionsTable'
+import { AccountCard } from '../account/AccountCard'
 
 export const UserProfile = () => {
-
   return (
     <MaxWidth className='bg-white pt-28 md:px-[50px] px-4'>
       <BackButton />

@@ -2,10 +2,10 @@
 
 import { AccountInfo } from './AccountInfo'
 import { Button } from '@/components/ui/button'
-import { ProfileImage } from './ProfileImage'
+import { ProfileImage } from '../profile/ProfileImage'
 import { Text } from '@/components/shared/Text'
 import { CustomImage } from '@/components/shared/Image'
-import profileBg from '../../../../public/User_profile_bg.png'
+import profileBg from '../../../../../public/User_profile_bg.png'
 import { useRouter } from 'next/navigation'
 
 export const AccountCard = () => {

@@ -12,10 +12,6 @@ import { Loader } from 'lucide-react'
 import { Text } from '@/components/shared/Text'
 
 export const UserAccount = () => {
-  function onChange(value) {
-    console.log('Captcha value:', value)
-  }
-
   const form = useForm({
     resolver: zodResolver(AccountSchema),
     defaultValues: {
@@ -37,7 +33,6 @@ export const UserAccount = () => {
     <MaxWidth className='bg-white pt-28 md:px-[50px] px-4 mb-20'>
       <div className='md:w-[515px] w-full'>
         <AccountHeader />
-
         <div className='rounded-[12px] md:p-6 p-4 shadow-[0_0_0_2px_transparent,0_0_0_4px_rgba(1,147,253,0.3)]'>
           <Form {...form}>
             <form
@@ -45,7 +40,9 @@ export const UserAccount = () => {
               className='w-full flex flex-col gap-4'
             >
               <div>
-                <Text style='md:text-[20px] text-[18px] font-[700] mb-3'>My Profile</Text>
+                <Text style='md:text-[20px] text-[18px] font-[700] mb-3'>
+                  My Profile
+                </Text>
                 <InputField
                   inputStyle='border border-black h-[35px] rounded-[33px]  mb-4'
                   control={form.control}
@@ -63,7 +60,7 @@ export const UserAccount = () => {
                   placeholder='Enter your new password'
                   label={
                     <div className='flex items-center gap-1 flex-wrap'>
-                      <span className="text-[16px] font-[600]">Password*</span>
+                      <span className='text-[16px] font-[600]'>Password*</span>
                       <span className='text-destructive text-[12px] font-[400]'>
                         N.B: Enter password only if you are changing it
                       </span>
@@ -79,7 +76,9 @@ export const UserAccount = () => {
                 />
               </div>
               <div>
-                <Text style='md:text-[20px] text-[18px] font-[700] mb-3'>Contact</Text>
+                <Text style='md:text-[20px] text-[18px] font-[700] mb-3'>
+                  Contact
+                </Text>
                 <InputField
                   inputStyle='border border-black h-[35px] rounded-[33px]  mb-4'
                   control={form.control}

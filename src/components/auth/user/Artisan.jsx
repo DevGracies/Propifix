@@ -32,8 +32,9 @@ export const ArtisanForm = () => {
   const [nextOfKinIdentifierImage, setNextOfKinIdentifierImage] = useState('')
 
   function onChange(value) {
-    console.log('Captcha value:', value)
-    setIsRobot(false)
+    setTimeout(() => {
+      setIsRobot(false)
+    }, 1500)
   }
 
   const checkIfPhoneFieldIsValid = () => {
@@ -275,10 +276,12 @@ export const ArtisanForm = () => {
                 uploadBtnText={'Upload Identification'}
                 topLabel={'Upload Identification (Optional)'}
               />
-              <ReCAPTCHA
-                sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                onChange={onChange}
-              />
+              {isRobot && (
+                <ReCAPTCHA
+                  sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                  onChange={onChange}
+                />
+              )}
               <div className='text-[9.72px] font-[400] flex items-center '>
                 <Checkbox
                   onCheckedChange={() => setIsTermsAccepted((prev) => !prev)}
