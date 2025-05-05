@@ -1,4 +1,5 @@
 'use client'
+
 import React from 'react'
 import {
   Table,
@@ -19,7 +20,7 @@ const pagination_Style = {
   nextLabel: <NextPagination />,
   previousLabel: <PreviousPagination />,
   containerClassName:
-    'flex md:w-fit text-xs rounded-lg  ms-auto items-center bg-thick-purple-5',
+    'flex md:w-fit text-xs rounded-lg  ms-auto items-center bg-thick-purple-5 py-1',
   activeClassName: 'shadow bg-white',
   previousClassName: 'w-fit px-2',
   nextClassName: 'w-fit px-2',
@@ -37,11 +38,13 @@ export const TableLayout = ({
   tableHeadRowChildren,
   caption,
   tableHead,
+  tableHeadStyle,
   totalPageNumber,
   activePage,
   loading = false,
   skeletonCount = 5,
   skeletonRow,
+  paginationStyle,
 }) => {
   const handlePageClick = (event) => {
     let page_number = event.selected + 1
@@ -77,15 +80,15 @@ export const TableLayout = ({
           <TableHeader>
             {loading ? (
               <TableRow
-                className={
-                  tableHeadRowStyle ||
-                  'font-[600] text-[16px] bg-none border-none shadow-none'
-                }
+                className={cn(
+                  'font-[600] text-[16px] bg-none border-none shadow-none',
+                  tableHeadRowStyle
+                )}
               >
                 {tableHeadRow?.map((heading, index) => (
                   <TableHead
                     className={cn(
-                      '',
+                      tableHeadStyle,
                       hideIndexOnMobile?.includes(index) && 'hidden'
                     )}
                     key={index}
@@ -98,15 +101,15 @@ export const TableLayout = ({
               tableHeadRowChildren
             ) : (
               <TableRow
-                className={
-                  tableHeadRowStyle ||
-                  'font-[600] text-[16px] bg-light-grey border-none shadow-none'
-                }
+                className={cn(
+                  'font-[600] text-[16px] bg-light-grey border-none shadow-none',
+                  tableHeadRowStyle
+                )}
               >
                 {tableHeadRow?.map((heading, index) => (
                   <TableHead
                     className={cn(
-                      '',
+                      tableHeadStyle,
                       hideIndexOnMobile?.includes(index) &&
                         'md:table-cell hidden'
                     )}
@@ -134,7 +137,12 @@ export const TableLayout = ({
       )}
 
       {!loading && totalPageNumber > 1 && (
-        <div className='flex flex-wrap-reverse justify-end items-end mt-auto md:flex-wrap-nowrap gap-2'>
+        <div
+          className={cn(
+            paginationStyle,
+            'flex flex-wrap-reverse justify-end items-end mt-auto md:flex-wrap-nowrap gap-2'
+          )}
+        >
           <ReactPaginate
             breakLabel='...'
             nextLabel={pagination_Style.nextLabel}

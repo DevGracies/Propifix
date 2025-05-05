@@ -57,10 +57,12 @@ export const UserSignInForm = () => {
         />
 
         <div className='flex flex-col gap-5 mt-3'>
-          <ReCAPTCHA
-            sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-            onChange={onChange}
-          />
+          {isRobot && (
+            <ReCAPTCHA
+              sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+              onChange={onChange}
+            />
+          )}
           <Button
             disabled={!isTermsAccepted || isRobot}
             className='h-12 flex items-center justify-center rounded-[12px] bg_linear-purple text-white font-medium text-lg w-full'
