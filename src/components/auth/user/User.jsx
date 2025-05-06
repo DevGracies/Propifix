@@ -75,9 +75,9 @@ export const UserForm = () => {
       registerUser(
         {
           __t: userTypes.user,
-          fullName: values.full_name, // Corrected
-          email: values.email, // Corrected
-          password: values.pwd, // Corrected
+          fullName: values.full_name,
+          email: values.email, 
+          password: values.pwd,
           phone: `+${phone}`,
           identifierImage: nationalId,
         },

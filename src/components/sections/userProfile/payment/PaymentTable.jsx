@@ -75,7 +75,7 @@ export const PaymentsTable = () => {
   }
 
   return (
-    <div className='border mt-2 mb-8 rounded-lg'>
+    <div className='border mt-2 mb-8 rounded-xl'>
       <TableLayout
         dataLength={data.length}
         hideIndexOnMobile={hideIndexOnMobile}

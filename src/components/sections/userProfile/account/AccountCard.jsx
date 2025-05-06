@@ -12,7 +12,7 @@ export const AccountCard = () => {
   const router = useRouter()
   return (
     <div className='p-6 rounded-[12px] flex md:flex-row justify-between flex-col-reverse relative gap-4'>
-      <div className='rounded-[12px] absolute top-0 left-0 bottom-0 right-0 z-10'>
+      <div className='border-thick-purple border-3 p-[0.1rem] rounded-[12px] absolute top-0 left-0 bottom-0 right-0 z-10'>
         <div className='relative w-full h-full'>
           <CustomImage
             src={profileBg}
