@@ -6,9 +6,13 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { truncateMiddle } from '@/utils/helpers/TruncateText'
 import { Text } from '@/components/shared/Text'
+import { useState } from 'react'
+import { ModalWrapper } from '@/components/custom-ui/Modal'
+import { InspectionModalBody } from './InspectionModalBody'
 
 export const InspectionsTable = () => {
   const hideIndexOnMobile = [0, 2, 3, 4]
+  const [inspectionModalIsOpen, setInspectionModal] = useState(false)
 
   const data = [
     {
@@ -80,7 +84,10 @@ export const InspectionsTable = () => {
                 className='font-[600] text-sm bg-light-grey'
                 key={index}
               >
-                <Button className='cursor-pointer flex items-center w-[58px] h-[31px] rounded bg_linear-purple font-[400] text-sm'>
+                <Button
+                  onClick={() => setInspectionModal(true)}
+                  className='cursor-pointer flex items-center w-[58px] h-[31px] rounded bg_linear-purple font-[400] text-sm'
+                >
                   View
                 </Button>
               </TableCell>
@@ -88,6 +95,13 @@ export const InspectionsTable = () => {
           )
         })}
       </TableLayout>
+      <ModalWrapper
+        title='Inspection Details'
+        open={inspectionModalIsOpen}
+        setOpen={setInspectionModal}
+      >
+        <InspectionModalBody />
+      </ModalWrapper>
     </div>
   )
 }
