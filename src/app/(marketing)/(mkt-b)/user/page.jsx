@@ -1,4 +1,4 @@
-import { UserProfile } from '@/components/sections/userProfile'
+import { UserProfile } from '@/components/sections/userProfile/profile'
 import React from 'react'
 
 const UsersProfile = () => {

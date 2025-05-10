@@ -1,4 +1,5 @@
 "use client";
+
 import {
   Dialog,
   DialogClose,
@@ -8,10 +9,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "../dialog";
+} from "../ui/dialog";
 import React, { memo } from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "../button";
+import { Button } from "../ui/button";
 
 export const ModalWrapper = memo(
   ({
@@ -43,7 +44,7 @@ export const ModalWrapper = memo(
           {children}
           <DialogFooter className="sm:justify-start hidden">
             <DialogClose asChild>
-              <Button ref={closeModalTrigger}></Button>
+              <Button></Button>
             </DialogClose>
           </DialogFooter>
         </DialogContent>

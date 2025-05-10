@@ -31,8 +31,9 @@ export const UserForm = () => {
   const [nationalId, setNationalId] = useState('')
 
   function onChange(value) {
-    console.log('Captcha value:', value)
-    setIsRobot(false)
+    setTimeout(() => {
+      setIsRobot(false)
+    }, 1500)
   }
 
   const checkIfPhoneFieldIsValid = () => {
@@ -74,9 +75,9 @@ export const UserForm = () => {
       registerUser(
         {
           __t: userTypes.user,
-          fullName: values.full_name, // Corrected
-          email: values.email, // Corrected
-          password: values.pwd, // Corrected
+          fullName: values.full_name,
+          email: values.email, 
+          password: values.pwd,
           phone: `+${phone}`,
           identifierImage: nationalId,
         },
@@ -135,10 +136,12 @@ export const UserForm = () => {
             />
             <div className='flex flex-col gap-5'>
               <div className='flex flex-wrap gap-2 justify-between items-start'>
-                <ReCAPTCHA
-                  sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                  onChange={onChange}
-                />
+                {isRobot && (
+                  <ReCAPTCHA
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                    onChange={onChange}
+                  />
+                )}
                 <UploadButton
                   handleChange={(e) => setNationalId(e)}
                   label={`e.g., National ID, NIN, Driver’s License`}
