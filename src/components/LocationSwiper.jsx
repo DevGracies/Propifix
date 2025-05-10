@@ -5,6 +5,8 @@ import "swiper/css";
 import Image from "next/image";
 import { useRef } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import "swiper/css";
 
 const LocationSwiper = () => {
   const swiperRef = useRef(null);
