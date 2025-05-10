@@ -1,6 +1,3 @@
-import ArrowButton from "@/components/custom-ui/ArrowButton";
-import FeedbackCard from "@/components/custom-ui/FeedbackCard";
-import ProfileAvatar from "@/components/custom-ui/ProfileAvatar";
 import ProfileCard from "@/components/custom-ui/ProfileCard";
 import UserFeedback from "@/components/sections/UserFeedback";
 import { BackButton } from "@/components/sections/userProfile/BackButton";

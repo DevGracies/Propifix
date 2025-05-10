@@ -11,7 +11,7 @@ const page = () => {
 
 
   return (
-    <section className="flex flex-col gap-6 md:gap-12 py-28  md:px-[50px] px-4">
+    <section className="flex flex-col gap-6 md:gap-12 py-28  md:px-[50px] px-4 max-w-[1240px] mx-auto">
       <div className="space-y-7">
         <BackButton />
         <div className="flex flex-col md:flex-row gap-12 ">
