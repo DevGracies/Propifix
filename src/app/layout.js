@@ -3,7 +3,6 @@ import './globals.css'
 import NextTopLoader from 'nextjs-toploader'
 import ReactQueryProvider from '@/utils/context/ReactQueryProvider'
 import { Toaster } from '@/components/ui/sonner'
-// import { Toaster } from '@/components/ui/sonner'
 
 const montserrat = Montserrat({
   subsets: ['latin'],

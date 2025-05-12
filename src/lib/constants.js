@@ -288,15 +288,15 @@ export const FOOTERLINKS = {
   legalLinks: [
     {
       title: "privacy policy",
-      url: "/privacypolicy",
+      url: "/privacy-policy",
     },
     {
       title: "Terms of Service",
-      url: "/termsofservice",
+      url: "/terms&conditions",
     },
     {
       title: "FAQs",
-      url: "/FAQs",
+      url: "/faq",
     },
   ],
 };
@@ -649,3 +649,142 @@ export const FAQ = [
 
 export const TOKEN_KEY = '$propifix__auth__token';
 export const REFRESH_TOKEN_KEY = '$propifix__refresh_auth__token';
+
+export const ProfileDetails = [
+  {
+    title: "Artisan Full Name",
+    value: "Grace Olori",
+  },
+  {
+    title: "Contact",
+    value: "07006599384",
+  },
+  {
+    title: "Location",
+    value: "Lagos, Ikeja",
+  },
+  {
+    title: "Profession/Skill",
+    value: "Carpenter",
+  },
+  {
+    title: "Language",
+    value: "English, French, Yoruba, Spanish, Igbo",
+  },
+  {
+    title: "Date Registered",
+    value: "Dec 23, 2024",
+  },
+];
+
+export const feedbackList = [
+  {
+    rating: 3.5,
+    feedback: `“I recently worked with [Agent's Name], and the experience was nothing
+        short of exceptional. They were incredibly responsive, always answering
+        my inquiries promptly, and their knowledge of the market was impressive.
+        “`,
+    author: "Olori Grace",
+    authorImage: "/images/grace.jpg",
+    date: "23/12/2024",
+  },
+  {
+    rating: 4.5,
+    feedback: `“I had a fantastic experience with [Agent's Name]. They were attentive to my needs and went above and beyond to ensure I found the perfect home. I highly recommend their services!”`,
+    author: "Grace Olori",
+    authorImage: "/images/grace.jpg",
+    date: "23/12/2024",
+  },
+  {
+    rating: 4.5,
+    feedback: `“I had a fantastic experience with [Agent's Name]. They were attentive to my needs and went above and beyond to ensure I found the perfect home. I highly recommend their services!”`,
+    author: "Grace Olori",
+    authorImage: "/images/grace.jpg",
+    date: "23/12/2024",
+  },
+  {
+    rating: 4.5,
+    feedback: `“I had a fantastic experience with [Agent's Name]. They were attentive to my needs and went above and beyond to ensure I found the perfect home. I highly recommend their services!”`,
+    author: "Grace Olori",
+    authorImage: "/images/grace.jpg",
+    date: "23/12/2024",
+  },
+  {
+    rating: 4.5,
+    feedback: `“I had a fantastic experience with [Agent's Name]. They were attentive to my needs and went above and beyond to ensure I found the perfect home. I highly recommend their services!”`,
+    author: "Grace Olori",
+    authorImage: "/images/grace.jpg",
+    date: "23/12/2024",
+  },
+  {
+    rating: 4.5,
+    feedback: `“I had a fantastic experience with [Agent's Name]. They were attentive to my needs and went above and beyond to ensure I found the perfect home. I highly recommend their services!”`,
+    author: "Grace Olori",
+    authorImage: "/images/grace.jpg",
+    date: "23/12/2024",
+  },
+  {
+    rating: 4.5,
+    feedback: `“I had a fantastic experience with [Agent's Name]. They were attentive to my needs and went above and beyond to ensure I found the perfect home. I highly recommend their services!”`,
+    author: "Grace Olori",
+    authorImage: "/images/grace.jpg",
+    date: "23/12/2024",
+  },
+  {
+    rating: 4.5,
+    feedback: `“I had a fantastic experience with [Agent's Name]. They were attentive to my needs and went above and beyond to ensure I found the perfect home. I highly recommend their services!”`,
+    author: "Grace Olori",
+    authorImage: "/images/grace.jpg",
+    date: "23/12/2024",
+  },
+  {
+    rating: 4.5,
+    feedback: `“I had a fantastic experience with [Agent's Name]. They were attentive to my needs and went above and beyond to ensure I found the perfect home. I highly recommend their services!”`,
+    author: "Grace Olori",
+    authorImage: "/images/grace.jpg",
+    date: "23/12/2024",
+  },
+  {
+    rating: 4.5,
+    feedback: `“I had a fantastic experience with [Agent's Name]. They were attentive to my needs and went above and beyond to ensure I found the perfect home. I highly recommend their services!”`,
+    author: "Grace Olori",
+    authorImage: "/images/grace.jpg",
+    date: "23/12/2024",
+  },
+];
+
+export const MOREINFO = [
+  {
+    title: "service area",
+    desc: "Residential, Industrial, Commercial",
+  },
+  {
+    title: "Frequency",
+    desc: "One-Time, Yearly, Monthly",
+  },
+  {
+    title: "Work Experience",
+    desc: "5 years",
+  },
+  {
+    title: "Round-the-Clock Service",
+    desc: "Yes",
+  },
+  {
+    title: "Provide Regular Service",
+    desc: "Yes",
+  },
+  {
+    title: "Service Includes",
+    desc: "Air Cleaning, Carpet Cleaning, Clean-Up After Work, Dusting, Gutter Cleaning, Kitchen Appliance Cleaning, Laundry & Dry Cleaning Services, Mopping, Moss Removal, Power & Pressure Washing, Reinstating Furniture, Vacuuming, Wall Washing, Windows Cleaning",
+  },
+];
+
+export const SERVICEIMAGESOURCE = [
+  "/work/image1.jpg",
+  "/work/image2.jpg",
+  "/work/image3.avif",
+  "/work/images4.jpeg",
+  "/work/images5.jpeg",
+  "/work/images6.jpeg",
+];
