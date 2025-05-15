@@ -36,7 +36,7 @@ const Stats = ({
                 variant="determinate"
                 value={successRateInPercentage}
                 color="white"
-                className="absolute top-1/2 left-1/2 -translate-1/2"
+                className="absolute top-1/2 left-1/2 -translate-1/2 "
               />
               <p className="text-[16px]">{successRateValue}</p>
             </div>

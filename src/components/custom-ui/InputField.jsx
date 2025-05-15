@@ -39,7 +39,8 @@ export const InputField = ({
   const inputCnStyle = cn(
     `italic text-[11.04px] font-[400] border border-input-border h-[45px] rounded-[9.46px] flex items-center`,
     inputStyle,
-    hideTopBorder && 'border-t-0 border-x-0 shadow-none px-0 focus-visible:border-t-0 focus-visible:border-x-0 focus-visible:ring-0'
+    hideTopBorder &&
+      'border-t-0 border-x-0 shadow-none px-0 focus-visible:border-t-0 focus-visible:border-x-0 focus-visible:ring-0'
   )
 
   const inputLabelStyle = cn(`text-[14px] font-[500]`, labelStyle)
@@ -125,14 +126,17 @@ export const InputField = ({
                   <SelectTrigger className={inputCnStyle}>
                     <SelectValue
                       placeholder={placeholder}
-                      className='flex items-center text-[11.04px] font-[400]'
+                      className={inputCnStyle}
                     />
                   </SelectTrigger>
                 </FormControl>
                 <SelectContent>
                   {selectList !== undefined &&
                     selectList?.map((item, index) => (
-                      <SelectItem value={item.value} key={index}>
+                      <SelectItem
+                        value={item.value}
+                        key={index}
+                      >
                         {item.title}
                       </SelectItem>
                     ))}
