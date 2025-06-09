@@ -40,9 +40,9 @@ const UserFeedback = ({feedbackList}) => {
         </div>
       </div>
       <Swiper
-        spaceBetween={50}
+        spaceBetween={25}
         slidesPerView={"auto"}
-        className="!px-5 h-[280px] cursor-default"
+        className="!px-5 h-[max-content] cursor-default"
         onSwiper={(swiper) => (swiperRef.current = swiper)}
         onProgress={(swiper) => {
           const percent = Math.round(swiper.progress * 100);
@@ -52,7 +52,7 @@ const UserFeedback = ({feedbackList}) => {
         {feedbackList.map((feedback, index) => (
           <SwiperSlide
             key={index}
-            className="max-w-[419px]"
+            className="max-w-[419px] !h-[max-content] py-4"
           >
             <FeedbackCard
               ratingValue={feedback.rating}

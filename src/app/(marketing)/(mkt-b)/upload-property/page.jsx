@@ -1,9 +1,8 @@
+import { UploadProperty } from '@/components/sections/uploadProperty'
 import React from 'react'
 
-const UploadProperty = () => {
-  return (
-    <div>UploadProperty</div>
-  )
+const UploadPropertyPage = () => {
+  return <UploadProperty />
 }
 
-export default UploadProperty
+export default UploadPropertyPage
