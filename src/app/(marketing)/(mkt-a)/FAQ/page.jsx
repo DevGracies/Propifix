@@ -5,25 +5,23 @@ import {
   Accordion,
   AccordionContent,
   AccordionItem,
-  AccordionTrigger,
 } from "@/components/ui/accordion";
 import { CustomAccordionTrigger } from "@/components/custom-ui/CustomAccordianTrigger";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
-import Banner from "@/components/Banner";
+import Navbarr from "@/components/Navbarr";
 
 const FrenquentlyAskedQuestionsPage = () => {
   const [openItem, setOpenItem] = useState("");
 
   return (
     <section className="w-full bg-[#F9F7FB] overflow-hidden">
-      <Banner
-        content={
-          <h1 className="text-[48px] font-semibold uppercase text-white tracking-wide">
-            FAQ
-          </h1>
-        }
-      />
+      <Navbarr>
+        {" "}
+        <h1 className="text-[48px] font-semibold uppercase text-white tracking-wide text-center">
+          FAQ
+        </h1>
+      </Navbarr>
       <div className="py-[50px] md:py-[100px] bg-[#F9F7FB] px-5 space-y-[50px] md:space-y-[100px]">
         <h1 className="w-full max-w-[1296px] mx-auto text-[18px] md:text-[22px] font-medium md:font-semibold leading-[28px] text-center">
           Got questions about Propifix? You're in the right place! This FAQ

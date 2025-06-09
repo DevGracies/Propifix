@@ -1,9 +1,8 @@
+import { UserAccount } from '@/components/sections/userProfile/account/UserAccount'
 import React from 'react'
 
-const UsersProfile = () => {
-  return (
-    <div>UsersProfile</div>
-  )
+const UserAccountPage = () => {
+  return <UserAccount />
 }
 
-export default UsersProfile
+export default UserAccountPage
