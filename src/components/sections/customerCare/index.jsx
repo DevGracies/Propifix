@@ -41,7 +41,7 @@ export const CustomerCare = () => {
         {`We’d love to hear from you! Whether you have feedback, or need assistance, our team is here to help.`}
       </Text>
       <div className='bg-white md:mx-[6rem] mx-0 py-12 md:px-12 px-6 rounded-[10px] md:w-[788px] w-full min-h-[677px] flex flex-col gap-[30px] mb-10'>
-        <Form {...form}>
+        <Form {...form} >
           <form
             onSubmit={form.handleSubmit(onSubmit)}
             className='w-full flex flex-col gap-[40px]'

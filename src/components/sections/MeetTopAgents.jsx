@@ -1,10 +1,23 @@
+'use client';
+import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 import { TOPAGENTS } from "@/lib/constants";
 import { Button } from "../ui/button";
 import { Rating } from "@mui/material";
 import Image from "next/image";
-import Link from "next/link";
 
 const MeetTopAgents = () => {
+  const router = useRouter();
+   const handleClick = () => {
+    router.push('/listing');
+  };
+    const agent = () => {
+    router.push('/agent');
+  };
+
+  const [selectedAgentIndex, setSelectedAgentIndex] = useState(0); 
+  const selectedAgent = TOPAGENTS[selectedAgentIndex];
+
   return (
     <section className="py-[40px] " id="meet-top-agents">
       <h1 className="capitalize text-[#9D71C6] text-[30px] font-semibold mb-10 mx-5 md:ml-[72px]">
@@ -35,32 +48,35 @@ const MeetTopAgents = () => {
           />
           {TOPAGENTS.map((agent, index) => (
             <Button
+               key={agent.agentName}
               variant={"outline"}
-              className={`bg-transparent p-5 w-full h-fit flex flex-col items-start group relative cursor-pointer`}
+              onClick={() => setSelectedAgentIndex(index)}
+              className={`bg-transparent p-5 w-full h-fit flex flex-col items-start group relative cursor-pointer items-start group relative cursor-pointer transition-all duration-300
+                ${selectedAgentIndex === index
+                  ? "bg-white text-[#5D14AD] font-semibold shadow-lg"
+                  : "bg-transparent text-white"
+                }`}
               style={{ maxWidth: `${100 - index * 15}%` }}
             >
               <div className="space-y-1">
-                <div className="w-fit text-[13px] md:text-[15px] font-medium italic text-white group-hover:text-[#9747FF]">
-                  Agent Name:{" "}
-                  <span className="not-italic text-white group-hover:text-[#5D14AD] font-bold capitalize">
-                    {agent.agentName}
-                  </span>
+                <div className={`w-fit text-[13px] md:text-[15px] font-medium italic ${selectedAgentIndex === index ? "text-[#5D14AD]" : "text-white group-hover:text-[#9747FF]"}`}>
+                  Agent Name: <span className={`not-italic font-bold capitalize  ${selectedAgentIndex === index ? "text-[#5D14AD]" : "text-white group-hover:text-[#9747FF]"}`}>{agent.agentName}</span>
+                
                 </div>
-                <div className="w-fit text-[13px] md:text-[15px] font-medium italic text-white group-hover:text-[#9747FF] flex justify-center items-center">
+                <div className={`w-fit text-[13px] md:text-[15px] font-medium italic ${selectedAgentIndex === index ? "text-[#5D14AD]" : "text-white group-hover:text-[#9747FF]"} flex justify-center items-center`}>
                   Rating:{" "}
-                  <span className="not-italic text-[#5D14AD] font-bold capitalize">
+                  <span className={`not-italic text-[#5D14AD] font-bold capitalize  ${selectedAgentIndex === index ? "text-[#5D14AD]" : "text-white"}`}>
                     <Rating
                       name="half-rating-read"
                       defaultValue={agent.rating}
                       precision={0.5}
                       readOnly
-                      className="!text-white group-hover:!text-[#5D14AD]"
                     />
                   </span>
                 </div>
-                <div className="w-fit text-[13px] md:text-[15px] font-medium italic text-white group-hover:text-[#9747FF]">
+                <div  className={`w-fit text-[13px] md:text-[15px] font-medium italic ${selectedAgentIndex === index ? "text-[#5D14AD]" : "text-white group-hover:text-[#9747FF]"}`}>
                   Location:{" "}
-                  <span className="not-italic text-white group-hover:text-[#5D14AD] font-bold capitalize">
+                  <span className={`not-italic font-bold capitalize  ${selectedAgentIndex === index ? "text-[#5D14AD]" : "text-white group-hover:text-[#9747FF]"}`}>
                     {agent.location}
                   </span>
                 </div>
@@ -70,31 +86,32 @@ const MeetTopAgents = () => {
           <Button
             variant={"outline"}
             className={
-              "bg-transparent relative w-fit text-white !px-10 rounded-xl"
+              `bg-transparent relative w-fit text-white !px-10 rounded-xl`
             }
-            asChild
+            onClick={handleClick}
           >
-            <Link href={"top-agents"}>See all</Link>
+            See all
           </Button>
         </div>
         <div className="p-[2px] rounded-xl w-[350px] h-[428px] border-[2px] border-[#9747FF] mx-auto mt-10">
           <div className="relative w-full h-full flex items-end overflow-hidden rounded-lg p-[30px]">
             <Image
-              src="/images/grace.jpg"
+                src={selectedAgent.image ||"/images/grace.jpg"}
               fill
               alt="agent picture"
               className="object-cover brightness-75 backdrop-blur-sm"
             />
 
-            <div className="flex flex-col gap-1 text-white relative ">
-              <h1 className="font-bold text-[30px] capitalize">Grace Olori</h1>
-              <p className="font-semibold text-[20px] capitalize">
-                house agent
-              </p>
-              <p className="font-medium text-[18px] capitalize">
-                reviews <span className="font-bold text-[20px]"> • 20+</span>
-              </p>
-            </div>
+           <div className="flex flex-col gap-1 text-white relative ">
+  <h1 className="font-bold text-[30px] capitalize">{selectedAgent.agentName}</h1>
+  <p className="font-semibold text-[20px] capitalize">
+    {selectedAgent.role || 'house agent'}
+  </p>
+  <p className="font-medium text-[18px] capitalize">
+    reviews <span className="font-bold text-[20px]"> • {selectedAgent.reviews || '20+'}</span>
+  </p>
+</div>
+
           </div>
         </div>
       </div>
