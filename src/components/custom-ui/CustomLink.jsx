@@ -1,6 +1,5 @@
 "use client";
 
-import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { Link as ScrollLink, scroller } from "react-scroll";
@@ -12,19 +11,23 @@ const CustomLink = ({ url, children, className = "" }) => {
   if (!url) return null;
 
   const isInternal = url.startsWith("/");
+  const isScrollLink = !isInternal && pathname === "/";
 
   const handleClick = (e) => {
-    if (url === "#") {
-      e.preventDefault();
-      return;
-    }
+    e.preventDefault();
 
-    if (!isInternal && pathname !== "/") {
-      e.preventDefault();
+    if (url === "#") return;
+
+    if (isInternal) {
+      // Navigate to internal page manually
+      router.push(url);
+    } else {
+      // Navigate to homepage and scroll
       router.push(`/?scrollTo=${url}`);
     }
   };
 
+  // Scroll behavior on homepage load
   useEffect(() => {
     const searchParams = new URLSearchParams(window.location.search);
     const scrollTo = searchParams.get("scrollTo");
@@ -42,37 +45,26 @@ const CustomLink = ({ url, children, className = "" }) => {
     }
   }, [pathname]);
 
-
-  if (isInternal) {
+  // If you're on the homepage and scrolling to section
+  if (isScrollLink) {
     return (
-      <Link
-        href={url}
+      <ScrollLink
+        to={url}
+        offset={-80}
         className={className}
+        smooth={true}
+        duration={500}
       >
         {children}
-      </Link>
+      </ScrollLink>
     );
   }
 
-  return pathname === "/" ? (
-    <ScrollLink
-      to={url}
-      offset={-80}
-      className={className}
-      smooth={true}
-      duration={500}
-      onClick={handleClick}
-    >
+ 
+  return (
+    <button onClick={handleClick} className={className}>
       {children}
-    </ScrollLink>
-  ) : (
-    <a
-      href="#"
-      onClick={handleClick}
-      className={className}
-    >
-      {children}
-    </a>
+    </button>
   );
 };
 

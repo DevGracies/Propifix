@@ -7,7 +7,7 @@ import { ChevronLeft, Loader } from 'lucide-react'
 import { InputField } from '../../custom-ui/InputField'
 import { Form } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
-import { useRouter } from 'nextjs-toploader/app'
+import { useRouter } from 'next/navigation';
 import { VerifyCodeFormSchema } from '@/lib/schema/VerifyCodeFormSchema'
 import { Text } from '@/components/shared/Text'
 

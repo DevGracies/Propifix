@@ -6,7 +6,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { ChevronLeft, Loader } from 'lucide-react'
 import { Form } from '@/components/ui/form'
 import { Button } from '@/components/ui/button'
-import { useRouter } from 'nextjs-toploader/app'
+import { useRouter } from 'next/navigation';
 import { NewPasswordFormSchema } from '@/lib/schema/NewPasswordFormSchema'
 import { Text } from '@/components/shared/Text'
 import { PasswordInput } from '@/components/custom-ui/PasswordField'

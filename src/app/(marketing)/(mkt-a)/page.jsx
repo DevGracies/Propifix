@@ -14,7 +14,7 @@ const HomePage = () => {
       <Hero />
       <FindAgent />
       <HowItWorks />
-      <FeaturedLocations />
+      {/* <FeaturedLocations /> */}
       <MeetTopAgents />
       <WhyPropifix />
       <DiscoverMore />

@@ -20,7 +20,7 @@ const AgentProfilePage = () => {
         heavierText={'Account'}
       />
       <div className='grid lg:grid-cols-2 grid-cols-1 md:gap-[40px] gap-[15px]'>
-        <ProfileCard role='carpentry' profileDetails={ProfileDetails} />
+        <ProfileCard role='Agent' profileDetails={ProfileDetails} />
         <Stats
           responseTime='Typically responds within 1 hour.'
           jobsCompleted={10}

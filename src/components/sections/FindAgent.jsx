@@ -10,15 +10,14 @@ const agents = [
 
 const FindAgent = () => {
   return (
-    <section className="lg:flex text-white relative" id="find-an-agent">
+    <section className="lg:flex  text-white" id="find-an-agent">
       <div
         className="w-full lg:max-w-[520px] px-5 md:px-[72px] lg:pr-0 lg:pl-[72px] py-[60px] md:py-[40px] bg-gradient-to-l from-[#5D14AD] to-[#9747FF] flex flex-col gap-5 relative
-        z-40
-"
+        z-40"
       >
         <h1 className="font-semibold text-[20px] md:text-[30px] max-w-[530px]">
-          Discover house agents and trusted service providers near you, from
-          carpenters and cleaners to painters and electricians.
+          Discover house agents, caretakers, landords and trusted service providers near you, from
+          carpenters and cleaners to painters and electricians and more.
         </h1>
         <div className="flex gap-[4px] items-center">
           <Image
@@ -57,7 +56,9 @@ const FindAgent = () => {
           className="object-cover absolute -left-6 w-full h-full"
         />
       </div>
-      <MapComponent agents={agents} />
+      <div className="relative">
+      <MapComponent agents={agents}   />
+      </div>
     </section>
   );
 };

@@ -1,9 +1,15 @@
-import Link from "next/link";
+'use client';
+
 import { Button } from "../ui/button";
 import Card from "../custom-ui/Card";
 import { SERVICES } from "@/lib/constants";
+import { useRouter } from 'next/navigation';
 
 const DiscoverMore = () => {
+    const router = useRouter();
+     const handleClick = () => {
+    router.push('/listing'); 
+  };
   return (
     <section className="p-5 pt-10 md:px-[40px] md:py-[40px] space-y-16" id="discover">
       <div className="flex justify-between items-center gap-14">
@@ -12,14 +18,14 @@ const DiscoverMore = () => {
           <span className="text-[#5D14AD]">Fix</span>
         </h1>
 
-        <Button
+         <Button
           variant={"outline"}
           className={
             "bg-transparent rounded-lg px-8 text-[#5D14AD] border-[#5D14AD] hover:bg-[#5D14AD] hover:text-white"
           }
-          asChild
+          onClick={handleClick}
         >
-          <Link href={"artisans"}>View All </Link>
+         View All
         </Button>
       </div>
       <div class="grid grid-cols-[repeat(auto-fit,minmax(122px,1fr))] md:grid-rows-2 gap-4 h-[650px] md:h-[535px]">
