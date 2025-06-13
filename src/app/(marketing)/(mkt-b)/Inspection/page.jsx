@@ -1,8 +1,9 @@
 import React from 'react'
+import Inspection from '@/components/sections/inspectionPage'
 
 const InspectionPage = () => {
   return (
-    <div>InspectionPage</div>
+     <Inspection/>
   )
 }
 
