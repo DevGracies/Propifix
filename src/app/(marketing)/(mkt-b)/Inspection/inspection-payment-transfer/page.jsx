@@ -1,9 +1,9 @@
 import React from 'react'
-import PaymentTransferPage from '@/components/sections/inspectionPage/inspection-payment/PaymentTransfer'
+import InspectionPaymentTransferPage from '@/components/sections/inspectionPage/inspection-payment/PaymentTransfer'
 
 const InspectionPaymentTransfer = () => {
   return (
-    <PaymentTransferPage/>
+    <InspectionPaymentTransferPage/>
   )
 }
 
