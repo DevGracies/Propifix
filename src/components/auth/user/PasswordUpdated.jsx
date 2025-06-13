@@ -2,7 +2,7 @@
 
 import { ChevronLeft } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { useRouter } from 'nextjs-toploader/app'
+import { useRouter } from 'next/navigation';
 import { Text } from '@/components/shared/Text'
 
 export const PasswordUpdated = () => {

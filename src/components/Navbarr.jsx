@@ -9,7 +9,7 @@ const Navbarr = ({ children }) => {
   const gapY = 6;  
 
   return (
-    <header className="relative bg-gradient-to-r from-[#6b00f5] to-[#a300f5] text-white overflow-hidden">
+    <header className="relative bg_linear-purple h-[300px] text-white overflow-hidden">
       <div className="absolute top-0 left-0 w-full h-full z-0 pointer-events-none">
         {Array.from({ length: rows * cols }).map((_, index) => {
           const row = Math.floor(index / cols);

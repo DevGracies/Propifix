@@ -18,7 +18,7 @@ import { ScrollArea } from '@/components/ui/scroll-area'
 import { useCreateUser } from '@/hooks/auth/regsiter.hook'
 import { userTypes } from '@/utils/ConstantEnums'
 import { toast } from 'sonner'
-import { useRouter } from 'nextjs-toploader/app'
+import { useRouter } from 'next/navigation';
 
 export const UserForm = () => {
   const router = useRouter()
