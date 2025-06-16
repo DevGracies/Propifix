@@ -6,13 +6,30 @@ import {
   Marker,
   Popup,
   ZoomControl,
-} from 'react-leaflet';
-import { useRouter } from 'next/navigation';
-import L from 'leaflet';
+} from "react-leaflet";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import "leaflet/dist/leaflet.css";
+import L from "leaflet";
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+
+delete L.Icon.Default.prototype._getIconUrl;
+L.Icon.Default.mergeOptions({
+  iconUrl: markerIcon.src,
+  shadowUrl: markerShadow.src,
+});
 
 const LeafletMap = ({ agents }) => {
   const router = useRouter();
+  const [mounted, setMounted] = useState(false);
   const defaultPosition = [6.5244, 3.3792];
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   return (
     <MapContainer
@@ -20,7 +37,7 @@ const LeafletMap = ({ agents }) => {
       zoom={12}
       scrollWheelZoom={false}
       zoomControl={false}
-      className="w-full h-full rounded-xl shadow-md border border-gray-200 z-0"
+      className="w-full h-[500px] rounded-xl shadow-md border border-gray-200 z-0"
     >
       <ZoomControl position="topright" />
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
@@ -35,33 +52,31 @@ const LeafletMap = ({ agents }) => {
         </Marker>
       )}
 
-      {agents?.map((agent) => (
-        <Marker
-          key={agent.id}
-          position={[agent.lat, agent.lng]}
-          title={agent.name}
-          icon={L.icon({
-            iconUrl: '/icons/marker.svg',
-            iconSize: [25, 41],
-            iconAnchor: [12, 41],
-            popupAnchor: [0, -40],
-          })}
-        >
-          <Popup>
-            <div className="text-sm space-y-1 text-black">
-              <p className="font-semibold">{agent.name}</p>
-              <p className="text-xs text-gray-600">{agent.category}</p>
-              <p className="text-yellow-500 text-xs">⭐ {agent.stars}</p>
-              <button
-                className="text-blue-600 cursor-pointer underline text-xs hover:text-blue-800"
-                onClick={() => router.push(`/agent/${agent.id}`)}
-              >
-                See More
-              </button>
-            </div>
-          </Popup>
-        </Marker>
-      ))}
+      {agents?.map((agent) => {
+        if (!agent.lat || !agent.lng) return null;
+
+        return (
+          <Marker
+            key={agent.id}
+            position={[agent.lat, agent.lng]}
+            title={agent.name}
+          >
+            <Popup>
+              <div className="text-sm space-y-1 text-black">
+                <p className="font-semibold">{agent.name}</p>
+                <p className="text-xs text-gray-600">{agent.category}</p>
+                <p className="text-yellow-500 text-xs">⭐ {agent.stars}</p>
+                <button
+                  className="text-blue-600 cursor-pointer underline text-xs hover:text-blue-800"
+                  onClick={() => router.push(`/agent/${agent.id}`)}
+                >
+                  See More
+                </button>
+              </div>
+            </Popup>
+          </Marker>
+        );
+      })}
     </MapContainer>
   );
 };
