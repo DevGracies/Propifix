@@ -16,8 +16,9 @@ const FindAgent = () => {
         z-40"
       >
         <h1 className="font-semibold text-[20px] md:text-[30px] max-w-[530px]">
-          Discover house agents, caretakers, landords and trusted service providers near you, from
-          carpenters and cleaners to painters and electricians and more.
+          Discover house agents, caretakers, landords and trusted service
+          providers near you, from carpenters and cleaners to painters and
+          electricians and more.
         </h1>
         <div className="flex gap-[4px] items-center">
           <Image
@@ -57,7 +58,7 @@ const FindAgent = () => {
         />
       </div>
       <div className="relative">
-      <MapComponent agents={agents}   />
+        <MapComponent agents={agents} />
       </div>
     </section>
   );
