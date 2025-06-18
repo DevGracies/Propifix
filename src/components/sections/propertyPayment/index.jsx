@@ -60,7 +60,7 @@ const PropertyPayment = () => {
   }
 
 return (
-    <div className="min-h-screen w-full bg-gray-50 mt-24 px-4 py-8">
+    <div className="min-h-screen w-full bg-gray-50 mt-16 px-4 py-2">
       <div className="max-w-5xl mx-auto ">
         <div className='flex items-center gap-2 mb-8 ml-2'>
           <Link href={'/property'}>

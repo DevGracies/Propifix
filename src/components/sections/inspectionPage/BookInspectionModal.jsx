@@ -94,7 +94,7 @@ const BookInspectionModal = () => {
           .
         </p>
 
-        <Link href={'/inspection/inspection-payment'} >
+        <Link href={'/inspection-payment'} >
           <button className="w-full cursor-pointer bg-gradient-to-r from-[#5D14AD] to-[#9747FF] text-white py-3 rounded-md font-semibold hover:opacity-90 transition">Book for Inspection now</button>
         </Link>
       </div>
