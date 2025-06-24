@@ -19,7 +19,7 @@ const InspectionPaymentTransferPage = ({
   }
 
   return (
-    <div className="min-h-screen mt-24 bg-gray-50 px-4 py-8">
+    <div className="min-h-screen mt-16 bg-gray-50 px-4 py-2">
       <div className="max-w-2xl mx-auto">
         <h1 className="text-2xl text-center font-semibold text-[#9D71C6] mb-8">
             Pay for <span className="text-[#5D14AD]">Inspection</span>

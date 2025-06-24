@@ -6,14 +6,24 @@ import Link from "next/link"
 const InspectionPaymentCompletedPage = ({}) => {
 
   return (
-    <div className="min-h-screen mt-24 bg-gray-50 px-4 py-8">
+    <div className="min-h-screen mt-16 bg-gray-50 px-4 py-2">
       <div className="w-full mx-auto">
+
+      <div className='flex items-center gap-2 mb-8 ml-10'>
+          <Link href={'/inspection'}>
+          <button className='cursor-pointer'>
+            <Image src={'/icons/left-arrow-button.svg'} alt='button' width={30} height={20}/> 
+          </button>
+          </Link>
+          <p className='font-medium text-md md:text-lg'>Back</p>
+        </div>
+
         <div className=" p-8 text-center">
           <h1 className="text-2xl font-semibold text-[#9D71C6] mb-8">
             Pay for <span className="text-[#5D14AD]">Inspection</span>
           </h1>
 
-          <div className="flex flex-col justify-center bg-white h-full md:h-[500px] mb-8 rounded-2xl shadow-sm ">
+          <div className="flex flex-col justify-center bg-white h-full md:h-[500px] mb-8 rounded-2xl shadow-lg ">
             <h2 className="text-3xl font-bold text-[#5D14AD] mb-6">
               Propi<span className="text-black/80 font-medium">Fix</span>
             </h2>

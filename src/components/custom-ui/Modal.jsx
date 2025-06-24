@@ -30,10 +30,16 @@ export const ModalWrapper = memo(
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>{trigger}</DialogTrigger>
         <DialogContent
+          // className={cn(
+          //   "bg-white m-auto ",
+          //   bigscreenwidth && bigscreenwidth,
+          //   scrollable && "overflow-y-scroll max-h-screen",
+          //   bg && bg
+          // )}
           className={cn(
-            "bg-white m-auto ",
+            "w-full max-w-[90vw] sm:max-w-xl max-h-[90vh] overflow-y-auto bg-white m-auto rounded-lg",
             bigscreenwidth && bigscreenwidth,
-            scrollable && "overflow-y-scroll max-h-screen",
+            scrollable && "overflow-y-auto",
             bg && bg
           )}
         >
