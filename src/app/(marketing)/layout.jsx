@@ -1,10 +1,10 @@
-export default function HomeLayout({
-  children,
-}) {
+import Footer from "@/components/Footer";
+
+export default function HomeLayout({ children }) {
   return (
     <div>
-      <nav>Dashboard Navigation</nav>
-      <main>{children}</main>
+      {children}
+      <Footer />
     </div>
   );
 }
