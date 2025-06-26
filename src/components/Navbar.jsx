@@ -59,13 +59,13 @@ const Navbar = ({ transparent }) => {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="items-center space-x-10 hidden lg:flex">
-            <ul className="gap-8 justify-center items-center w-fit flex">
+          <nav className="items-center cursor-pointer space-x-10 hidden lg:flex">
+            <ul className="gap-8 cursor-pointer justify-center items-center w-fit flex">
               {NAVLINKS.map((link) => (
                 <li key={link.url}>
                   <AnimatedLinks
-                    className={`${
-                      transparent ? 'text-white' : 'text-black hover:text-blue-900'
+                    className={` cursor-pointer ${ 
+                      transparent ? 'text-white' : 'text-black hover:text-blue-900' 
                     } capitalize font-medium text-[13px]`}
                     iconColor={transparent ? 'white' : 'black'}
                   >
@@ -77,7 +77,7 @@ const Navbar = ({ transparent }) => {
             <div>
               <Button
                 variant="outline"
-                className={`bg-transparent border capitalize text-white ${
+                className={`bg-transparent cursor-pointer border capitalize text-white ${
                   !transparent &&
                   'border-black text-black hover:bg-gradient-to-r hover:from-[#5D14AD] hover:to-[#9747FF] hover:text-white transition-all duration-300'
                 }`}
@@ -93,7 +93,7 @@ const Navbar = ({ transparent }) => {
             <Button
               variant="ghost"
               onClick={() => setIsOpen(!isOpen)}
-              className={`${transparent ? 'text-white' : 'text-black'} py-3`}
+              className={`cursor-pointer ${transparent ? 'text-white' : 'text-black'} py-3`}
             >
               {isOpen ? <XIcon size={24} /> : <MenuIcon size={24} />}
             </Button>
@@ -102,15 +102,15 @@ const Navbar = ({ transparent }) => {
 
         {/* Mobile Menu */}
         <div
-          className={`absolute top-full right-5 w-[90%] max-w-xs bg-white border border-gray-200 rounded-xl shadow-md z-40 transition-all duration-300 ease-in-out overflow-hidden lg:hidden ${
+          className={`absolute top-full right-5 w-[90%] max-w-xs bg-white border cursor-pointer border-gray-200 rounded-xl shadow-md z-40 transition-all duration-300 ease-in-out overflow-hidden lg:hidden ${
             isOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
           }`}
         >
-          <nav className="flex flex-col py-5 px-6 space-y-4">
+          <nav className="flex flex-col py-5 cursor-pointer px-6 space-y-4">
             {NAVLINKS.map((link) => (
               <AnimatedLinks
                 key={link.url}
-                className="text-black capitalize font-medium text-base hover:text-purple-600"
+                className="text-black capitalize font-medium text-base cursor-pointer hover:text-purple-600"
                 iconColor="black"
               >
                 <CustomLink url={link.url} onClick={() => setIsOpen(false)}>
@@ -121,7 +121,7 @@ const Navbar = ({ transparent }) => {
             <div>
               <Button
                 variant="outline"
-                className="text-black border capitalize hover:bg-purple-50"
+                className="text-black border cursor-pointer capitalize hover:bg-purple-50"
                 onClick={handleClick}
               >
                 {isLoggedIn ? 'Account' : 'Get Started'}

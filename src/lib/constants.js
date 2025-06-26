@@ -1,26 +1,26 @@
 export const NAVLINKS = [
   {
-    title: 'home',
+    title: 'Home',
     url: 'hero',
   },
   {
-    title: 'find an agent',
+    title: 'Find an agent',
     url: 'find-an-agent',
   },
   {
-    title: 'services',
+    title: 'Services',
     url: 'discover',
   },
   {
-    title: 'how it works',
+    title: 'How it works',
     url: '/how-it-works',
   },
   {
-    title: 'about us',
+    title: 'About us',
     url: '/about',
   },
   {
-    title: 'contact us',
+    title: 'Contact us',
     url: '/contact',
   },
 ]
@@ -99,12 +99,12 @@ export const SELECTOPTIONS = [
       '800,000',
       '900,000',
       '1 million',
-      '2 million',
-      '3 million',
       '5 million',
       '10 million',
-      '20 million',
-      '30 million',
+      '50 million',
+      '100 million',
+      '250 million',
+      '500 million',
     ],
   },
 ]
@@ -251,33 +251,33 @@ export const SOCIALLINKS = [
 export const FOOTERLINKS = {
   quickLinks: [...NAVLINKS],
   services: [
-    { title: 'carpentry', url: '/artisans?carpentry' },
+    { title: 'Carpentry', url: '/artisans?carpentry' },
     {
-      title: 'electrical work',
+      title: 'Electrical work',
       url: '/artisans?electrical-work',
     },
     {
-      title: 'dry cleaning',
+      title: 'Dry cleaning',
       url: '/artisans?dry-cleaning',
     },
     {
-      title: 'house cleaning',
+      title: 'House cleaning',
       url: '/artisans?house-cleaning',
     },
     {
-      title: 'painting & wallpaper installation',
+      title: 'Painting & wallpaper installation',
       url: '/artisans?painting&wallpaperinstallaion',
     },
     {
-      title: 'plumbing',
+      title: 'Plumbing',
       url: '/artisans?plumbing',
     },
     {
-      title: 'tiling',
+      title: 'Tiling',
       url: '/artisans?tiling',
     },
     {
-      title: 'welding',
+      title: 'Welding',
       url: '/artisans?welding',
     },
     {
@@ -287,7 +287,7 @@ export const FOOTERLINKS = {
   ],
   legalLinks: [
     {
-      title: 'privacy policy',
+      title: 'Privacy policy',
       url: '/privacy-policy',
     },
     {
