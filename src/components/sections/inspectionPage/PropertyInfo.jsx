@@ -11,7 +11,7 @@ const PropertyInfo = ({
   fee,
 }) => {
   return (
-    <div className='shadow rounded-xl p-6 space-y-4 text-sm w-full'>
+    <div className='shadow rounded-xl p-6 space-y-4 text-xs md:text-sm w-full'>
       <div>
         <strong>Property Name</strong>
         <p>{name}</p>
