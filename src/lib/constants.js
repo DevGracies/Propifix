@@ -825,3 +825,64 @@ export const FEATURES = [
   'Governors consent',
   'Sport Court',
 ]
+
+ export const agentlisting = [
+  {
+    id: 1,
+    name: "Jane Doe",
+    location: "Ikeja, Lagos",
+    rating: 4.5,
+    reviews: "23+",
+  },
+  {
+    id: 2,
+    name: "John Smith",
+    location: "Lekki, Lagos",
+    rating: 3.0,
+    reviews: "15+",
+  },
+  {
+    id: 3,
+    name: "Amina Bello",
+    location: "Wuse, Abuja",
+    rating: 5.0,
+    reviews: "48+",
+  },
+  {
+    id: 4,
+    name: "Emeka Obi",
+    location: "GRA, Port Harcourt",
+    rating: 2.5,
+    reviews:"9+",
+  },
+];
+ export const artisanlisting = [
+  {
+    id: 1,
+    name: "Jane Doe",
+    location: "Ikeja, Lagos",
+    rating: 4.5,
+    reviews: "23+",
+  },
+  {
+    id: 2,
+    name: "John Smith",
+    location: "Lekki, Lagos",
+    rating: 3.0,
+    reviews: "15+",
+  },
+  {
+    id: 3,
+    name: "Amina Bello",
+    location: "Wuse, Abuja",
+    rating: 5.0,
+    reviews: "48+",
+  },
+  {
+    id: 4,
+    name: "Emeka Obi",
+    location: "GRA, Port Harcourt",
+    rating: 2.5,
+    reviews:"9+",
+  },
+];

@@ -1,6 +1,8 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
+import { Rating } from "@mui/material";
+import { agentlisting } from "@/lib/constants";
 
 const Caretakers = () => {
   const [locations, setLocations] = useState([]);
@@ -9,58 +11,58 @@ const Caretakers = () => {
     const [caretakers, setCaretakers] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // const fetchLocations = async () => {
-    //   const data = [
-    //     "All",
-    //     "Ikeja",
-    //     "Agege",
-    //     "Victoria Island",
-    //     "Banana Island",
-    //     "Ikoyi",
-    //     "Lekki",
-    //     "Ikorodu",
-    //   ];
-    //   setLocations(data);
-    // };
-
-
     const fetchLocations = async () => {
-      try {
-        const res = await fetch("api/location/caretaker")
-        if (!res.ok) {
-          throw new Error("Failed to fetch caretaker location")
-        }
-        const data = await res.json()
-        setCaretakers(data)
-      } catch (error) {
-        console.error("Error fetching caretaker location")
-      }
-    } 
-     const fetchCaretakers = async () => {
-      try {
-        const res = await fetch("/api/agents")
-        const data = await res.json()
-        setCaretakers(data)
-      } catch (error) {
-        console.error("Error fetching caretakers:", error)
-      } finally{
-        setLoading(false)
-      }
-    }
+      const data = [
+        "All",
+        "Ikeja",
+        "Agege",
+        "Victoria Island",
+        "Banana Island",
+        "Ikoyi",
+        "Lekki",
+        "Ikorodu",
+      ];
+      setLocations(data);
+    };
+
+
+    // const fetchLocations = async () => {
+    //   try {
+    //     const res = await fetch("api/location/caretaker")
+    //     if (!res.ok) {
+    //       throw new Error("Failed to fetch caretaker location")
+    //     }
+    //     const data = await res.json()
+    //     setCaretakers(data)
+    //   } catch (error) {
+    //     console.error("Error fetching caretaker location")
+    //   }
+    // } 
+    //  const fetchCaretakers = async () => {
+    //   try {
+    //     const res = await fetch("/api/agents")
+    //     const data = await res.json()
+    //     setCaretakers(data)
+    //   } catch (error) {
+    //     console.error("Error fetching caretakers:", error)
+    //   } finally{
+    //     setLoading(false)
+    //   }
+    // }
 
    
   useEffect(() => {
     const fetchAllData = async () => {
           // fetchLocations();
-      await  fetchCaretakers()
+      // await  fetchCaretakers()
       await fetchLocations()
     }
 fetchAllData()
    
   }, []);
 
-    if (loading) return <p>Loading agents...</p>;
-  if (caretakers.length === 0) return <p>No agents found.</p>;
+  //   if (loading) return <p>Loading agents...</p>;
+  // if (caretakers.length === 0) return <p>No agents found.</p>;
   return (
     <div>
       <div>
