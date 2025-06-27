@@ -36,16 +36,16 @@ const page = () => {
       <Navbarr>
         <div className=" flex justify-between items-center ">
           <div>
-            <h1 className=" text-5xl font-medium">
+            <h1 className=" text-3xl md:text-5xl font-medium">
               {roleData[activeRole].title}
             </h1>
-            <h6>{roleData[activeRole].subtitle}</h6>
+            <h6 className="text-sm md:text-base ">{roleData[activeRole].subtitle}</h6>
           </div>
           <Image src={"/categoryNavbar.svg"} width={300} height={100} />
         </div>
       </Navbarr>
 
-      <div className="flex space-x-6 mb-10">
+      <div className="flex flex-wrap justify-center md:justify-start gap-4 md:gap-6 mb-10 px-4">
         {Object.keys(roleData).map((role) => (
           <button
             key={role}
