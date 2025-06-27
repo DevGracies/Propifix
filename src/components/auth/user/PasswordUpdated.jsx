@@ -20,7 +20,7 @@ export const PasswordUpdated = () => {
         <div className='flex flex-col gap-5'>
           <Button
             onClick={() => router.push('/user/login')}
-            className='h-12 flex items-center justify-center rounded-[12px] bg_linear-purple text-white font-medium text-lg w-full'
+            className='h-12 flex  cursor-pointer  items-center justify-center rounded-[12px] bg_linear-purple text-white font-medium text-lg w-full'
           >
             Sign In
           </Button>

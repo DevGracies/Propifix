@@ -37,7 +37,7 @@ const LeafletMap = ({ agents }) => {
       zoom={12}
       scrollWheelZoom={false}
       zoomControl={false}
-      className="w-full h-[500px] rounded-xl shadow-md border border-gray-200 z-0"
+      className="w-full h-full rounded-xl shadow-md border border-gray-200 z-0"
     >
       <ZoomControl position="topright" />
       <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
