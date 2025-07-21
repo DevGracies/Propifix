@@ -57,7 +57,7 @@ const FindAgent = () => {
           className="object-cover absolute -left-6 w-full h-full"
         />
       </div>
-      <div className="relative w-full ">
+      <div className="relative w-1/2">
             <MapComponent agents={agents} />
       </div>
     </section>
@@ -65,3 +65,5 @@ const FindAgent = () => {
 };
 
 export default FindAgent;
+
+

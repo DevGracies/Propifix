@@ -862,6 +862,7 @@ export const FEATURES = [
     name: "Jane Doe",
     location: "Ikeja, Lagos",
     rating: 4.5,
+    type: "Carpentry",
     reviews: "23+",
   },
   {
@@ -869,6 +870,7 @@ export const FEATURES = [
     name: "John Smith",
     location: "Lekki, Lagos",
     rating: 3.0,
+    type: "Dry Cleaning",
     reviews: "15+",
   },
   {
@@ -876,6 +878,7 @@ export const FEATURES = [
     name: "Amina Bello",
     location: "Wuse, Abuja",
     rating: 5.0,
+    type: "Electrical Work",
     reviews: "48+",
   },
   {
@@ -883,6 +886,75 @@ export const FEATURES = [
     name: "Emeka Obi",
     location: "GRA, Port Harcourt",
     rating: 2.5,
+    type: "House Cleaning",
     reviews:"9+",
+  },
+];
+export const caretakerlisting = [
+  {
+    id: 1,
+    name: "Jane Doe",
+    location: "Ikeja, Lagos",
+    rating: 4.5,
+    assingedProperties: 5,
+    reviews: "23+",
+  },
+  {
+    id: 2,
+    name: "John Smith",
+    location: "Lekki, Lagos",
+    rating: 3,
+    assingedProperties: 5,
+    reviews: "15+",
+  },
+  {
+    id: 3,
+    name: "Amina Bello",
+    location: "Wuse, Abuja",
+    rating: 5.0,
+    assingedProperties: 5,
+    reviews: "48+",
+  },
+  {
+    id: 4,
+    name: "Emeka Obi",
+    location: "GRA, Port Harcourt",
+    rating: 2.5,
+    assingedProperties: 5,
+    reviews:"9+",
+  },
+];
+export const landlordlisting = [
+  {
+    id: 1,
+    name: "Jane Doe",
+    location: "Ikeja, Lagos",
+    rating: 4.5,
+    propertiesOwned: 10,
+    verificationStatus: "Verified",
+  },
+  {
+    id: 2,
+    name: "John Smith",
+    location: "Lekki, Lagos",
+    rating: 3,
+    propertiesOwned: 10,
+    verificationStatus: "Verified",
+  },
+  {
+    id: 3,
+    name: "Amina Bello",
+    location: "Wuse, Abuja",
+    rating: 5.0,
+    propertiesOwned: 10,
+    verificationStatus: "Verified",
+  },
+  {
+    id: 4,
+    name: "Emeka Obi",
+    location: "GRA, Port Harcourt",
+    rating: 2.5,
+    propertiesOwned: 10,
+    verificationStatus: "Verified",
   },
 ];

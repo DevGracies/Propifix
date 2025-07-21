@@ -23,7 +23,7 @@ const HowItWorks = () => {
           </div>
           <div className="flex flex-col gap-1">
             <h1 className="font-semibold text-[18px] md:text-[20px]">{step.title}</h1>
-            <p className="text-[12px] md:text-[14px] font-normal">{step.title}</p>
+            <p className="text-[12px] md:text-[14px] font-normal">{step.desc}</p>
           </div>
         </div>
       ))}

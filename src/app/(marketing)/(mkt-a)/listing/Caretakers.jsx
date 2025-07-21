@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { Rating } from "@mui/material";
-import { agentlisting } from "@/lib/constants";
+import { caretakerlisting } from "@/lib/constants";
 
 const Caretakers = () => {
   const [locations, setLocations] = useState([]);
@@ -102,55 +102,54 @@ const Caretakers = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {agentlisting.map((agent) => (
+        {caretakerlisting.map((caretaker) => (
             <div
-              key={agent.id}
-              className="relative w-[290px] h-[267px] rounded-[24px] p-5  flex items-center justify-center bg-cover bg-center"
-              style={{
-                borderWidth: "2.4px",
-                borderStyle: "solid",
-                borderImage:
-                  "linear-gradient(229.55deg, #9747FF 0%, #5D14AD 100%) 1",
-                background: "rgba(255, 255, 255, 0.05)",
-                backdropFilter: "blur(10px)",
-                WebkitBackdropFilter: "blur(10px)",
-                backgroundImage: "url('/backgroundListing.png')",
-              }}
+              key={caretaker.id}
+              className="relative border-2 border-[#5D14AD] w-[290px] h-[300px] rounded-[24px] p-5 flex items-center justify-center bg-cover bg-center"
             >
-              <div className="flex flex-col h-full justify-between">
+             <div
+              className="rounded-xl m-2 absolute inset-0 bg-cover bg-center z-0"
+              style={{
+                backgroundImage: "url('/home-images/sidehouse.svg')"
+              }}>
+
+             <div className="absolute inset-0 rounded-xl bg-black/70 z-0" />
+             
+            <div className="relative">
+            <div className="flex flex-col h-full text-white justify-between p-7">
                 <div className=" flex justify-center items-center">
-                  <div className="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center text-xl font-bold">
-                    {agent.id}
-                  </div>
                 </div>
                 <div className="space-y-2">
-                  <h2 className="text-lg font-semibold">
-                    Agent Name: {agent.name}
+                  <h2 className="text-md italic">
+                    Caretaker Name: <span className="not-italic font-semibold">{caretaker.name}</span>
                   </h2>
                   <div className="flex items-center ">
-                    <h2 className="text-sm">
+                    <h2 className="text-md italic flex items-center">
                       Rating:
                       <Rating
-                        name={`rating-${agent.id}`}
-                        value={agent.rating}
+                        name={`rating-${caretaker.id}`}
+                        value={caretaker.rating}
                         precision={0.5}
                         readOnly
-                        className="flex items-center space-x-2 mb-1"
+                        className="flex items-center !text-white space-x-2 mb-1"
                       />
                     </h2>
                   </div>
-                  <p className="text-sm">Location: {agent.location}</p>
-                  <p className="text-sm">
+                  <p className="text-md italic">Location: <span className="not-italic font-semibold">{caretaker.location}</span></p>
+                  <p className="text-md italic">Assigned Properties: <span className="not-italic font-semibold">{caretaker.assingedProperties}</span></p>
+                  <p className="text-md italic">
                     Reviews:
-                    <span className="text-gray-500 text-sm ml-1">
-                      {agent.reviews}
+                    <span className="text-md not-italic font-semibold ml-1">
+                      {caretaker.reviews}
                     </span>
                   </p>
                 </div>
-                <button className="mt-4 border border-black text-black px-4 py-2 rounded-lg bg-transparent hover:bg-white hover:text-[#5D14AD] transition-all duration-300">
+                <button className="mt-7 border border-white px-4 py-2 rounded-lg bg-transparent hover:bg-white hover:text-[#5D14AD] transition-all duration-300">
                   View Profile
                 </button>
               </div>
+            </div>
+             </div>
             </div>
           ))}
         </div>

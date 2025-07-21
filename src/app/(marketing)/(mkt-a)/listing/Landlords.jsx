@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { Rating } from "@mui/material";
-import { agentlisting } from "@/lib/constants"; // You can replace with `landlordlisting` later
+import { landlordlisting } from "@/lib/constants";
 
 const Landlords = () => {
   const [locations, setLocations] = useState([]);
@@ -40,16 +40,16 @@ const Landlords = () => {
     }
   };
 
-  useEffect(() => {
-    const fetchAll = async () => {
-      await fetchLocations();
-      await fetchLandlords();
-    };
-    fetchAll();
-  }, []);
+  // useEffect(() => {
+  //   const fetchAll = async () => {
+  //     await fetchLocations();
+  //     await fetchLandlords();
+  //   };
+  //   fetchAll();
+  // }, []);
 
-  if (loading) return <p>Loading landlords...</p>;
-  if (landord.length === 0) return <p>No landlords found.</p>;
+  // if (loading) return <p>Loading landlords...</p>;
+  // if (landord.length === 0) return <p>No landlords found.</p>;
 
   return (
     <div>
@@ -92,55 +92,51 @@ const Landlords = () => {
       </div>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-        {agentlisting.map((landlord) => (
-          <div
-            key={landlord.id}
-            className="relative w-[290px] h-[267px] rounded-[24px] p-5 flex items-center justify-center bg-cover bg-center"
-            style={{
-              borderWidth: "2.4px",
-              borderStyle: "solid",
-              borderImage:
-                "linear-gradient(229.55deg, #9747FF 0%, #5D14AD 100%) 1",
-              background: "rgba(255, 255, 255, 0.05)",
-              backdropFilter: "blur(10px)",
-              WebkitBackdropFilter: "blur(10px)",
-              backgroundImage: "url('/backgroundListing.png')",
-            }}
-          >
-            <div className="flex flex-col h-full justify-between">
-              <div className="flex justify-center items-center">
-                <div className="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center text-xl font-bold">
-                  {landlord.id}
+      {landlordlisting.map((landlord) => (
+            <div
+              key={landlord.id}
+              className="relative border-2 border-[#5D14AD] w-[290px] h-[300px] rounded-[24px] p-5 flex items-center justify-center bg-cover bg-center"
+            >
+             <div
+              className="rounded-xl m-2 absolute inset-0 bg-cover bg-center z-0"
+              style={{
+                backgroundImage: "url('/home-images/sidehouse.svg')"
+              }}>
+
+             <div className="absolute inset-0 rounded-xl bg-black/70 z-0" />
+             
+            <div className="relative">
+            <div className="flex flex-col h-full text-white justify-between p-7">
+                <div className=" flex justify-center items-center">
                 </div>
-              </div>
-              <div className="space-y-2">
-                <h2 className="text-lg font-semibold">Name: {landlord.name}</h2>
-                <div className="flex items-center">
-                  <h2 className="text-sm">
-                    Rating:
-                    <Rating
-                      name={`rating-${landlord.id}`}
-                      value={landlord.rating}
-                      precision={0.5}
-                      readOnly
-                      className="flex items-center space-x-2 mb-1"
-                    />
+                <div className="space-y-2">
+                  <h2 className="text-md italic">
+                    Landlord Name: <span className="not-italic font-semibold">{landlord.name}</span>
                   </h2>
+                  <div className="flex items-center ">
+                    <h2 className="text-md italic flex items-center">
+                      Rating:
+                      <Rating
+                        name={`rating-${landlord.id}`}
+                        value={landlord.rating}
+                        precision={0.5}
+                        readOnly
+                        className="flex items-center !text-white space-x-2 mb-1"
+                      />
+                    </h2>
+                  </div>
+                  <p className="text-md italic">Location: <span className="not-italic font-semibold">{landlord.location}</span></p>
+                  <p className="text-md italic">Properties Owned: <span className="not-italic font-semibold">{landlord.propertiesOwned}</span></p>
+                  <p className="text-md italic">Verification Status: <span className="not-italic font-semibold">{landlord.verificationStatus}</span></p>
                 </div>
-                <p className="text-sm">Location: {landlord.location}</p>
-                <p className="text-sm">
-                  Reviews:
-                  <span className="text-gray-500 text-sm ml-1">
-                    {landlord.reviews}
-                  </span>
-                </p>
+                <button className="mt-7 border border-white px-4 py-2 rounded-lg bg-transparent hover:bg-white hover:text-[#5D14AD] transition-all duration-300">
+                  View Profile
+                </button>
               </div>
-              <button className="mt-4 border border-black text-black px-4 py-2 rounded-lg bg-transparent hover:bg-white hover:text-[#5D14AD] transition-all duration-300">
-                View Profile
-              </button>
             </div>
-          </div>
-        ))}
+             </div>
+            </div>
+          ))}
       </div>
     </div>
   );
