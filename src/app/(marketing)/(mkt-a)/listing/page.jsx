@@ -34,7 +34,7 @@ const page = () => {
   return (
     <div>
       <Navbarr>
-        <div className=" flex justify-between items-center ">
+        <div className=" flex !flex-row justify-between items-center ">
           <div>
             <h1 className=" text-3xl md:text-5xl font-medium">
               {roleData[activeRole].title}
@@ -45,7 +45,7 @@ const page = () => {
         </div>
       </Navbarr>
 
-      <div className="flex flex-wrap justify-center md:justify-start gap-4 md:gap-6 mb-10 px-4">
+      <div className="flex flex-wrap justify-center md:justify-start gap-4 md:gap-6 mb-1 px-4">
         {Object.keys(roleData).map((role) => (
           <button
             key={role}
