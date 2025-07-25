@@ -2,7 +2,9 @@
 import React, { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { Rating } from "@mui/material";
-import { artisanlisting } from "@/lib/constants";
+import axios from "axios";
+import { artisanlisting as topArtisansMock } from "@/lib/constants";
+import LocationDropdown from "@/components/listing/LocationDropdown";
 
 const Artisans = () => {
   const [locations, setLocations] = useState([]);
@@ -13,30 +15,68 @@ const Artisans = () => {
   const [showLocationDropdown, setShowLocationDropdown] = useState(false);
   const [showTypeDropdown, setShowTypeDropdown] = useState(false);
 
+  const [artisans, setArtisans] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [filteredArtisans, setFilteredArtisans] = useState([]);
+
   useEffect(() => {
-    const fetchData = async () => {
-      setLocations([
-        "All", "Ikeja", "Agege", "Victoria Island", "Banana Island",
-        "Ikoyi", "Lekki", "Ikorodu"
-      ]);
-      setArtisanTypes([
-        "All", "Carpentry", "Dry Cleaning", "Electrical work", "House Cleaning",
-        "Plumbing", "Painting", "Roofing", "Bricklaying", "Glazing",
-        "Tiling", "HVAC Installation", "Welding"
-      ]);
+    const fetchArtisans = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/artisan`);
+        const data = response?.data?.data?.data || [];
+        setArtisans(data);
+        setFilteredArtisans(data);
+        setError("");
+      } catch (err) {
+        console.error(err);
+        setError("Unable to fetch artisans at the moment.");
+      } finally {
+        setLoading(false);
+      }
     };
-    fetchData();
+
+    fetchArtisans();
+
+    setLocations([
+      "All", "Ikeja", "Agege", "Victoria Island", "Banana Island",
+      "Ikoyi", "Lekki", "Ikorodu"
+    ]);
+
+    setArtisanTypes([
+      "All", "Carpentry", "Dry Cleaning", "Electrical work", "House Cleaning",
+      "Plumbing", "Painting", "Roofing", "Bricklaying", "Glazing",
+      "Tiling", "HVAC Installation", "Welding"
+    ]);
   }, []);
+
+  useEffect(() => {
+    let filtered = artisans;
+
+    if (selectedLocation !== "Filter by location" && selectedLocation !== "All") {
+      filtered = filtered.filter(artisan =>
+        artisan.homeAddress?.toLowerCase().includes(selectedLocation.toLowerCase())
+      );
+    }
+
+    if (selectedType !== "Type of Artisan" && selectedType !== "All") {
+      filtered = filtered.filter(artisan =>
+        artisan.skill?.toLowerCase() === selectedType.toLowerCase()
+      );
+    }
+
+    setFilteredArtisans(filtered);
+  }, [selectedLocation, selectedType, artisans]);
 
   return (
     <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-20 py-8">
-      {/* Top Artisans */}
       <h1 className="text-[#9D71C6] text-3xl pb-4 font-medium">
         Top <span className="text-[#5D14AD]">Artisans</span>
       </h1>
 
+      {/* Top Artisans */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-10">
-        {artisanlisting.map((artisan) => (
+        {topArtisansMock.map((artisan) => (
           <div
             key={artisan.id}
             className="relative rounded-[24px] border-2 border-[#5D14AD] h-[350px] bg-cover bg-center overflow-hidden shadow-md"
@@ -124,86 +164,74 @@ const Artisans = () => {
           </div>
 
           {/* Location Dropdown */}
-          <div className="relative h-[44px]">
-            <button
-              onClick={() => {
-                setShowLocationDropdown(!showLocationDropdown);
-                setShowTypeDropdown(false);
-              }}
-              className="w-[180px] h-full flex items-center justify-between px-4 border border-gray-300 rounded-[12px] text-gray-700 italic bg-white"
-            >
-              <span className={selectedLocation === "Filter by location" ? "text-gray-900" : ""}>
-                {selectedLocation}
-              </span>
-              <ChevronDown className="w-5 h-5 text-gray-500" />
-            </button>
-
-            {showLocationDropdown && (
-              <ul className="absolute top-full left-0 z-30 w-full mt-1 bg-white border border-gray-300 rounded-[12px] shadow-lg max-h-60 overflow-y-auto">
-                {locations.map((location) => (
-                  <li
-                    key={location}
-                    onClick={() => {
-                      setSelectedLocation(location);
-                      setShowLocationDropdown(false);
-                    }}
-                    className="px-4 py-2 cursor-pointer hover:bg-purple-100"
-                  >
-                    {location}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
+          <LocationDropdown
+            locations={locations}
+            selected={selectedLocation}
+            setSelected={setSelectedLocation}
+          />
         </div>
       </div>
 
       {/* All Artisans */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {artisanlisting.map((artisan) => (
-          <div
-            key={artisan.id}
-            className="relative rounded-[24px] border-2 border-[#5D14AD] h-[350px] bg-cover bg-center overflow-hidden shadow-md"
-          >
+      {loading ? (
+         <div className="text-center w-full py-8">
+         <p className="text-[#5D14AD] text-lg md:text-xl font-semibold italic">Loading artisans...</p>
+       </div>
+      ) : error ? (
+        <p className="text-center text-red-500 text-lg italic">{error}</p>
+      ) : filteredArtisans.length === 0 ? (
+        <p className="text-center text-gray-600 text-lg italic">
+          No artisans found for the selected filters.
+        </p>
+      ) : (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {filteredArtisans.map((artisan) => (
             <div
-              className="absolute rounded-[24px] m-1 inset-0 bg-cover bg-center z-0"
-              style={{ backgroundImage: "url('/images/carpentry.jpg')" }}
-            />
-            <div className="absolute rounded-[24px] m-1 inset-0 bg-black/70 z-10" />
+              key={artisan._id}
+              className="relative rounded-[24px] border-2 border-[#5D14AD] h-[350px] bg-cover bg-center overflow-hidden shadow-md"
+            >
+              <div
+                className="absolute rounded-[24px] inset-0 m-1 bg-cover bg-center z-0"
+                style={{ backgroundImage: "url('/images/carpentry.jpg')" }}
+              />
+              <div className="absolute rounded-[24px] inset-0 m-1 bg-black/70 z-10" />
 
-            <div className="relative z-20 h-full flex flex-col justify-between p-5 text-white">
-              <div className="space-y-2 mt-5">
-                <h2 className="text-sm md:text-base lg:text-lg italic">
-                  Artisan Name: <span className="font-semibold not-italic">{artisan.name}</span>
-                </h2>
-                <div className="flex items-center">
-                  <span className="text-sm md:text-base lg:text-lg italic mr-2">Rating:</span>
-                  <Rating
-                    name={`rating-${artisan.id}`}
-                    value={artisan.rating}
-                    precision={0.5}
-                    readOnly
-                    className="!text-white"
-                  />
+              <div className="relative z-20 h-full flex flex-col justify-between p-5 text-white">
+                <div className="space-y-2 mt-5">
+                  <h2 className="text-sm md:text-base lg:text-lg italic">
+                    Artisan Name: <span className="font-semibold not-italic">{artisan.fullName}</span>
+                  </h2>
+                  <div className="flex items-center">
+                    <span className="text-sm md:text-base lg:text-lg italic mr-2">Rating:</span>
+                    <Rating
+                      name={`rating-${artisan._id}`}
+                      value={4.5}
+                      precision={0.5}
+                      readOnly
+                      className="!text-white"
+                    />
+                  </div>
+                  <p className="text-sm md:text-base lg:text-lg italic">
+                    Location: <span className="font-semibold not-italic">{artisan.homeAddress}</span>
+                  </p>
+                  <p className="text-sm md:text-base lg:text-lg italic">
+                    Type: <span className="font-semibold not-italic">{artisan.skill}</span>
+                  </p>
+                  <p className="text-sm md:text-base lg:text-lg italic">
+                    Reviews: <span className="font-semibold not-italic">18</span>
+                  </p>
                 </div>
-                <p className="text-sm md:text-base lg:text-lg italic">Location: <span className="font-semibold not-italic">{artisan.location}</span></p>
-                <p className="text-sm md:text-base lg:text-lg italic">Type: <span className="font-semibold not-italic">{artisan.type}</span></p>
-                <p className="text-sm md:text-base lg:text-lg italic">
-                  Reviews:
-                  <span className="font-semibold not-italic ml-1">
-                    {artisan.reviews}
-                  </span>
-                </p>
+                <button className="mt-3 text-sm md:text-base lg:text-lg font-semibold border border-white px-4 py-2 rounded-lg bg-transparent hover:bg-white hover:text-[#5D14AD] transition-all duration-300">
+                  View Profile
+                </button>
               </div>
-              <button className="mt-3 text-sm md:text-base lg:text-lg font-semibold border border-white px-4 py-2 rounded-lg bg-transparent hover:bg-white hover:text-[#5D14AD] transition-all duration-300">
-                View Profile
-              </button>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };
 
 export default Artisans;
+

@@ -1,27 +1,53 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { ChevronDown } from "lucide-react";
 import { Rating } from "@mui/material";
-import { caretakerlisting } from "@/lib/constants";
+import LocationDropdown from "@/components/listing/LocationDropdown";
 
 const Caretakers = () => {
   const [locations, setLocations] = useState([]);
-  const [selected, setSelected] = useState("Filter by location");
+  const [selectedLocation, setSelectedLocation] = useState("Filter by location");
   const [showDropdown, setShowDropdown] = useState(false);
 
+  const [caretakers, setCaretakers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [filteredCaretakers, setFilteredCaretakers] = useState([]);
+
   useEffect(() => {
-    const data = [
-      "All",
-      "Ikeja",
-      "Agege",
-      "Victoria Island",
-      "Banana Island",
-      "Ikoyi",
-      "Lekki",
-      "Ikorodu",
-    ];
-    setLocations(data);
+    const fetchCaretakers = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/caretaker`);
+        const data = response?.data?.data?.data || [];
+        setCaretakers(data);
+        setFilteredCaretakers(data);
+        setError("");
+      } catch (err) {
+        console.error(err);
+        setError("Unable to fetch caretakers at the moment.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCaretakers();
+
+    setLocations([
+      "All", "Ikeja", "Agege", "Victoria Island", "Banana Island",
+      "Ikoyi", "Lekki", "Ikorodu"
+    ]);
   }, []);
+
+  useEffect(() => {
+    let filtered = caretakers;
+
+    if (selectedLocation !== "Filter by location" && selectedLocation !== "All") {
+      filtered = filtered.filter(artisan =>
+        caretaker.businessLocation?.toLowerCase().includes(selectedLocation.toLowerCase())
+      );
+    }
+
+    setFilteredCaretakers(filtered);
+  }, [selectedLocation, caretakers]);
 
   return (
     <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-20 py-8">
@@ -30,40 +56,28 @@ const Caretakers = () => {
           All <span className="text-[#5D14AD]">Caretakers</span>
         </h1>
 
-        {/* Filter Dropdown */}
-        <div className="relative w-full md:w-[350px]">
-          <button
-            onClick={() => setShowDropdown(!showDropdown)}
-            className="w-full h-[44px] flex items-center justify-between px-4 border border-gray-300 rounded-[12px] text-gray-700 italic  bg-white"
-          >
-            <span className={selected === "Filter by location" ? "text-gray-900" : ""}>
-              {selected}
-            </span>
-            <ChevronDown className="w-5 h-5 text-gray-500" />
-          </button>
-
-          {showDropdown && (
-            <ul className="absolute top-full left-0 z-20 w-full mt-1 bg-white border border-gray-300 rounded-[12px] shadow-lg max-h-60 overflow-y-auto">
-              {locations.map((location) => (
-                <li
-                  key={location}
-                  onClick={() => {
-                    setSelected(location);
-                    setShowDropdown(false);
-                  }}
-                  className="px-4 py-2 cursor-pointer hover:bg-purple-100"
-                >
-                  {location}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+        {/* Location Filter */}
+        <LocationDropdown
+            locations={locations}
+            selected={selectedLocation}
+            setSelected={setSelectedLocation}
+        />
       </div>
 
-      {/* Caretaker */}
+      {/* All Caretakers */}
+      {loading ? (
+         <div className="text-center w-full py-8">
+         <p className="text-[#5D14AD] text-lg md:text-xl font-semibold italic">Loading caretakers...</p>
+       </div>
+      ) : error ? (
+        <p className="text-center text-red-500 text-lg italic">{error}</p>
+      ) : filteredCaretakers.length === 0 ? (
+        <p className="text-gray-500 italic text-lg md:text-xl">
+              No caretakers found for <span className="font-semibold">{selectedLocation}</span>.
+       </p>
+      ) : (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {caretakerlisting.map((caretaker) => (
+        {filteredCaretakers.map((caretaker) => (
           <div
             key={caretaker.id}
             className="relative border-2 border-[#5D14AD] h-[350px] rounded-[24px] overflow-hidden bg-cover bg-center"
@@ -80,7 +94,7 @@ const Caretakers = () => {
                 <div className="space-y-2">
                   <h2 className="text-sm md:text-base lg:text-lg italic">
                     Caretaker Name:{" "}
-                    <span className="not-italic font-semibold">{caretaker.name}</span>
+                    <span className="not-italic font-semibold">{caretaker.fullName}</span>
                   </h2>
                   <div className="flex items-center">
                     <span className="text-sm md:text-base lg:text-lg italic">Rating:</span>
@@ -94,7 +108,7 @@ const Caretakers = () => {
                   </div>
                   <p className="text-sm md:text-base lg:text-lg italic">
                     Location:{" "}
-                    <span className="not-italic font-semibold">{caretaker.location}</span>
+                    <span className="not-italic font-semibold">{caretaker.businessLocation}</span>
                   </p>
                   <p className="text-sm md:text-base lg:text-lg italic">
                     Assigned Properties:{" "}
@@ -115,6 +129,7 @@ const Caretakers = () => {
           </div>
         ))}
       </div>
+       )}
     </div>
   );
 };

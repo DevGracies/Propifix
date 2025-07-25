@@ -2,26 +2,53 @@
 import React, { useEffect, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import { Rating } from "@mui/material";
-import { landlordlisting } from "@/lib/constants";
+import LocationDropdown from "@/components/listing/LocationDropdown";
 
 const Landlords = () => {
   const [locations, setLocations] = useState([]);
-  const [selected, setSelected] = useState("Filter by location");
+  const [selectedLocation, setSelectedLocation] = useState("Filter by location");
   const [showDropdown, setShowDropdown] = useState(false);
 
+  const [landlords, setLandlords] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [filteredLandlords, setFilteredLandlords] = useState([]);
+
   useEffect(() => {
-    const data = [
-      "All",
-      "Ikeja",
-      "Agege",
-      "Victoria Island",
-      "Banana Island",
-      "Ikoyi",
-      "Lekki",
-      "Ikorodu",
-    ];
-    setLocations(data);
+    const fetchLandlords = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/landlord`);
+        const data = response?.data?.data?.data || [];
+        setLandlords(data);
+        setFilteredLandlords(data);
+        setError("");
+      } catch (err) {
+        console.error(err);
+        setError("Unable to fetch landlords at the moment.");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchLandlords();
+
+    setLocations([
+      "All", "Ikeja", "Agege", "Victoria Island", "Banana Island",
+      "Ikoyi", "Lekki", "Ikorodu"
+    ]);
   }, []);
+
+  useEffect(() => {
+    let filtered = landlords;
+
+    if (selectedLocation !== "Filter by location" && selectedLocation !== "All") {
+      filtered = filtered.filter(artisan =>
+        landlord.businessLocation?.toLowerCase().includes(selectedLocation.toLowerCase())
+      );
+    }
+
+    setFilteredLandlords(filtered);
+  }, [selectedLocation, landlords]);
 
   return (
     <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-20 py-8">
@@ -30,38 +57,26 @@ const Landlords = () => {
           All <span className="text-[#5D14AD]">Landlords</span>
         </h1>
 
-        {/* Filter Dropdown */}
-        <div className="relative w-full md:w-[350px]">
-          <button
-            onClick={() => setShowDropdown(!showDropdown)}
-            className="w-full h-[44px] flex items-center justify-between px-4 border border-gray-300 rounded-[12px] text-gray-700 italic bg-white"
-          >
-            <span className={selected === "Filter by location" ? "text-gray-900" : ""}>
-              {selected}
-            </span>
-            <ChevronDown className="w-5 h-5 text-gray-500" />
-          </button>
-
-          {showDropdown && (
-            <ul className="absolute top-full left-0 z-20 w-full mt-1 bg-white border border-gray-300 rounded-[12px] shadow-lg max-h-60 overflow-y-auto">
-              {locations.map((location) => (
-                <li
-                  key={location}
-                  onClick={() => {
-                    setSelected(location);
-                    setShowDropdown(false);
-                  }}
-                  className="px-4 py-2 cursor-pointer hover:bg-purple-100"
-                >
-                  {location}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
+        {/* Location Filter */}
+        <LocationDropdown
+            locations={locations}
+            selected={selectedLocation}
+            setSelected={setSelectedLocation}
+        />
       </div>
 
-      {/* Landlord */}
+      {/* All Landlords */}
+      {loading ? (
+         <div className="text-center w-full py-8">
+         <p className="text-[#5D14AD] text-lg md:text-xl font-semibold italic">Loading landlords...</p>
+       </div>
+      ) : error ? (
+        <p className="text-center text-red-500 text-lg italic">{error}</p>
+      ) : filteredLandlords.length === 0 ? (
+        <p className="text-gray-500 italic text-lg md:text-xl">
+              No landlords found for <span className="font-semibold">{selectedLocation}</span>.
+        </p>
+      ) : (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
         {landlordlisting.map((landlord) => (
           <div
@@ -113,6 +128,7 @@ const Landlords = () => {
           </div>
         ))}
       </div>
+       )}
     </div>
   );
 };
