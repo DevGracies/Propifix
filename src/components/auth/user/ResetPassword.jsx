@@ -10,6 +10,10 @@ import { Button } from '@/components/ui/button'
 import { useRouter } from 'next/navigation';
 import { ResetPasswordFormSchema } from '@/lib/schema/ResetPasswordFormSchema'
 import { Text } from '@/components/shared/Text'
+import { CustomImage } from '@/components/shared/Image';
+import logo from '../../../../public/Propifix_logo.svg'
+import topDesign from '../../../../public/backgrounds/auth-top-vector.svg'
+import bottomDesign from '../../../../public/backgrounds/auth-bottom-vector.svg'
 
 export const ResetPasswordForm = () => {
   const [isPending, setIsPending] = useState(false)
@@ -27,7 +31,22 @@ export const ResetPasswordForm = () => {
   }
 
   return (
-    <div className='sm:p-8 p-4 bg-white/80 backdrop-blur-sm border rounded-lg flex flex-col gap-4'>
+   <div className='bg-white border rounded-lg'>
+     <div className='flex flex-row'>
+      <CustomImage
+          src={logo}
+          style="w-full h-10 my-6"
+          imgStyle="object-contain object-right"
+          priority={true}
+          />
+        <CustomImage
+          src={topDesign}
+          style="w-full h-24"
+          imgStyle="object-contain object-right"
+          priority={true}
+          />  
+      </div>
+     <div className='sm:p-8 p-4 flex flex-col gap-4'>
       <Text as='h1' style='text-[29.15px] font-semibold leading-[40.49px]'>
         Reset your password
       </Text>
@@ -85,5 +104,17 @@ export const ResetPasswordForm = () => {
         </form>
       </Form>
     </div>
+    <div className='flex items-center'>
+        <CustomImage
+        src={bottomDesign}
+        style="w-full h-24"
+        imgStyle="object-contain object-left"
+        priority={true}
+        />  
+        <p className='italic text-xs md:text-sm text-left ml-2 flex mr-0 md:mr-30 w-7xl'>
+          Seamless transactions, trusted professionals, and quality service every time.
+        </p>
+    </div>
+   </div>
   )
 }
