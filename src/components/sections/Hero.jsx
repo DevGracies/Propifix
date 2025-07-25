@@ -24,8 +24,7 @@ const Hero = () => {
         className="absolute w-full h-[681px] md:h-[820px] object-cover object-left lg:object-right top-[85px] md:top-[15px]"
       />
       <div
-        className="bg-[#5D14AD] w-full absolute top-0 h-[750px] md:h-[820px] clip-svg
- overflow-hidden"
+        className="bg-[#5D14AD] w-full absolute top-0 h-[750px] md:h-[820px] clip-svg overflow-hidden"
       >
         <Image
           src={"/home-images/bg1.svg"}
@@ -53,7 +52,7 @@ const Hero = () => {
         </p>
         <Form SELECTOPTIONS={SELECTOPTIONS} />
       </div>
-      <div className="absolute bottom-20 right-0 pr-[50px] hidden lg:block">
+      <div className="absolute bottom-10 right-0 pr-[50px] hidden lg:block">
         <div>
           <h1 className="text-[#9D71C6] text-right text-[30px] font-semibold">
             Trusted Real Estate + <br />{" "}
@@ -69,29 +68,29 @@ const Hero = () => {
         </div>
       </div>
       <Link
-  href="https://www.youtube.com/watch?v=yourVideoId"
-  target="_blank"
-  rel="noopener noreferrer"
->
-  <div className="flex gap-[10px] items-center w-fit absolute bottom-10 md:bottom-16 left-0 pl-[20px] cursor-pointer">
-    <Image
-      src={"/icons/playIcon.svg"}
-      width={44}
-      height={44}
-      alt="play-icon"
-    />
-    <div>
-      <h1 className="font-medium text-sm italic text-black">
-        Watch how{" "}
-        <span className="text-[#9D71C6]">
-          Propi<span className="text-[#5D14AD]">Fix</span>
-        </span>{" "}
-        works
-      </h1>
-      <p className="text-[#828282] text-xs">Presented by PropiFix CEO</p>
-    </div>
-  </div>
-</Link>
+        href="https://www.youtube.com/watch?v=yourVideoId"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <div className="flex gap-[10px] items-center w-fit absolute bottom-10 md:bottom-16 left-0 pl-[20px] cursor-pointer">
+          <Image
+            src={"/icons/playIcon.svg"}
+            width={44}
+            height={44}
+            alt="play-icon"
+          />
+          <div>
+            <h1 className="font-medium text-sm italic text-black">
+              Watch how{" "}
+              <span className="text-[#9D71C6]">
+                Propi<span className="text-[#5D14AD]">Fix</span>
+              </span>{" "}
+              works
+            </h1>
+            <p className="text-[#828282] text-xs">Presented by PropiFix CEO</p>
+          </div>
+        </div>
+      </Link>
     </section>
   );
 };
