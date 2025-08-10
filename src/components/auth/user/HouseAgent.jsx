@@ -93,7 +93,7 @@ export const HouseAgentForm = () => {
   })
 
   const onSubmit = (values) => {
-    const phoneFieldIsValid = checkIfPhoneFieldIsValid
+    const phoneFieldIsValid = checkIfPhoneFieldIsValid()
     const imageIsUploaded = documentsSelected()
 
     if (phoneFieldIsValid && imageIsUploaded) {
@@ -116,7 +116,7 @@ export const HouseAgentForm = () => {
         referenceLetters: ReferenceLetters,
         next_of_kin: {
           fullName: values.next_of_kin_full_name,
-          relationship: values.relationship,
+          relationship: values.relationship.toLowerCase().trim(),
           phone: `+${nextOfKinPhone}`,
           email: values.next_of_kin_email,
           address: values.next_of_kin_address,
@@ -182,7 +182,7 @@ export const HouseAgentForm = () => {
                 },
                 {
                   title:
-                    'Remassos- The  Real Estate Managers’ Association in Ondo State',
+                    'Remassos- The  Real Estate Managers Association in Ondo State',
                   value: 'Remassos',
                 },
                 {
@@ -292,7 +292,7 @@ export const HouseAgentForm = () => {
               <InputField
                 control={form.control}
                 name='next_of_kin_full_name'
-                placeholder={`Enter your next of kin’s full name`}
+                placeholder={`Enter your next of kin's full name`}
                 inputCategory='input'
                 inputType='text'
               />
@@ -323,7 +323,7 @@ export const HouseAgentForm = () => {
               <InputField
                 control={form.control}
                 name='next_of_kin_address'
-                placeholder={`Enter next of kin’s residential address`}
+                placeholder={`Enter next of kin's residential address`}
                 inputCategory='input'
                 inputType='text'
               />

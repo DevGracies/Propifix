@@ -124,7 +124,7 @@ export const CaretakerForm = () => {
         referenceLetters: ReferenceLetters,
         next_of_kin: {
           fullName: values.next_of_kin_full_name,
-          relationship: values.relationship,
+          relationship: values.relationship.toLowerCase().trim(),
           phone: `+${nextOfKinPhone}`,
           email: values.next_of_kin_email,
           address: values.next_of_kin_address,

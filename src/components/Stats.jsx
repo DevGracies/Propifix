@@ -6,6 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Stats = ({
+  title,
   responseTime = "Typically responds within 1 hour.",
   jobsCompleted,
   successRateInPercentage,
@@ -18,7 +19,7 @@ const Stats = ({
   return (
     <div className="bg-[linear-gradient(247deg,_#9747FF_0%,_#5D14AD_100%)] w-full h-[497px] lg:h-full p-5 rounded-[12px] flex flex-col justify-between text-white ">
       <div className="flex flex-col gap-3 md:gap-5">
-        <h1 className="text-[24px]  font-semibold">Artisans Performance</h1>
+        <h1 className="text-[24px]  font-semibold">{title}</h1>
         <div className="flex flex-col gap-[6px] md:gap-[10px]">
           <h3 className="text-[16px] font-semibold">Response Time</h3>
           <p className="text-[16px] font-light">{responseTime}</p>

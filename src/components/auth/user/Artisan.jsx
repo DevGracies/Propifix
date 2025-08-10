@@ -102,7 +102,7 @@ export const ArtisanForm = () => {
         availableOnDemand: values.available_on_demand,
         next_of_kin: {
           fullName: values.next_of_kin_full_name,
-          relationship: values.relationship,
+          relationship: values.relationship.toLowerCase().trim(),
           phone: `+${nextOfKinPhone}`,
           email: values.next_of_kin_email,
           address: values.next_of_kin_address,
@@ -140,18 +140,18 @@ export const ArtisanForm = () => {
               placeholder='Trade/Skill'
               inputCategory='select'
               selectList={[
-                { title: 'House Agent', value: 'House_Agent' },
-                { title: 'Carpentry', value: 'Carpentry' },
-                { title: 'Electrical Work', value: 'Electrical_Work' },
-                { title: 'Dry Cleaning', value: 'Dry_Cleaning' },
-                { title: 'House Cleaning', value: 'House_Cleaning' },
-                { title: 'Plumbing', value: 'Plumbing' },
-                { title: 'Painting', value: 'Painting' },
-                { title: 'Bricklaying', value: 'Bricklaying' },
-                { title: 'Tiling', value: 'Tiling' },
-                { title: 'Welding', value: 'Welding' },
-                { title: 'Roofing', value: 'Roofing' },
-                { title: 'HVAC Installation', value: ' HVAC_Installation' },
+                { title: 'House Agent', value: 'House_Agent'},
+                { title: 'Carpentry', value: 'Carpentry'},
+                { title: 'Electrical Work', value: 'Electrical_Work'},
+                { title: 'Dry Cleaning', value: 'Dry_Cleaning'},
+                { title: 'House Cleaning', value: 'House_Cleaning'},
+                { title: 'Plumbing', value: 'Plumbing'},
+                { title: 'Painting', value: 'Painting'},
+                { title: 'Bricklaying', value: 'Bricklaying'},
+                { title: 'Tiling', value: 'Tiling'},
+                { title: 'Welding', value: 'Welding'},
+                { title: 'Roofing', value: 'Roofing'},
+                { title: 'HVAC Installation', value: ' HVAC_Installation'},
               ]}
             />
             <InputField
