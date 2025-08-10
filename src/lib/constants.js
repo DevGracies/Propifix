@@ -1,11 +1,23 @@
+export const ROLE_MAP = {
+  house_agent: 'house_agent',
+  caretaker: 'caretaker',
+  artisan: 'artisan',
+  landlord: 'landlord',
+  user: 'user',
+}
+
 export const NAVLINKS = [
   {
     title: 'Home',
     url: 'hero',
   },
+  // {
+  //   title: 'Find an agent',
+  //   url: 'find-an-agent',
+  // },
   {
-    title: 'Find an agent',
-    url: 'find-an-agent',
+    title: 'Our story',
+    url: '/about',
   },
   {
     title: 'Services',
@@ -16,61 +28,44 @@ export const NAVLINKS = [
     url: '/how-it-works',
   },
   {
-    title: 'About us',
-    url: '/about',
-  },
-  {
     title: 'Contact us',
     url: '/contact',
   },
 ]
 
-export const SELECTOPTIONS = [
+export const BUYSELECTOPTIONS = [
   {
-    label: 'Type',
+    label: 'Property Type',
     items: [
-      'flat & apartment',
-      'self contain',
-      'mini flats',
-      'houses',
-      'land',
-      'shop',
-      'office space',
-      'semi detached bungalow',
-      'semi detached duplex',
-      'detached bungalow',
-      'detached duplex',
-      'commercial property',
+      'Hostels',
+      'Single room',
+      'Self contain',
+      'Room and parlour self contained',
+      'One bedroom',
+      'Two bedroom',
+      'Three bedroom',
+      'Four bedroom',
+      'Five bedroom',
+      'Flat',
+      'Semi Detached Bungalow',
+      'Office space',
+      'Semi Detached Duplex',
+      'Detached bungalow',
+      'Detached duplex',
+      'Shop',
     ],
   },
   {
-    label: 'Bedroom',
+    label: 'Property Highlights',
     items: [
-      '1 bedroom',
-      '2 bedroom',
-      '3 bedroom',
-      '4 bedroom',
-      '5 bedroom',
-      '6 bedroom',
-      '7 bedroom',
-      '8 bedroom',
-      '9 bedroom',
-      '10 bedroom',
-    ],
-  },
-  {
-    label: 'Toilet',
-    items: [
-      '1 toilet',
-      '2 toilet',
-      '3 toilet',
-      '4 toilet',
-      '5 toilet',
-      '6 toilet',
-      '7 toilet',
-      '8 toilet',
-      '9 toilet',
-      '10 toilet',
+      'Parking Space',
+      'Running Water',
+      'Security Guard',
+      'Power Supply',
+      'POP Ceiling',
+      'PVC',
+      'Balcony',
+      'Private Gate',
     ],
   },
   {
@@ -88,23 +83,220 @@ export const SELECTOPTIONS = [
       '900,000',
       '1 million',
       '2 million',
+      '3 million',
+      '4 million',
+      '5 million',
     ],
   },
   {
     label: 'Max. Price',
     items: [
+      '5 million',
+      '10 million',
+      '20 million',
+      '30 million',
+      '40 million',
+      '50 million',
+      '60 million',
+      '70 million',
+      '80 million',
+      '90 million',
+      '100 million',
+    ],
+  },
+]
+
+export const RENTSELECTOPTIONS = [
+  {
+    label: 'Property Type',
+    items: [
+      'Apartment',
+      'Single room',
+      'Self contain',
+      'Room and parlour self contained',
+      'One bedroom',
+      'Two bedroom',
+      'Three bedroom',
+      'Four bedroom',
+      'Five bedroom',
+      'Flat',
+      'Semi Detached Bungalow',
+      'Office space',
+      'Semi Detached Duplex',
+      'Detached bungalow',
+      'Detached duplex',
+      'Shop',
+    ],
+  },
+  {
+    label: 'Property Highlights',
+    items: [
+      'Parking Space',
+      'Running Water',
+      'Security Guard',
+      'Power Supply',
+      'POP Ceiling',
+      'PVC',
+      'Balcony',
+      'Private Gate',
+    ],
+  },
+  {
+    label: 'Min. Price',
+    items: [
+      '50,000',
+      '100,000',
+      '200,000',
+      '300,000',
+      '400,000',
       '500,000',
       '600,000',
       '700,000',
       '800,000',
       '900,000',
       '1 million',
+      '2 million',
+      '3 million',
+      '4 million',
+      '5 million',
+    ],
+  },
+  {
+    label: 'Max. Price',
+    items: [
       '5 million',
       '10 million',
+      '20 million',
+      '30 million',
+      '40 million',
       '50 million',
+      '60 million',
+      '70 million',
+      '80 million',
+      '90 million',
       '100 million',
-      '250 million',
-      '500 million',
+    ],
+  },
+]
+
+export const SHORTLETSELECTOPTIONS = [
+  {
+    label: 'Property Type',
+    items: [
+      'Apartment',
+      'Single room',
+      'Self contain',
+      'Room and parlour self contained',
+      'One bedroom',
+      'Two bedroom',
+      'Three bedroom',
+      'Four bedroom',
+      'Five bedroom',
+      'Flat',
+      'Semi Detached Bungalow',
+      'Office space',
+      'Semi Detached Duplex',
+      'Detached bungalow',
+      'Detached duplex',
+      'Shop',
+    ],
+  },
+  {
+    label: 'Min. Price',
+    items: [
+      '50,000',
+      '100,000',
+      '200,000',
+      '300,000',
+      '400,000',
+      '500,000',
+      '600,000',
+      '700,000',
+      '800,000',
+      '900,000',
+      '1 million',
+      '2 million',
+      '3 million',
+      '4 million',
+      '5 million',
+    ],
+  },
+  {
+    label: 'Max. Price',
+    items: [
+      '5 million',
+      '10 million',
+      '20 million',
+      '30 million',
+      '40 million',
+      '50 million',
+      '60 million',
+      '70 million',
+      '80 million',
+      '90 million',
+      '100 million',
+    ],
+  },
+]
+
+export const LANDSELECTOPTIONS = [
+  {
+    label: 'Land Type',
+    items: [
+      'Residential',
+      'Commercial',
+      'Farmland',
+      'Religious Ground',
+    ],
+  },
+  {
+    label: 'Plot Size & Measurement',
+    items: [
+      '1 Plot',
+      '2 Plots',
+      '3 Plots',
+      '4 Plots',
+      '5 Plots',
+      '1 acre',
+      '2 acres',
+      '3 acres',
+      '4 acres',
+    ],
+  },
+  {
+    label: 'Min. Price',
+    items: [
+      '50,000',
+      '100,000',
+      '200,000',
+      '300,000',
+      '400,000',
+      '500,000',
+      '600,000',
+      '700,000',
+      '800,000',
+      '900,000',
+      '1 million',
+      '2 million',
+      '3 million',
+      '4 million',
+      '5 million',
+    ],
+  },
+  {
+    label: 'Max. Price',
+    items: [
+      '5 million',
+      '10 million',
+      '20 million',
+      '30 million',
+      '40 million',
+      '50 million',
+      '60 million',
+      '70 million',
+      '80 million',
+      '90 million',
+      '100 million',
     ],
   },
 ]
@@ -112,41 +304,45 @@ export const SELECTOPTIONS = [
 export const HOWITWORKS = [
   {
     no: '01',
-    title: 'Share or Enter Your Location',
-    desc: 'Allow Propifix to detect your location or enter it manually. This helps us show you agents and service providers near you.',
+    title: 'Tell us what you need',
+    desc: "Want to rent, buy, sell, or shortlet a home or land? Just send a request - nearby landlords, agents, or caretakers who have what you're looking for will reply to you directly in chat."
   },
   {
     no: '02',
-    title: 'Select Your Service',
-    desc: 'Choose the type of service you’re looking for—whether it’s real estate agents, carpentry, electrical work, or more.',
+    title: 'Explore Nearby Options',
+    desc: 'Use our interactive map to find trusted landlords, caretakers, agents, and skilled artisans near you - all verified and ready to serve your needs.',
   },
   {
     no: '03',
-    title: 'Explore Nearby Professionals',
-    desc: 'View profiles of trusted agents and providers in your area on our interactive map. Click on any profile to see ratings, services offered, and contact options',
+    title: 'Search & Compare',
+    desc: 'Browse listings, compare services, check profiles - then choose what fits you best.',
   },
   {
     no: '04',
-    title: 'Connect & Get Started',
-    desc: 'Reach out directly to the professional of your choice. Book services, schedule a meeting, or get answers to any questions you have—all in one place',
+    title: 'Need Help? Propifix has you covered',
+    desc: "Don't stress - if you're unsure where to start or just want someone to handle it for you, our team is here. Reach out to Propifix directly and get personalized support from real people who are ready to guide you every step of the way - until the job is done.",
   },
 ]
 export const WHYPROPIFIX = [
   {
     iconPath: '/icons/icon-verified.svg',
-    title: 'Verified Local Agents',
+    title: 'Verified People, Real Results',
+    desc: 'Every provider is vetted - no scams, no guesswork.'
   },
   {
     iconPath: '/icons/token_trust.svg',
-    title: 'Property Insights You Can Trust',
+    title: 'Smart Matching That Works',
+    desc: 'You send one request. Multiple trusted providers respond.'
   },
   {
     iconPath: '/icons/teany_icon.svg',
-    title: 'Wide Range of Properties',
+    title: 'Everything in One Place',
+    desc: 'Find various properties and artisans near you, compare, chat, and choose.'
   },
   {
     iconPath: '/icons/wrench.svg',
-    title: 'Comprehensive Home & Property Services',
+    title: 'Support That Cares',
+    desc: 'Our team is here to guide you personally.'
   },
 ]
 
@@ -649,7 +845,76 @@ export const FAQ = [
 export const TOKEN_KEY = '$propifix__auth__token'
 export const REFRESH_TOKEN_KEY = '$propifix__refresh_auth__token'
 
-export const ProfileDetails = [
+export const AgentProfileDetails = [
+  {
+    title: 'Agent Full Name',
+    value: 'Grace Olori',
+  },
+  {
+    title: 'Contact',
+    value: '07006599384',
+  },
+  {
+    title: 'Location',
+    value: 'Lagos, Ikeja',
+  },
+  {
+    title: 'Language',
+    value: 'English, French, Yoruba, Spanish, Igbo',
+  },
+  {
+    title: 'Date Registered',
+    value: 'Dec 23, 2024',
+  },
+]
+
+export const CaretakerProfileDetails = [
+  {
+    title: 'Caretaker Full Name',
+    value: 'Grace Olori',
+  },
+  {
+    title: 'Contact',
+    value: '07006599384',
+  },
+  {
+    title: 'Location',
+    value: 'Lagos, Ikeja',
+  },
+  {
+    title: 'Language',
+    value: 'English, French, Yoruba, Spanish, Igbo',
+  },
+  {
+    title: 'Date Registered',
+    value: 'Dec 23, 2024',
+  },
+]
+
+export const LandlordProfileDetails = [
+  {
+    title: 'Landlord Full Name',
+    value: 'Grace Olori',
+  },
+  {
+    title: 'Contact',
+    value: '07006599384',
+  },
+  {
+    title: 'Location',
+    value: 'Lagos, Ikeja',
+  },
+  {
+    title: 'Language',
+    value: 'English, French, Yoruba, Spanish, Igbo',
+  },
+  {
+    title: 'Date Registered',
+    value: 'Dec 23, 2024',
+  },
+]
+
+export const ArtisanProfileDetails = [
   {
     title: 'Artisan Full Name',
     value: 'Grace Olori',
