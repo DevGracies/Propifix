@@ -1,9 +1,12 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { Rating } from "@mui/material";
 import LocationDropdown from "@/components/listing/LocationDropdown";
+import { useRouter } from "next/navigation";
 
 const Caretakers = () => {
+  const router = useRouter();
   const [locations, setLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState("Filter by location");
   const [showDropdown, setShowDropdown] = useState(false);
@@ -17,6 +20,7 @@ const Caretakers = () => {
     const fetchCaretakers = async () => {
       try {
         const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/caretaker`);
+        console.log("Caretakers response:", response);
         const data = response?.data?.data?.data || [];
         setCaretakers(data);
         setFilteredCaretakers(data);
@@ -32,7 +36,7 @@ const Caretakers = () => {
     fetchCaretakers();
 
     setLocations([
-      "All", "Ikeja", "Agege", "Victoria Island", "Banana Island",
+      "All", "Ikeja", "Ipaja", "Agege", "Victoria Island", "Banana Island",
       "Ikoyi", "Lekki", "Ikorodu"
     ]);
   }, []);
@@ -41,7 +45,7 @@ const Caretakers = () => {
     let filtered = caretakers;
 
     if (selectedLocation !== "Filter by location" && selectedLocation !== "All") {
-      filtered = filtered.filter(artisan =>
+      filtered = filtered.filter(caretaker =>
         caretaker.businessLocation?.toLowerCase().includes(selectedLocation.toLowerCase())
       );
     }
@@ -50,7 +54,7 @@ const Caretakers = () => {
   }, [selectedLocation, caretakers]);
 
   return (
-    <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-20 py-8">
+    <div className="px-4 min-h-screen sm:px-6 md:px-8 lg:px-10 xl:px-20 py-8">
       <div className="flex flex-col md:flex-row md:justify-between md:items-center w-full mb-6 gap-4">
         <h1 className="text-[#9D71C6] text-3xl pb-4 font-medium">
           All <span className="text-[#5D14AD]">Caretakers</span>
@@ -72,7 +76,7 @@ const Caretakers = () => {
       ) : error ? (
         <p className="text-center text-red-500 text-lg italic">{error}</p>
       ) : filteredCaretakers.length === 0 ? (
-        <p className="text-gray-500 italic text-lg md:text-xl">
+        <p className="text-gray-500 text-center italic text-lg md:text-xl">
               No caretakers found for <span className="font-semibold">{selectedLocation}</span>.
        </p>
       ) : (
@@ -121,7 +125,9 @@ const Caretakers = () => {
                     </span>
                   </p>
                 </div>
-                <button className="mt-4 text-sm md:text-base lg:text-lg font-semibold border border-white px-4 py-2 rounded-lg bg-transparent hover:bg-white hover:text-[#5D14AD] transition-all duration-300">
+                <button 
+                onClick={() => router.push(`/caretaker/${caretaker._id}`)}
+                className="mt-4 text-sm md:text-base lg:text-lg font-semibold border border-white px-4 py-2 rounded-lg bg-transparent hover:bg-white hover:text-[#5D14AD] transition-all duration-300">
                   View Profile
                 </button>
               </div>

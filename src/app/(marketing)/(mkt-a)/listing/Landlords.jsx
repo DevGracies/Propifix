@@ -1,10 +1,13 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { useRouter } from "next/navigation";
 import { Rating } from "@mui/material";
+import axios from "axios";
+
 import LocationDropdown from "@/components/listing/LocationDropdown";
 
 const Landlords = () => {
+  const router = useRouter();
   const [locations, setLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState("Filter by location");
   const [showDropdown, setShowDropdown] = useState(false);
@@ -33,7 +36,7 @@ const Landlords = () => {
     fetchLandlords();
 
     setLocations([
-      "All", "Ikeja", "Agege", "Victoria Island", "Banana Island",
+      "All", "Ikeja", "Ipaja", "Agege", "Victoria Island", "Banana Island",
       "Ikoyi", "Lekki", "Ikorodu"
     ]);
   }, []);
@@ -42,8 +45,8 @@ const Landlords = () => {
     let filtered = landlords;
 
     if (selectedLocation !== "Filter by location" && selectedLocation !== "All") {
-      filtered = filtered.filter(artisan =>
-        landlord.businessLocation?.toLowerCase().includes(selectedLocation.toLowerCase())
+      filtered = filtered.filter(landlord =>
+        landlord.homeAddress?.toLowerCase().includes(selectedLocation.toLowerCase())
       );
     }
 
@@ -51,7 +54,7 @@ const Landlords = () => {
   }, [selectedLocation, landlords]);
 
   return (
-    <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-20 py-8">
+    <div className="px-4 min-h-screen sm:px-6 md:px-8 lg:px-10 xl:px-20 py-8">
       <div className="flex flex-col md:flex-row md:justify-between md:items-center w-full mb-6 gap-4">
         <h1 className="text-[#9D71C6] text-3xl font-medium">
           All <span className="text-[#5D14AD]">Landlords</span>
@@ -73,12 +76,12 @@ const Landlords = () => {
       ) : error ? (
         <p className="text-center text-red-500 text-lg italic">{error}</p>
       ) : filteredLandlords.length === 0 ? (
-        <p className="text-gray-500 italic text-lg md:text-xl">
+        <p className="text-gray-500 text-center italic text-lg md:text-xl">
               No landlords found for <span className="font-semibold">{selectedLocation}</span>.
         </p>
       ) : (
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-        {landlordlisting.map((landlord) => (
+        {filteredLandlords.map((landlord) => (
           <div
             key={landlord.id}
             className="relative border-2 border-[#5D14AD] h-[350px] rounded-[24px] overflow-hidden bg-cover bg-center"
@@ -95,7 +98,7 @@ const Landlords = () => {
                 <div className="space-y-2">
                   <h2 className="text-sm md:text-base lg:text-lg italic">
                     Landlord Name:{" "}
-                    <span className="not-italic font-semibold">{landlord.name}</span>
+                    <span className="not-italic font-semibold">{landlord.fullName}</span>
                   </h2>
                   <div className="flex items-center">
                     <span className="text-sm md:text-base lg:text-lg italic">Rating:</span>
@@ -109,18 +112,20 @@ const Landlords = () => {
                   </div>
                   <p className="text-sm md:text-base lg:text-lg italic">
                     Location:{" "}
-                    <span className="not-italic font-semibold">{landlord.location}</span>
+                    <span className="not-italic font-semibold">{landlord.homeAddress}</span>
                   </p>
                   <p className="text-sm md:text-base lg:text-lg italic">
                     Properties Owned:{" "}
-                    <span className="not-italic font-semibold">{landlord.propertiesOwned}</span>
+                    <span className="not-italic font-semibold">{landlord.numberOfHousesOwned}</span>
                   </p>
                   <p className="text-sm md:text-base lg:text-lg italic">
                     Verification Status:{" "}
                     <span className="not-italic font-semibold">{landlord.verificationStatus}</span>
                   </p>
                 </div>
-                <button className="mt-4 text-sm md:text-base lg:text-lg font-semibold border border-white px-4 py-2 rounded-lg bg-transparent hover:bg-white hover:text-[#5D14AD] transition-all duration-300">
+                <button 
+                onClick={() => router.push(`/landlord/${landlord._id}`)}
+                className="mt-4 text-sm md:text-base lg:text-lg font-semibold border border-white px-4 py-2 rounded-lg bg-transparent hover:bg-white hover:text-[#5D14AD] transition-all duration-300">
                   View Profile
                 </button>
               </div>

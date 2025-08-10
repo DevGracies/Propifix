@@ -5,8 +5,10 @@ import { Rating } from "@mui/material";
 import axios from "axios";
 import { artisanlisting as topArtisansMock } from "@/lib/constants";
 import LocationDropdown from "@/components/listing/LocationDropdown";
+import { useRouter } from "next/navigation";
 
 const Artisans = () => {
+  const router = useRouter();
   const [locations, setLocations] = useState([]);
   const [artisanTypes, setArtisanTypes] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState("Filter by location");
@@ -39,15 +41,26 @@ const Artisans = () => {
     fetchArtisans();
 
     setLocations([
-      "All", "Ikeja", "Agege", "Victoria Island", "Banana Island",
+      "All", "Ikeja", "Ipaja", "Agege", "Victoria Island", "Banana Island",
       "Ikoyi", "Lekki", "Ikorodu"
     ]);
 
     setArtisanTypes([
-      "All", "Carpentry", "Dry Cleaning", "Electrical work", "House Cleaning",
-      "Plumbing", "Painting", "Roofing", "Bricklaying", "Glazing",
-      "Tiling", "HVAC Installation", "Welding"
+      "All",
+      "Carpentry",
+      "Dry_Cleaning",
+      "Electrical_Work",
+      "House_Cleaning",
+      "Plumbing",
+      "Painting",
+      "Roofing",
+      "Bricklaying",
+      "Glazing",
+      "Tiling",
+      "HVAC_Installation",
+      "Welding"
     ]);
+    
   }, []);
 
   useEffect(() => {
@@ -69,7 +82,7 @@ const Artisans = () => {
   }, [selectedLocation, selectedType, artisans]);
 
   return (
-    <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-20 py-8">
+    <div className="px-4 min-h-screen sm:px-6 md:px-8 lg:px-10 xl:px-20 py-8">
       <h1 className="text-[#9D71C6] text-3xl pb-4 font-medium">
         Top <span className="text-[#5D14AD]">Artisans</span>
       </h1>
@@ -140,7 +153,11 @@ const Artisans = () => {
               className="w-[180px] h-full flex items-center justify-between px-4 border border-gray-300 rounded-[12px] text-gray-700 italic bg-white"
             >
               <span className={selectedType === "Type of Artisan" ? "text-gray-900" : ""}>
-                {selectedType}
+              {selectedType === "Type of Artisan"
+                ? selectedType
+                : selectedType === "All"
+                ? "All"
+                : selectedType.replace(/[_-]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
               </span>
               <ChevronDown className="w-5 h-5 text-gray-500" />
             </button>
@@ -156,7 +173,9 @@ const Artisans = () => {
                     }}
                     className="px-4 py-2 cursor-pointer hover:bg-purple-100"
                   >
-                    {type}
+                    {type === "All"
+                      ? "All"
+                      : type.replace(/[_-]/g, " ").replace(/\b\w/g, (c) => c.toUpperCase())}
                   </li>
                 ))}
               </ul>
@@ -215,13 +234,20 @@ const Artisans = () => {
                     Location: <span className="font-semibold not-italic">{artisan.homeAddress}</span>
                   </p>
                   <p className="text-sm md:text-base lg:text-lg italic">
-                    Type: <span className="font-semibold not-italic">{artisan.skill}</span>
+                    Type:{" "}
+                    <span className="font-semibold not-italic">
+                      {artisan.skill
+                        ?.replace(/[_-]/g, " ")        
+                        .replace(/\b\w/g, (c) => c.toUpperCase())} 
+                    </span>
                   </p>
                   <p className="text-sm md:text-base lg:text-lg italic">
                     Reviews: <span className="font-semibold not-italic">18</span>
                   </p>
                 </div>
-                <button className="mt-3 text-sm md:text-base lg:text-lg font-semibold border border-white px-4 py-2 rounded-lg bg-transparent hover:bg-white hover:text-[#5D14AD] transition-all duration-300">
+                <button 
+                onClick={() => router.push(`/artisans/${artisan._id}`)}
+                className="mt-3 text-sm md:text-base lg:text-lg font-semibold border border-white px-4 py-2 rounded-lg bg-transparent hover:bg-white hover:text-[#5D14AD] transition-all duration-300">
                   View Profile
                 </button>
               </div>

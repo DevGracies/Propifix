@@ -4,8 +4,10 @@ import { Rating } from "@mui/material";
 import axios from "axios";
 import { agentlisting as topAgentsMock } from "@/lib/constants";
 import LocationDropdown from "@/components/listing/LocationDropdown";
+import { useRouter } from "next/navigation";
 
 const Agents = () => {
+  const router = useRouter();
   const [locations, setLocations] = useState([]);
   const [selectedLocation, setSelectedLocation] = useState("Filter by location");
   const [allAgents, setAllAgents] = useState([]);
@@ -55,14 +57,14 @@ const Agents = () => {
   }, [BASE_URL]);
 
   const filteredAgents =
-    selected === "All" || selected === "Filter by location"
+    selectedLocation === "All" || selectedLocation === "Filter by location"
       ? allAgents
       : allAgents.filter((agent) =>
-          agent.businessLocation?.toLowerCase().includes(selected.toLowerCase())
+          agent.businessLocation?.toLowerCase().includes(selectedLocation.toLowerCase())
         );
 
   return (
-    <div className="px-4 sm:px-6 md:px-8 lg:px-10 xl:px-20 py-8">
+    <div className="px-4 min-h-screen sm:px-6 md:px-8 lg:px-10 xl:px-20 py-8">
       <div>
         <h1 className="text-[#9D71C6] text-3xl pb-4 font-medium">
           Top House <span className="text-[#5D14AD]">Agents</span>
@@ -184,7 +186,9 @@ const Agents = () => {
                         <span className="not-italic font-semibold ml-1">{agent.reviews}</span>
                       </p>
                     </div>
-                    <button className="mt-4 text-sm md:text-base lg:text-lg font-semibold border border-white px-4 py-2 rounded-lg bg-transparent hover:bg-white hover:text-[#5D14AD] transition-all duration-300">
+                    <button 
+                    onClick={() => router.push(`/agent/${agent._id}`)}
+                    className="mt-4 text-sm md:text-base lg:text-lg font-semibold border border-white px-4 py-2 rounded-lg bg-transparent hover:bg-white hover:text-[#5D14AD] transition-all duration-300">
                       View Profile
                     </button>
                   </div>
