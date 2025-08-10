@@ -17,8 +17,10 @@ export const PasswordUpdated = () => {
      <div className='flex flex-row'>
       <CustomImage
           src={logo}
+          alt='Propifix logo'
+          clickFunc={() => router.push('/')}
           style="w-full h-10 my-6"
-          imgStyle="object-contain object-right"
+          imgStyle="object-contain object-right cursor-pointer"
           priority={true}
           />
         <CustomImage

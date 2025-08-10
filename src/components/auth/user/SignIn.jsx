@@ -20,10 +20,12 @@ export const SignIn = () => {
   return (
   <div className='bg-white border rounded-lg'>
      <div className='flex flex-row'>
-      <CustomImage
+        <CustomImage
           src={logo}
+          alt='Propifix logo'
           style="w-full h-10 my-6"
-          imgStyle="object-contain object-right"
+          imgStyle="object-contain object-right cursor-pointer"
+          clickFunc={() => router.push('/')}
           priority={true}
           />
         <CustomImage
@@ -59,19 +61,19 @@ export const SignIn = () => {
           <ScrollBar orientation='horizontal' />
         </ScrollArea>
         <TabsContent value={userTypes.agent}>
-          <UserSignInForm />
+          <UserSignInForm userType={userTypes.agent} />
         </TabsContent>
         <TabsContent value={userTypes.user}>
-          <UserSignInForm />
+          <UserSignInForm userType={userTypes.user} />
         </TabsContent>
         <TabsContent value={userTypes.caretaker}>
-          <UserSignInForm />
+          <UserSignInForm userType={userTypes.caretaker} />
         </TabsContent>
         <TabsContent value={userTypes.artisan}>
-          <UserSignInForm />
+          <UserSignInForm userType={userTypes.artisan}/>
         </TabsContent>
         <TabsContent value={userTypes.landlord}>
-          <UserSignInForm />
+          <UserSignInForm userType={userTypes.landlord} />
         </TabsContent>
       </Tabs>
       <div className='w-full flex justify-between gap-4 items-center flex-wrap'>

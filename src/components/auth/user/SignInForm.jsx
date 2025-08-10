@@ -12,11 +12,14 @@ import { Button } from '@/components/ui/button'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Text } from '../../shared/Text'
 import ReCAPTCHA from 'react-google-recaptcha'
+import { useLogin } from '@/hooks/auth/login.hook'
 
-export const UserSignInForm = () => {
+export const UserSignInForm = ({userType}) => {
   const [isPending, setIsPending] = useState(false)
   const [isTermsAccepted, setIsTermsAccepted] = useState(false)
   const [isRobot, setIsRobot] = useState(true)
+
+  const loginMutation = useLogin(userType)
 
   function onChange(value) {
     console.log('Captcha value:', value)
@@ -34,7 +37,18 @@ export const UserSignInForm = () => {
   })
 
   const onSubmit = (values) => {
-    console.log(values)
+    setIsPending(true)
+
+    const payload = {
+      email: values.email,
+      password: values.pwd,
+    }
+
+    loginMutation.mutate(payload, {
+      onSettled: () => {
+        setIsPending(false)
+      },
+    })
   }
 
   return (
@@ -53,7 +67,7 @@ export const UserSignInForm = () => {
         <PasswordInput
           control={form.control}
           name='pwd'
-          placeholder='Create Password'
+          placeholder='Enter your password'
         />
 
         <div className='flex flex-col gap-5 mt-3'>

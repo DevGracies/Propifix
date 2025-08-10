@@ -27,7 +27,8 @@ export const Register = () => {
    <CustomImage
       src={logo}
       style="w-full h-10 my-6"
-      imgStyle="object-contain object-right"
+      imgStyle="object-contain object-right cursor-pointer"
+      clickFunc={() => router.push('/')}
       priority={true}
       />
      <CustomImage
