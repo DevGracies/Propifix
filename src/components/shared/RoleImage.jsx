@@ -1,8 +1,8 @@
 import Image from "next/image";
 
 const roleImageMap = {
-  agent: "/images/agent.png",
-  user: "/user_profile_bg.png",
+  agent: "/backgrounds/agent-card-bg.jpg",
+  user: "/User_profile_bg.png",
   carpentry: "/images/carpentry.png",
   electrician: "/images/electrical-work.png",
   houseCleaning: "/images/house-cleaning.png",
@@ -11,7 +11,7 @@ const roleImageMap = {
 };
 
 const RoleImage = ({ role, alt = "Role image", ...props }) => {
-  const src = roleImageMap[role] || "/images/default.png";
+  const src = roleImageMap[role] || "/backgrounds/agent-card-bg.jpg";
   return (
     <Image
       src={src}

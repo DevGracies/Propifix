@@ -18,7 +18,7 @@ const LocationDropdown = ({ locations, selected, setSelected }) => {
       </button>
 
       {showDropdown && (
-        <ul className="absolute top-full left-0 z-20 w-full mt-1 bg-white border border-gray-300 rounded-[12px] shadow-lg max-h-60 overflow-y-auto">
+        <ul className="absolute top-full left-0 z-30 w-full mt-1 bg-white border border-gray-300 rounded-[12px] shadow-lg max-h-60 overflow-y-auto">
           {locations.map((location) => (
             <li
               key={location}

@@ -87,7 +87,7 @@ const Footer = () => {
                 <li key={index}>
                   <CustomLink
                     url={link.url}
-                    className="text-[14px] hover:opacity-80 transition-opacity capitalize cursor-pointer"
+                    className="text-[14px] lg:text-nowrap hover:opacity-80 transition-opacity capitalize cursor-pointer"
                   >
                     {link.title}
                   </CustomLink>
@@ -123,7 +123,7 @@ const Footer = () => {
           <span>Customer Care</span>
         </Button>
         <p className="text-sm opacity-90">
-          © 2024 PropiFix. All rights reserved
+        &copy; {new Date().getFullYear()} Propifix. All rights reserved.
         </p>
       </div>
     </footer>
