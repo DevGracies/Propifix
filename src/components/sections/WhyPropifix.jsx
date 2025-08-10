@@ -18,7 +18,10 @@ const WhyPropifix = () => {
               alt={how.title}
               className='size-[20px] md:size-[30px]'
             />
-            <h1 className="text-[18px] sm:text-[20px] md:text-[25px] font-medium capitalize">{how.title}</h1>
+            <div className='flex flex-col gap-1'>
+              <h1 className="text-[18px] sm:text-[20px] md:text-[25px] font-medium capitalize">{how.title}</h1>
+              <p className="text-[12px] md:text-[14px] font-normal">{how.desc}</p>
+            </div>
           </div>
         ))}
       </div>

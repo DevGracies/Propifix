@@ -55,7 +55,7 @@ const FindAgent = () => {
   return (
     <section className="lg:flex text-white" id="find-an-agent">
       <div
-        className="w-1/2 px-5 md:px-[72px] lg:pl-[72px] py-[60px] md:py-[40px] bg-gradient-to-l from-[#5D14AD] to-[#9747FF] flex flex-col gap-5 relative z-40"
+        className="w-full lg:w-1/2 px-5 md:px-[72px] lg:pl-[72px] py-[60px] md:py-[40px] bg-gradient-to-l from-[#5D14AD] to-[#9747FF] flex flex-col gap-5 relative z-40"
       >
         <h1 className="font-semibold text-[20px] md:text-[30px] max-w-[530px]">
           Discover house agents, caretakers, landlords and trusted service
