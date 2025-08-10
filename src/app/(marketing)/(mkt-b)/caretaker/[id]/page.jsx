@@ -8,42 +8,42 @@ import { BackButton } from "@/components/sections/userProfile/BackButton";
 import { MaxWidth } from "@/components/shared/MaxWidth";
 import MultiColorHeader from "@/components/shared/MultiColorHeader";
 import Stats from "@/components/Stats";
+import PropertiesAvailable from "@/components/shared/propertiesAvailable";
 import { feedbackList } from "@/lib/constants";
 import { formatDate } from "@/utils/helpers/FormatDate";
-import PropertiesAvailable from "@/components/shared/propertiesAvailable";
 
-const AgentProfilePage = () => {
+const CaretakerProfilePage = () => {
   const { id } = useParams();
-  const [agent, setAgent] = useState(null);
+  const [caretaker, setCaretaker] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
     if (!id) return;
 
-    const fetchAgent = async () => {
+    const fetchCaretaker = async () => {
       try {
         const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/agent/${id}`
+          `${process.env.NEXT_PUBLIC_BASE_URL}/caretaker/${id}`
         );
-        setAgent(res.data.data); 
+        setCaretaker(res.data.data); 
         setError("");
       } catch (err) {
         console.error(err);
-        setError("Unable to fetch agent profile.");
+        setError("Unable to fetch caretaker profile.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchAgent();
+    fetchCaretaker();
   }, [id]);
 
   if (loading) {
     return (
       <MaxWidth className="py-28">
         <p className="text-center min-h-screen text-[#5D14AD] italic text-lg">
-          Loading agent profile...
+          Loading caretaker profile...
         </p>
       </MaxWidth>
     );
@@ -57,42 +57,42 @@ const AgentProfilePage = () => {
     );
   }
 
-  if (!agent) return null;
+  if (!caretaker) return null;
 
   return (
     <MaxWidth className="bg-white py-28 md:px-[50px] px-4">
-      <BackButton title="agent" role="agent" />
+      <BackButton title="caretaker" role="caretaker" />
 
       <MultiColorHeader
         className="text-[30px] font-semibold tracking-wide mb-4 mt-5"
         lighterColor="#9D71C6"
-        lighterText="Agent"
+        lighterText="Caretaker"
         heavierColor="#5D14AD"
         heavierText="Account"
       />
 
       <div className="grid lg:grid-cols-2 grid-cols-1 md:gap-[40px] gap-[15px]">
         <ProfileCard
-          role="agent"
-          agentProfileDetails={[
-            { title: "Agent Full Name", value: agent.fullName },
-            { title: "Contact", value: agent.phone },
-            { title: "Location", value: agent.businessLocation },
-            {title: "Date Registered", value: formatDate(agent.createdAt)},
+          role="caretaker"
+          caretakerProfileDetails={[
+            { title: "Caretaker Full Name", value: caretaker.fullName },
+            { title: "Contact", value: caretaker.phone },
+            { title: "Location", value: caretaker.businessLocation },
+            {title: "Date Registered", value: formatDate(caretaker.createdAt)},
           ]}
           isEditable={true}
         />
 
         <Stats
-          title="Agent Performance"
+          title="Caretaker Performance"
           responseTime="Typically responds within 1 hour."
           jobsCompleted={10} 
-          successRateInPercentage={80}  
+          successRateInPercentage={80} 
           successRateValue="80%"
           numberOfCustomerReviews={50} 
           customerRatingInPercentage={80} 
           customerRatingValue="4.5/5" 
-          serviceFeeInNaira="15,000" 
+          serviceFeeInNaira="15,000"
         />
       </div>
 
@@ -105,9 +105,9 @@ const AgentProfilePage = () => {
           heavierText="Me"
         />
         <p className="text-[16px]">
-          Hello, my name is {agent.fullName}. I have {agent.yoe} years
-          of experience as an agent and I’m passionate about connecting clients
-          with the perfect property.
+          Hello, my name is {caretaker.fullName}. I have {caretaker.yoe} years
+          of experience as a caretaker and I’m passionate about providing
+          exceptional service.
         </p>
       </div>
 
@@ -117,4 +117,4 @@ const AgentProfilePage = () => {
   );
 };
 
-export default AgentProfilePage;
+export default CaretakerProfilePage;

@@ -8,42 +8,42 @@ import { BackButton } from "@/components/sections/userProfile/BackButton";
 import { MaxWidth } from "@/components/shared/MaxWidth";
 import MultiColorHeader from "@/components/shared/MultiColorHeader";
 import Stats from "@/components/Stats";
+import PropertiesAvailable from "@/components/shared/propertiesAvailable";
 import { feedbackList } from "@/lib/constants";
 import { formatDate } from "@/utils/helpers/FormatDate";
-import PropertiesAvailable from "@/components/shared/propertiesAvailable";
 
-const AgentProfilePage = () => {
+const LandlordProfilePage = () => {
   const { id } = useParams();
-  const [agent, setAgent] = useState(null);
+  const [landlord, setLandlord] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
 
   useEffect(() => {
     if (!id) return;
 
-    const fetchAgent = async () => {
+    const fetchLandlord = async () => {
       try {
         const res = await axios.get(
-          `${process.env.NEXT_PUBLIC_BASE_URL}/agent/${id}`
+          `${process.env.NEXT_PUBLIC_BASE_URL}/landlord/${id}`
         );
-        setAgent(res.data.data); 
+        setLandlord(res.data.data); 
         setError("");
       } catch (err) {
         console.error(err);
-        setError("Unable to fetch agent profile.");
+        setError("Unable to fetch landlord profile.");
       } finally {
         setLoading(false);
       }
     };
 
-    fetchAgent();
+    fetchLandlord();
   }, [id]);
 
   if (loading) {
     return (
       <MaxWidth className="py-28">
         <p className="text-center min-h-screen text-[#5D14AD] italic text-lg">
-          Loading agent profile...
+          Loading landlord profile...
         </p>
       </MaxWidth>
     );
@@ -52,47 +52,47 @@ const AgentProfilePage = () => {
   if (error) {
     return (
       <MaxWidth className="py-28">
-        <p className="text-center text-red-500 italic">{error}</p>
+        <p className="text-center min-h-screen text-red-500 italic">{error}</p>
       </MaxWidth>
     );
   }
 
-  if (!agent) return null;
+  if (!landlord) return null;
 
   return (
     <MaxWidth className="bg-white py-28 md:px-[50px] px-4">
-      <BackButton title="agent" role="agent" />
+      <BackButton title="landlord" role="landlord" />
 
       <MultiColorHeader
         className="text-[30px] font-semibold tracking-wide mb-4 mt-5"
         lighterColor="#9D71C6"
-        lighterText="Agent"
+        lighterText="Landlord"
         heavierColor="#5D14AD"
         heavierText="Account"
       />
 
       <div className="grid lg:grid-cols-2 grid-cols-1 md:gap-[40px] gap-[15px]">
         <ProfileCard
-          role="agent"
-          agentProfileDetails={[
-            { title: "Agent Full Name", value: agent.fullName },
-            { title: "Contact", value: agent.phone },
-            { title: "Location", value: agent.businessLocation },
-            {title: "Date Registered", value: formatDate(agent.createdAt)},
+          role="landlord"
+          landlordProfileDetails={[
+            { title: "Landlord Full Name", value: landlord.fullName },
+            { title: "Contact", value: landlord.phone },
+            { title: "Location", value: landlord.homeAddress },
+            {title: "Date Registered", value: formatDate(landlord.createdAt)},
           ]}
           isEditable={true}
         />
 
         <Stats
-          title="Agent Performance"
+          title="Landlord Performance"
           responseTime="Typically responds within 1 hour."
           jobsCompleted={10} 
-          successRateInPercentage={80}  
+          successRateInPercentage={80} 
           successRateValue="80%"
           numberOfCustomerReviews={50} 
           customerRatingInPercentage={80} 
           customerRatingValue="4.5/5" 
-          serviceFeeInNaira="15,000" 
+          serviceFeeInNaira="15,000"
         />
       </div>
 
@@ -105,9 +105,9 @@ const AgentProfilePage = () => {
           heavierText="Me"
         />
         <p className="text-[16px]">
-          Hello, my name is {agent.fullName}. I have {agent.yoe} years
-          of experience as an agent and I’m passionate about connecting clients
-          with the perfect property.
+          Hello, my name is {landlord.fullName}. I have {landlord.yoe} years
+          of experience as a landlord and I’m passionate about providing
+          exceptional service.
         </p>
       </div>
 
@@ -117,4 +117,4 @@ const AgentProfilePage = () => {
   );
 };
 
-export default AgentProfilePage;
+export default LandlordProfilePage;
