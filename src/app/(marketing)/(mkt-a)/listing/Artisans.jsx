@@ -246,7 +246,7 @@ const Artisans = () => {
                   </p>
                 </div>
                 <button 
-                onClick={() => router.push(`/artisans/${artisan._id}`)}
+                onClick={() => router.push(`/artisan/${artisan._id}`)}
                 className="mt-3 text-sm md:text-base lg:text-lg font-semibold border border-white px-4 py-2 rounded-lg bg-transparent hover:bg-white hover:text-[#5D14AD] transition-all duration-300">
                   View Profile
                 </button>

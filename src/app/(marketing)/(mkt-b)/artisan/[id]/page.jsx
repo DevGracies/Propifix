@@ -10,6 +10,7 @@ import MultiColorHeader from "@/components/shared/MultiColorHeader";
 import Stats from "@/components/Stats";
 import { feedbackList } from "@/lib/constants";
 import { formatDate } from "@/utils/helpers/FormatDate";
+import AnimatedSpinner from "@/components/ui/animated-spinner";
 
 const ArtisanProfilePage = () => {
   const { id } = useParams();
@@ -40,11 +41,14 @@ const ArtisanProfilePage = () => {
 
   if (loading) {
     return (
-      <MaxWidth className="py-28">
-        <p className="text-center min-h-screen text-[#5D14AD] italic text-lg">
-          Loading artisan profile...
-        </p>
-      </MaxWidth>
+      // <MaxWidth className="py-28">
+      //   <p className="flex justify-center not-[]:text-center min-h-screen text-[#5D14AD] italic text-lg">
+      //     Loading artisan profile...
+      //   </p>
+      // </MaxWidth>
+      <div className='min-h-screen pt-64 flex justify-center text-center'>
+      <AnimatedSpinner/>
+    </div>
     );
   }
 
@@ -77,6 +81,7 @@ const ArtisanProfilePage = () => {
             { title: "Artisan Full Name", value: artisan.fullName },
             { title: "Contact", value: artisan.phone },
             { title: "Location", value: artisan.homeAddress },
+            {title: "Profession/Skill", value: artisan.skill},
             {title: "Date Registered", value: formatDate(artisan.createdAt)},
           ]}
           isEditable={true}

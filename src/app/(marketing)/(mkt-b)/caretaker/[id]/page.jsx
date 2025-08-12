@@ -11,6 +11,7 @@ import Stats from "@/components/Stats";
 import PropertiesAvailable from "@/components/shared/propertiesAvailable";
 import { feedbackList } from "@/lib/constants";
 import { formatDate } from "@/utils/helpers/FormatDate";
+import AnimatedSpinner from "@/components/ui/animated-spinner";
 
 const CaretakerProfilePage = () => {
   const { id } = useParams();
@@ -41,11 +42,14 @@ const CaretakerProfilePage = () => {
 
   if (loading) {
     return (
-      <MaxWidth className="py-28">
-        <p className="text-center min-h-screen text-[#5D14AD] italic text-lg">
-          Loading caretaker profile...
-        </p>
-      </MaxWidth>
+      // <MaxWidth className="py-28">
+      //   <p className="text-center min-h-screen text-[#5D14AD] italic text-lg">
+      //     Loading caretaker profile...
+      //   </p>
+      // </MaxWidth>
+      <div className='min-h-screen pt-64 flex justify-center text-center'>
+      <AnimatedSpinner/>
+    </div>
     );
   }
 
