@@ -22,6 +22,7 @@ export const useLogin = (userType) => {
 
     onSuccess: (response) => {
       const userData = response?.data?.data
+      const user = userData?.user
       const actualRole = userData?.user?.__t?.toLowerCase()
       const token = userData?.accessToken
 
@@ -40,23 +41,8 @@ export const useLogin = (userType) => {
 
       toast.success('Login successful!')
 
-      switch (actualRole) {
-        case 'house_agent':
-          router.push('/agent/dashboard')
-          break
-        case 'landlord':
-          router.push('/landlord/dashboard')
-          break
-        case 'caretaker':
-          router.push('/caretaker/dashboard')
-          break
-        case 'artisan':
-          router.push('/artisan/dashboard')
-          break
-        case 'user':
-        default:
-          router.push('/user/dashboard')
-      }
+      const profilePath = `/${actualRole}/${user._id}`
+      router.push(profilePath)
     },
 
     onError: (error) => {
