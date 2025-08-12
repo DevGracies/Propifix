@@ -7,6 +7,10 @@ import { useRouter } from 'next/navigation';
 import { ChevronLeft } from 'lucide-react'
 import { userTypes } from '@/utils/ConstantEnums'
 import { UserSignInForm } from './SignInForm'
+import { CustomImage } from '@/components/shared/Image';
+import logo from '../../../../public/Propifix_logo.svg'
+import topDesign from '../../../../public/backgrounds/auth-top-vector.svg'
+import bottomDesign from '../../../../public/backgrounds/auth-bottom-vector.svg'
 
 const triggerStyle =
   'h-[28px] w-[93px] font-[400] text-[9.72px] rounded-[9.72px] data-[state=active]:text-white data-[state=active]:bg-thick-purple border border-input-border transition-colors duration-1000'
@@ -14,7 +18,24 @@ const triggerStyle =
 export const SignIn = () => {
   const router = useRouter()
   return (
-    <div className='sm:p-8 p-4 bg-white/80 backdrop-blur-sm border rounded-lg flex flex-col gap-4'>
+  <div className='bg-white border rounded-lg'>
+     <div className='flex flex-row'>
+        <CustomImage
+          src={logo}
+          alt='Propifix logo'
+          style="w-full h-10 my-6"
+          imgStyle="object-contain object-right cursor-pointer"
+          clickFunc={() => router.push('/')}
+          priority={true}
+          />
+        <CustomImage
+          src={topDesign}
+          style="w-full h-24"
+          imgStyle="object-contain object-right"
+          priority={true}
+          />  
+      </div>
+      <div className='sm:p-8 p-4 flex flex-col gap-4'>
       <Text as='h1' style='text-[29.15px] font-semibold leading-[40.49px]'>
         Log In to Explore Homes and Essential Services.
       </Text>
@@ -40,19 +61,19 @@ export const SignIn = () => {
           <ScrollBar orientation='horizontal' />
         </ScrollArea>
         <TabsContent value={userTypes.agent}>
-          <UserSignInForm />
+          <UserSignInForm userType={userTypes.agent} />
         </TabsContent>
         <TabsContent value={userTypes.user}>
-          <UserSignInForm />
+          <UserSignInForm userType={userTypes.user} />
         </TabsContent>
         <TabsContent value={userTypes.caretaker}>
-          <UserSignInForm />
+          <UserSignInForm userType={userTypes.caretaker} />
         </TabsContent>
         <TabsContent value={userTypes.artisan}>
-          <UserSignInForm />
+          <UserSignInForm userType={userTypes.artisan}/>
         </TabsContent>
         <TabsContent value={userTypes.landlord}>
-          <UserSignInForm />
+          <UserSignInForm userType={userTypes.landlord} />
         </TabsContent>
       </Tabs>
       <div className='w-full flex justify-between gap-4 items-center flex-wrap'>
@@ -84,5 +105,17 @@ export const SignIn = () => {
         </div>
       </div>
     </div>
+    <div className='flex items-center'>
+        <CustomImage
+        src={bottomDesign}
+        style="w-full h-24"
+        imgStyle="object-contain object-left"
+        priority={true}
+        />  
+        <p className='italic text-xs md:text-sm text-left ml-2 flex mr-0 md:mr-30 w-7xl'>
+          Seamless transactions, trusted professionals, and quality service every time.
+        </p>
+    </div>
+  </div>
   )
 }

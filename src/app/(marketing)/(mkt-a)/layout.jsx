@@ -1,12 +1,13 @@
 import Navbar from "@/components/Navbar";
+import MaxWidthWrapper from "@/components/MaxWidthWrapper";
 
 export default function MktALayout({
   children,
 }) {
   return (
-    <div>
+    <MaxWidthWrapper>
       <Navbar transparent={true}/>
       <main>{children}</main>
-    </div>
+    </MaxWidthWrapper>
   );
 }

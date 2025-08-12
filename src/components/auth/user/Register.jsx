@@ -11,6 +11,10 @@ import { CaretakerForm } from './Caretaker'
 import { ArtisanForm } from './Artisan'
 import { LandlordForm } from './Landlord'
 import { userTypes } from '@/utils/ConstantEnums'
+import { CustomImage } from '@/components/shared/Image';
+import logo from '../../../../public/Propifix_logo.svg'
+import topDesign from '../../../../public/backgrounds/auth-top-vector.svg'
+import bottomDesign from '../../../../public/backgrounds/auth-bottom-vector.svg'
 
 const triggerStyle =
   'h-[28px] w-[93px] font-[400] text-[9.72px] rounded-[9.72px] data-[state=active]:text-white data-[state=active]:bg-thick-purple border border-input-border transition-colors duration-1000'
@@ -18,7 +22,23 @@ const triggerStyle =
 export const Register = () => {
   const router = useRouter()
   return (
-    <div className='sm:p-8 p-4 bg-white border rounded-lg flex flex-col gap-4'>
+   <div className='bg-white border rounded-lg'>
+   <div className='flex flex-row'>
+   <CustomImage
+      src={logo}
+      style="w-full h-10 my-6"
+      imgStyle="object-contain object-right cursor-pointer"
+      clickFunc={() => router.push('/')}
+      priority={true}
+      />
+     <CustomImage
+      src={topDesign}
+      style="w-full h-24"
+      imgStyle="object-contain object-right"
+      priority={true}
+      />  
+   </div>
+    <div className='sm:p-8 p-4 flex flex-col gap-4'>
       <Text as='h1' style='text-[29.15px] font-semibold leading-[40.49px]'>
         Create Your Account for Seamless Living Solutions
       </Text>
@@ -79,7 +99,21 @@ export const Register = () => {
           <span>Have an account?</span>
           <span className='text-primary-color'>Sign In</span>
         </div>
-      </div>
+      </div>  
     </div>
+    <div className='flex items-center'>
+        <CustomImage
+        src={bottomDesign}
+        style="w-full h-24"
+        imgStyle="object-contain object-left"
+        priority={true}
+        />  
+        <p className='italic text-xs md:text-sm text-left ml-2 flex mr-0 md:mr-30 w-7xl'>
+          Seamless transactions, trusted professionals, and quality service every time.
+        </p>
+    </div>
+   </div>
   )
 }
+
+

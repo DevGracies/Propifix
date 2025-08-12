@@ -1,160 +1,141 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import axios from "axios";
 import { Rating } from "@mui/material";
-import { agentlisting } from "@/lib/constants";
+import LocationDropdown from "@/components/listing/LocationDropdown";
+import { useRouter } from "next/navigation";
 
 const Caretakers = () => {
+  const router = useRouter();
   const [locations, setLocations] = useState([]);
-  const [selected, setSelected] = useState("Filter by location");
+  const [selectedLocation, setSelectedLocation] = useState("Filter by location");
   const [showDropdown, setShowDropdown] = useState(false);
+
   const [caretakers, setCaretakers] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  const fetchLocations = async () => {
-    const data = [
-      "All",
-      "Ikeja",
-      "Agege",
-      "Victoria Island",
-      "Banana Island",
-      "Ikoyi",
-      "Lekki",
-      "Ikorodu",
-    ];
-    setLocations(data);
-  };
-
-  // const fetchLocations = async () => {
-  //   try {
-  //     const res = await fetch("api/location/caretaker")
-  //     if (!res.ok) {
-  //       throw new Error("Failed to fetch caretaker location")
-  //     }
-  //     const data = await res.json()
-  //     setCaretakers(data)
-  //   } catch (error) {
-  //     console.error("Error fetching caretaker location")
-  //   }
-  // }
-  //  const fetchCaretakers = async () => {
-  //   try {
-  //     const res = await fetch("/api/agents")
-  //     const data = await res.json()
-  //     setCaretakers(data)
-  //   } catch (error) {
-  //     console.error("Error fetching caretakers:", error)
-  //   } finally{
-  //     setLoading(false)
-  //   }
-  // }
+  const [error, setError] = useState("");
+  const [filteredCaretakers, setFilteredCaretakers] = useState([]);
 
   useEffect(() => {
-    const fetchAllData = async () => {
-      // fetchLocations();
-      // await  fetchCaretakers()
-      await fetchLocations();
+    const fetchCaretakers = async () => {
+      try {
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/caretaker`);
+        console.log("Caretakers response:", response);
+        const data = response?.data?.data?.data || [];
+        setCaretakers(data);
+        setFilteredCaretakers(data);
+        setError("");
+      } catch (err) {
+        console.error(err);
+        setError("Unable to fetch caretakers at the moment.");
+      } finally {
+        setLoading(false);
+      }
     };
-    fetchAllData();
+
+    fetchCaretakers();
+
+    setLocations([
+      "All", "Ikeja", "Ipaja", "Agege", "Victoria Island", "Banana Island",
+      "Ikoyi", "Lekki", "Ikorodu"
+    ]);
   }, []);
 
-  //   if (loading) return <p>Loading agents...</p>;
-  // if (caretakers.length === 0) return <p>No agents found.</p>;
+  useEffect(() => {
+    let filtered = caretakers;
+
+    if (selectedLocation !== "Filter by location" && selectedLocation !== "All") {
+      filtered = filtered.filter(caretaker =>
+        caretaker.businessLocation?.toLowerCase().includes(selectedLocation.toLowerCase())
+      );
+    }
+
+    setFilteredCaretakers(filtered);
+  }, [selectedLocation, caretakers]);
+
   return (
-    <div>
-      <div>
-        <div className=" flex justify-between items-center w-full p-5">
-          <h1 className="text-[#9D71C6] text-3xl font-medium">
-            All <span className="text-[#5D14AD]">Caretakers</span>
-          </h1>
-          <div className=" w-[542px] h-[44px]">
-            <button
-              onClick={() => setShowDropdown(!showDropdown)}
-              className="w-full h-full flex items-center justify-between px-4 border border-gray-300 rounded-[12px] text-gray-700 bg-white"
-            >
-              <span
-                className={
-                  selected === "Filter by location" ? "text-gray-400" : ""
-                }
-              >
-                {selected}
-              </span>
-              <ChevronDown className="w-5 h-5 text-gray-500" />
-            </button>
+    <div className="px-4 min-h-screen sm:px-6 md:px-8 lg:px-10 xl:px-20 py-8">
+      <div className="flex flex-col md:flex-row md:justify-between md:items-center w-full mb-6 gap-4">
+        <h1 className="text-[#9D71C6] text-3xl pb-4 font-medium">
+          All <span className="text-[#5D14AD]">Caretakers</span>
+        </h1>
 
-            {showDropdown && (
-              <ul className="absolute top-full left-0 z-10 w-full mt-1 bg-white border border-gray-300 rounded-[12px] shadow-lg max-h-60 overflow-y-auto">
-                {locations.map((location) => (
-                  <li
-                    key={location}
-                    onClick={() => {
-                      setSelected(location);
-                      setShowDropdown(false);
-                    }}
-                    className="px-4 py-2 cursor-pointer hover:bg-purple-100"
-                  >
-                    {location}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </div>
+        {/* Location Filter */}
+        <LocationDropdown
+            locations={locations}
+            selected={selectedLocation}
+            setSelected={setSelectedLocation}
+        />
+      </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
-          {agentlisting.map((agent) => (
+      {/* All Caretakers */}
+      {loading ? (
+         <div className="text-center w-full py-8">
+         <p className="text-[#5D14AD] text-lg md:text-xl font-semibold italic">Loading caretakers...</p>
+       </div>
+      ) : error ? (
+        <p className="text-center text-red-500 text-lg italic">{error}</p>
+      ) : filteredCaretakers.length === 0 ? (
+        <p className="text-gray-500 text-center italic text-lg md:text-xl">
+              No caretakers found for <span className="font-semibold">{selectedLocation}</span>.
+       </p>
+      ) : (
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        {filteredCaretakers.map((caretaker) => (
+          <div
+            key={caretaker.id}
+            className="relative border-2 border-[#5D14AD] h-[350px] rounded-[24px] overflow-hidden bg-cover bg-center"
+          >
             <div
-              key={agent.id}
-              className="relative w-[290px] h-[267px] rounded-[24px] p-5  flex items-center justify-center bg-cover bg-center"
+              className="rounded-[24px] absolute m-1 inset-0 bg-cover bg-center"
               style={{
-                borderWidth: "2.4px",
-                borderStyle: "solid",
-                borderImage:
-                  "linear-gradient(229.55deg, #9747FF 0%, #5D14AD 100%) 1",
-                background: "rgba(255, 255, 255, 0.05)",
-                backdropFilter: "blur(10px)",
-                WebkitBackdropFilter: "blur(10px)",
-                backgroundImage: "url('/backgroundListing.png')",
+                backgroundImage: "url('/home-images/sidehouse.svg')",
               }}
             >
-              <div className="flex flex-col h-full justify-between">
-                <div className=" flex justify-center items-center">
-                  <div className="w-10 h-10 rounded-full bg-blue-500 text-white flex items-center justify-center text-xl font-bold">
-                    {agent.id}
-                  </div>
-                </div>
+              <div className="absolute inset-0 rounded-[24px] bg-black/70" />
+
+              <div className="relative z-10 p-4 flex flex-col justify-between h-full text-white">
                 <div className="space-y-2">
-                  <h2 className="text-lg font-semibold">
-                    Agent Name: {agent.name}
+                  <h2 className="text-sm md:text-base lg:text-lg italic">
+                    Caretaker Name:{" "}
+                    <span className="not-italic font-semibold">{caretaker.fullName}</span>
                   </h2>
-                  <div className="flex items-center ">
-                    <h2 className="text-sm">
-                      Rating:
-                      <Rating
-                        name={`rating-${agent.id}`}
-                        value={agent.rating}
-                        precision={0.5}
-                        readOnly
-                        className="flex items-center space-x-2 mb-1"
-                      />
-                    </h2>
+                  <div className="flex items-center">
+                    <span className="text-sm md:text-base lg:text-lg italic">Rating:</span>
+                    <Rating
+                      name={`rating-${caretaker.id}`}
+                      value={caretaker.rating}
+                      precision={0.5}
+                      readOnly
+                      className="!text-white ml-2"
+                    />
                   </div>
-                  <p className="text-sm">Location: {agent.location}</p>
-                  <p className="text-sm">
-                    Reviews:
-                    <span className="text-gray-500 text-sm ml-1">
-                      {agent.reviews}
+                  <p className="text-sm md:text-base lg:text-lg italic">
+                    Location:{" "}
+                    <span className="not-italic font-semibold">{caretaker.businessLocation}</span>
+                  </p>
+                  <p className="text-sm md:text-base lg:text-lg italic">
+                    Assigned Properties:{" "}
+                    <span className="not-italic font-semibold">{caretaker.assingedProperties}</span>
+                  </p>
+                  <p className="text-sm md:text-base lg:text-lg italic">
+                    Reviews:{" "}
+                    <span className="not-italic font-semibold ml-1">
+                      {caretaker.reviews}
                     </span>
                   </p>
                 </div>
-                <button className="mt-4 border border-black text-black px-4 py-2 rounded-lg bg-transparent hover:bg-white hover:text-[#5D14AD] transition-all duration-300">
+                <button 
+                onClick={() => router.push(`/caretaker/${caretaker._id}`)}
+                className="mt-4 text-sm md:text-base lg:text-lg font-semibold border border-white px-4 py-2 rounded-lg bg-transparent hover:bg-white hover:text-[#5D14AD] transition-all duration-300">
                   View Profile
                 </button>
               </div>
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
+       )}
     </div>
   );
 };

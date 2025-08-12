@@ -11,11 +11,12 @@ export const ProfileImage = ({ isEditable = true, isUser = true, role }) => {
       <div className="relative w-[185px] h-[185px]">
         <CustomImage
           src={profilePics}
+          alt="Profile Image"
           style="w-full h-full rounded-tr-[20px] rounded-bl-[20px] rounded-tl-[50px] rounded-bl-[50px]"
         />
         {isEditable && (
           <div className="absolute top-[0.65rem] right-[0.65rem]">
-            <EditSvg />
+            <EditSvg className="bg-light-purple" />
           </div>
         )}
       </div>
@@ -25,14 +26,6 @@ export const ProfileImage = ({ isEditable = true, isUser = true, role }) => {
           <ClipBoard />
         </div>
       </div>
-      {
-        isUser ?  <Button className="bg-white rounded-[100px] gap-5 w-[182px] h-[26px] text-center text-[14px] font-[600] italic text-thick-purple">
-        <Text style="text-center text-[14px] font-[600] text-thick-purple">
-          Payment <span className="text-light-purple">History</span>
-        </Text>
-        </Button> : <h4 className="text-[20px] text-white font-semibold capitalize text-right">{role}</h4>
-      }
-     
     </div>
   );
 };

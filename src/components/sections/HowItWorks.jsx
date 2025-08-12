@@ -4,7 +4,10 @@ import React from "react";
 
 const HowItWorks = () => {
   return (
-    <section className="py-[50px] px-5 md:px-[72px] flex flex-col gap-4  md:gap-6" id="how-it-works">
+    <section
+      className="py-[50px] px-5 md:px-[72px] flex flex-col gap-4 md:gap-6"
+      id="how-it-works"
+    >
       <div>
         <h1 className="text-[#9D71C6] text-[20px] md:text-[30px] font-semibold">
           How Propi<span className="text-[#5D14AD]">Fix Works</span>
@@ -14,16 +17,25 @@ const HowItWorks = () => {
           easy with Propifix. Just follow these simple steps.
         </p>
       </div>
-      
+
       {HOWITWORKS.map((step) => (
-        <div className="flex gap-4">
-          <div className="size-[50px] relative flex">
-            <Image src={`/icons/${step.no}.svg`} height={50} width={50} alt="progress bar" className={`absolute top-0 left-0 ${step.no === '01' ? 'size-1/2' : ''} ${step.no === '02' ? 'w-1/2 h-full' : ''}`}/>
-            <h1 className="text-[#9D71C6] text-center items-center w-fit mx-auto my-auto text-[20px] font-semibold">{step.no}</h1>
+        <div key={step.no} className="flex gap-4 items-start">
+          <div className="w-[50px] h-[50px] relative shrink-0">
+            <Image
+              src={`/icons/${step.no}.svg`}
+              alt={`step ${step.no}`}
+              width={50}
+              height={50}
+              className={`absolute ${step.no === '01' ? 'size-1/2' : ''} ${step.no === '02' ? 'w-1/2 h-full' : ''}`}
+            />
+            <span className="absolute inset-0 flex items-center justify-center text-[#5D14AD] font-semibold text-[18px] leading-none">
+              {step.no}
+            </span>
           </div>
+
           <div className="flex flex-col gap-1">
             <h1 className="font-semibold text-[18px] md:text-[20px]">{step.title}</h1>
-            <p className="text-[12px] md:text-[14px] font-normal">{step.title}</p>
+            <p className="text-[12px] md:text-[14px] font-normal">{step.desc}</p>
           </div>
         </div>
       ))}

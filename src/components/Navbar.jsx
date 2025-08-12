@@ -1,43 +1,52 @@
-'use client';
+'use client'
 
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
-import { Button } from './ui/button';
-import AnimatedLinks from './AnimatedLinks';
-import { useEffect, useState } from 'react';
-import { MenuIcon, XIcon } from 'lucide-react';
-import Link from 'next/link';
-import { NAVLINKS } from '@/lib/constants';
-import CustomLink from './custom-ui/CustomLink';
-import { UseLoggedIn } from '@/hooks/useLoggedIn';
-import { MaxWidth } from './shared/MaxWidth';
+import { useRouter } from 'next/navigation'
+import Image from 'next/image'
+import { Button } from './ui/button'
+import AnimatedLinks from './AnimatedLinks'
+import { useEffect, useState } from 'react'
+import { MenuIcon, XIcon } from 'lucide-react'
+import Link from 'next/link'
+import { NAVLINKS } from '@/lib/constants'
+import CustomLink from './custom-ui/CustomLink'
+import { UseLoggedIn } from '@/hooks/useLoggedIn'
+import { MaxWidth } from './shared/MaxWidth'
+import Cookies from 'js-cookie'
+import { TOKEN_KEY } from '@/lib/constants'
+import {LogOut} from 'lucide-react'
 
 const Navbar = ({ transparent }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-  const [mounted, setMounted] = useState(false);
-  const { isLoggedIn } = UseLoggedIn();
-  const router = useRouter();
+  const [isOpen, setIsOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
+  const [mounted, setMounted] = useState(false)
+  const { isLoggedIn } = UseLoggedIn()
+  const router = useRouter()
 
-  // Avoid hydration mismatches
+  const token = Cookies.get(TOKEN_KEY)
+  const userData = token ? JSON.parse(token) : null
+  const role = userData?.user?.__t?.toLowerCase()
+  const userId = userData?.user?._id
+
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    setMounted(true)
+  }, [])
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+      setScrolled(window.scrollY > 50)
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
 
-  const handleClick = () => {
-    router.push(isLoggedIn ? '/user/account' : '/user/register');
-  };
+  const handleLogout = () => {
+    Cookies.remove(TOKEN_KEY)
+    router.push('/')
+  }
 
-  // Don't render until mounted to avoid hydration mismatch
-  if (!mounted) return null;
+  const profileLink = role && userId ? `/${role}/${userId}` : '/user/account'
+
+  if (!mounted) return null
 
   return (
     <header
@@ -74,17 +83,47 @@ const Navbar = ({ transparent }) => {
                 </li>
               ))}
             </ul>
-            <div>
-              <Button
-                variant="outline"
-                className={`bg-transparent cursor-pointer border capitalize text-white ${
-                  !transparent &&
-                  'border-black text-black hover:bg-gradient-to-r hover:from-[#5D14AD] hover:to-[#9747FF] hover:text-white transition-all duration-300'
-                }`}
-                onClick={handleClick}
-              >
-                {isLoggedIn ? 'Account' : 'Get Started'}
-              </Button>
+            <div className="relative">
+              {isLoggedIn ? (
+                <div className="group relative">
+                  <Button
+                    variant="outline"
+                    className={`bg-transparent cursor-pointer border capitalize text-white ${
+                      !transparent &&
+                      'border-black text-black hover:bg-gradient-to-r hover:from-[#5D14AD] hover:to-[#9747FF] hover:text-white transition-all duration-300'
+                    }`}
+                  >
+                    Account
+                  </Button>
+                  {/* Dropdown */}
+                  <div className="absolute hidden group-hover:block right-0 w-40 bg-white border border-gray-200 rounded-md shadow-lg">
+                    <button
+                      onClick={() => router.push(profileLink)}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-purple-50"
+                    >
+                      View Profile
+                    </button>
+                    <button
+                      onClick={handleLogout}
+                      className="flex items-center flex-row gap-2 w-full text-left px-4 py-2 text-sm hover:bg-purple-50"
+                    >
+                      Logout
+                      <LogOut size={16} className='text-[#5D14AD]'/>
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <Button
+                  variant="outline"
+                  className={`bg-transparent cursor-pointer border capitalize text-white ${
+                    !transparent &&
+                    'border-black text-black hover:bg-gradient-to-r hover:from-[#5D14AD] hover:to-[#9747FF] hover:text-white transition-all duration-300'
+                  }`}
+                  onClick={() => router.push('/user/register')}
+                >
+                  Get Started
+                </Button>
+              )}
             </div>
           </nav>
 
@@ -119,19 +158,48 @@ const Navbar = ({ transparent }) => {
               </AnimatedLinks>
             ))}
             <div>
-              <Button
-                variant="outline"
-                className="text-black border cursor-pointer capitalize hover:bg-purple-50"
-                onClick={handleClick}
-              >
-                {isLoggedIn ? 'Account' : 'Get Started'}
-              </Button>
+              {isLoggedIn ? (
+                <>
+                  <Button
+                    variant="outline"
+                    className="text-black border cursor-pointer capitalize hover:bg-purple-50 w-full mb-2"
+                    onClick={() => {
+                      router.push(profileLink)
+                      setIsOpen(false)
+                    }}
+                  >
+                    View Profile
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="hover:bg-purple-50 w-full"
+                    onClick={() => {
+                      handleLogout()
+                      setIsOpen(false)
+                    }}
+                  >
+                    Logout
+                    <LogOut size={12} className='text-[#5D14AD]'/>
+                  </Button>
+                </>
+              ) : (
+                <Button
+                  variant="outline"
+                  className="text-black border cursor-pointer capitalize hover:bg-purple-50 w-full"
+                  onClick={() => {
+                    router.push('/user/register')
+                    setIsOpen(false)
+                  }}
+                >
+                  Get Started
+                </Button>
+              )}
             </div>
           </nav>
         </div>
       </MaxWidth>
     </header>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

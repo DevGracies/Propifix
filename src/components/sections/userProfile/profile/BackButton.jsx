@@ -13,7 +13,7 @@ export const BackButton = () => {
     >
       <ChevronLeft className='w-[20.02px] h-[16.51px] text-black transition-colors duration-500 group-hover:text-primary-color' />
       <span className='underline text-black transition-colors duration-500 group-hover:text-primary-color ml-1'>
-        Back to agent profile
+        Back to HomePage
       </span>
     </div>
   )

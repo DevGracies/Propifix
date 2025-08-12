@@ -113,7 +113,7 @@ export const LandlordForm = () => {
         availableOnDemand: values.available_on_demand,
         next_of_kin: {
           fullName: values.next_of_kin_full_name,
-          relationship: values.relationship,
+          relationship: values.relationship.toLowerCase().trim(),
           phone: `+${nextOfKinPhone}`,
           email: values.next_of_kin_email,
           address: values.next_of_kin_address,
