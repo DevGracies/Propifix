@@ -3,9 +3,9 @@ import React from 'react'
 const AdminPropertyHubPage = () => {
   return (
     <div>
-      Property Hub
+      PROPERTY HUB
     </div>
   )
 }
 
-export default AdminPropertyHubPage
+export default AdminPropertyHubPage 

@@ -15,7 +15,7 @@ const poppins = Poppins({
 })
 
 const User = {
-  username: 'Grace Olori',
+  username: 'Mary Johnson',
   profileImage: '/images/agent.jpg',
 }
 
@@ -39,91 +39,93 @@ export default function AdminDashboardLayout({ children, user = User }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <div className={`${poppins.variable} flex min-h-screen bg-[#F5F5F5]`}>
-      {/* Sidebar */}
-      <aside
-        className={`fixed z-40 top-0 left-0 h-full w-full md:w-40 lg:w-64 bg-white border-r border-gray-200 flex flex-col justify-between py-10 px-6 transition-transform duration-300
-        md:relative md:translate-x-0
-        ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
-      >
-        <div>
-          <div className="flex justify-end md:hidden mb-6">
-            <button onClick={() => setSidebarOpen(false)}>
-              <X className="w-6 h-6 text-gray-800" />
-            </button>
-          </div>
-
-          <Link href="/" className="flex justify-center mb-12">
-            <Image src="/assets/propifix-icon.svg" alt="PropFix Logo" width={100} height={30} />
-          </Link>
-
-          {/* Nav Links */}
-          <nav className="space-y-6 text-center">
-            {navLinks.map(({ name, path }) => {
-              const isActive = pathname === path
-
-              return (
-                <Link
-                  href={path}
-                  key={name}
-                  onClick={() => setSidebarOpen(false)} 
-                  className={`relative block text-xs lg:text-sm font-medium transition-all ${
-                    name === 'Logout'
-                      ? 'text-[#A363FF]'
-                      : isActive
-                      ? 'text-[#5D14AD] font-semibold'
-                      : 'text-gray-600 hover:text-[#5D14AD]'
-                  }`}
-                >
-                  {name}
-
-                  {isActive && name !== 'Logout' && (
-                    <Image
-                      src="/icons/nav-underline.svg"
-                      alt="underline"
-                      width={60}
-                      height={10}
-                      className="mx-auto mt-1"
-                    />
-                  )}
-                </Link>
-              )
-            })}
-          </nav>
-        </div>
-      </aside>
-
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 z-30 bg-black/40 md:hidden"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
-      <div className="flex-1 flex flex-col">
-        {/* Navbar */}
-        <header className="w-full bg-white border-b shadow-xl border-gray-200 px-6 py-4 flex justify-between items-center md:justify-end">
-          <button onClick={() => setSidebarOpen(true)} className="md:hidden">
-            <Menu className="w-6 h-6 text-gray-800" />
-          </button>
-
-          <div className="flex items-center gap-3">
-            <div className="text-right">
-              <p className="text-sm lg:text-base font-bold">Hello, {user.username}</p>
-              <p className="text-xs lg:text-sm">Admin</p>
-            </div>
-            <Image
-              src={user.profileImage}
-              alt="Admin Avatar"
-              width={55}
-              height={40}
-              className="object-cover lg:mr-18 rounded-[16px] rounded-tl-[20px] rounded-br-[20px] border border-[#5D14AD]"
-            />
-          </div>
-        </header>
-
-        <main className="p-6 flex-1">{children}</main>
+    <div className={`${poppins.variable} flex h-screen overflow-hidden bg-[#F5F5F5]`}>
+  {/* Sidebar */}
+  <aside
+    className={`fixed z-40 top-0 left-0 h-screen w-full md:w-40 lg:w-64 bg-white border-r border-gray-200 flex flex-col justify-between py-10 px-6 transition-transform duration-300
+    md:relative md:translate-x-0
+    ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}`}
+  >
+    <div>
+      <div className="flex justify-end md:hidden mb-6">
+        <button onClick={() => setSidebarOpen(false)}>
+          <X className="w-6 h-6 text-gray-800" />
+        </button>
       </div>
+
+      <Link href="/" className="flex justify-center mb-12">
+        <Image src="/assets/propifix-icon.svg" alt="PropFix Logo" width={100} height={30} />
+      </Link>
+
+      {/* Nav Links */}
+      <nav className="space-y-6 text-center">
+        {navLinks.map(({ name, path }) => {
+          const isActive = pathname === path
+
+          return (
+            <Link
+              href={path}
+              key={name}
+              onClick={() => setSidebarOpen(false)}
+              className={`relative block text-xs lg:text-sm font-medium transition-all ${
+                name === 'Logout'
+                  ? 'text-[#A363FF]'
+                  : isActive
+                  ? 'text-[#5D14AD] font-semibold'
+                  : 'text-gray-600 hover:text-[#5D14AD]'
+              }`}
+            >
+              {name}
+
+              {isActive && name !== 'Logout' && (
+                <Image
+                  src="/icons/nav-underline.svg"
+                  alt="underline"
+                  width={60}
+                  height={10}
+                  className="mx-auto mt-1"
+                />
+              )}
+            </Link>
+          )
+        })}
+      </nav>
     </div>
+  </aside>
+
+  {sidebarOpen && (
+    <div
+      className="fixed inset-0 z-30 bg-black/40 md:hidden"
+      onClick={() => setSidebarOpen(false)}
+    />
+  )}
+
+  {/* Content Area */}
+  <div className="flex-1 flex flex-col h-screen">
+    {/* Navbar */}
+    <header className="w-full bg-white border-b shadow-xl border-gray-200 px-6 py-4 flex justify-between items-center md:justify-end">
+      <button onClick={() => setSidebarOpen(true)} className="md:hidden">
+        <Menu className="w-6 h-6 text-gray-800" />
+      </button>
+
+      <div className="flex items-center gap-3">
+        <div className="text-right">
+          <p className="text-sm lg:text-base font-bold">Hello, {user.username}</p>
+          <p className="text-xs lg:text-sm">Admin</p>
+        </div>
+        <Image
+          src={user.profileImage}
+          alt="Admin Avatar"
+          width={55}
+          height={40}
+          className="object-cover lg:mr-18 rounded-[16px] rounded-tl-[20px] rounded-br-[20px] border border-[#5D14AD]"
+        />
+      </div>
+    </header>
+
+    <main className="p-6 flex-1 overflow-y-auto">{children}</main>
+  </div>
+</div>
+
   )
 }
