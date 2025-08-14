@@ -1,7 +1,7 @@
 // pages/admin/inspection-hub.js
 "use client";
 import { useState } from "react";
-import { X, CreditCard } from "lucide-react";
+import { X, CreditCard, Flame } from "lucide-react";
 
 export default function InspectionHub() {
   const [activeCard, setActiveCard] = useState(1);
@@ -257,7 +257,7 @@ export default function InspectionHub() {
                           : "text-black"
                       }`}
                     >
-                      🔥 <span>{step}</span>
+                     <Flame size={28} /> <span>{step}</span>
                     </div>
                     <button
                       className={`text-white px-3 py-1 rounded ${
