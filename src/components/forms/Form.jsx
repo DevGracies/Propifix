@@ -26,10 +26,10 @@ const Form = ({ SELECTOPTIONS, calendarLabel, selectedTab, onTabChange }) => {
   const tabs = ["buy", "rent", "shortlet", "land"];
 
   return (
-    <div className="mt-8 p-5 w-full max-w-[1100px] rounded-md bg-white shadow-lg">
+    <div className="mt-8 p-5 w-full max-w-[920px] rounded-md bg-white shadow-lg">
       <FormContainer {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)}>
-          <div className="flex gap-10 md:gap-[65px] w-fit mx-auto">
+          <div className="flex flex-wrap justify-center gap-4 md:gap-[65px] w-full">
             {tabs.map((tab) => (
               <AnimatedLinks 
                 key={tab}
@@ -47,7 +47,7 @@ const Form = ({ SELECTOPTIONS, calendarLabel, selectedTab, onTabChange }) => {
             ))}
           </div>
 
-          <div className="flex items-center w-full border border-gray-300 rounded-lg px-2 py-1 focus-within:ring-2 focus-within:ring-purple-500 mt-[20px]">
+          <div className="flex items-center w-full border border-gray-300 rounded-lg px-2 py-1 focus-within:ring-2 focus-within:ring-purple-500 mt-[15px]">
             <Input
               type="text"
               placeholder="Enter your location"
@@ -58,15 +58,14 @@ const Form = ({ SELECTOPTIONS, calendarLabel, selectedTab, onTabChange }) => {
             </Button>
           </div>
 
-          <div className="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(180px,1fr))] gap-4">
+          <div className="mt-5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(120px,1fr))] justify-center` gap-4">
             {calendarLabel && (
-              <div>
+              <div className='w-full'>
                 <FormField
                   control={form.control}
                   name="calendar"
                   render={({ field }) => (
                     <FormItem className="flex flex-col gap-1">
-                      <FormLabel className="text-sm font-medium text-black">{calendarLabel}</FormLabel>
                       <FormControl>
                         <div
                           onClick={() => {
@@ -75,7 +74,7 @@ const Form = ({ SELECTOPTIONS, calendarLabel, selectedTab, onTabChange }) => {
                           className="w-full cursor-pointer border border-gray-300 px-3 py-1 rounded-md bg-white text-black shadow-none outline-none focus-within:ring-2 focus-within:ring-[#9747FF] flex items-center justify-between"
                         >
                           <span className="text-left">
-                            {field.value || "Select date"}
+                            {field.value || "Availablity Date"}
                           </span>
                           <Calendar width={16} height={16}/>
                           <input
@@ -93,14 +92,12 @@ const Form = ({ SELECTOPTIONS, calendarLabel, selectedTab, onTabChange }) => {
               </div>
             )}
           {SELECTOPTIONS.map((option, index) => (
-            <FormField
-              key={index}
+           <div key={index} className='w-full'>
+             <FormField
               control={form.control}
               name={option.label}
               render={({ field }) => (
                 <FormItem className="flex flex-col gap-1">
-                  <FormLabel className="text-sm font-medium text-black">{option.label}</FormLabel>
-
                   {option.label === "Property Highlights" ? (
                     <Select
                       open={field.value?.open}
@@ -113,7 +110,7 @@ const Form = ({ SELECTOPTIONS, calendarLabel, selectedTab, onTabChange }) => {
                       value="" 
                     >
                       <FormControl>
-                        <SelectTrigger className="w-full border border-gray-300 px-3 py-2 rounded-md bg-white text-black shadow-none outline-none focus:ring-2 focus:ring-[#9747FF]">
+                        <SelectTrigger className="w-full border text-sm border-gray-300 px-3 py-2 rounded-md bg-white text-black shadow-none outline-none focus:ring-2 focus:ring-[#9747FF]">
                           <div className="w-full text-left text-black">
                             {(field.value?.values?.length || 0) === 0
                               ? "Property Highlights"
@@ -157,7 +154,7 @@ const Form = ({ SELECTOPTIONS, calendarLabel, selectedTab, onTabChange }) => {
                   ) : (
                     <Select onValueChange={field.onChange} defaultValue={field.value}>
                       <FormControl>
-                        <SelectTrigger className="w-full border border-gray-300 px-3 py-2 rounded-md bg-white text-black shadow-none outline-none focus:ring-2 focus:ring-[#9747FF]">
+                        <SelectTrigger className="w-full border border-gray-300 px-3 py-2 rounded-md bg-white text-black text-sm shadow-none outline-none focus:ring-2 focus:ring-[#9747FF]">
                           <SelectValue placeholder={option.label} className="text-left" />
                         </SelectTrigger>
                       </FormControl>
@@ -179,6 +176,7 @@ const Form = ({ SELECTOPTIONS, calendarLabel, selectedTab, onTabChange }) => {
                 </FormItem>
               )}
             />
+           </div>
           ))}
           </div>
         </form>

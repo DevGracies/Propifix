@@ -88,15 +88,17 @@ const AgentProfilePage = () => {
         />
 
         <Stats
-          title="Agent Performance"
-          responseTime="Typically responds within 1 hour."
-          jobsCompleted={10} 
-          successRateInPercentage={80}  
-          successRateValue="80%"
-          numberOfCustomerReviews={50} 
-          customerRatingInPercentage={80} 
-          customerRatingValue="4.5/5" 
-          serviceFeeInNaira="15,000" 
+          // title="Agent Performance"
+          // responseTime="Typically responds within 1 hour."
+          // jobsCompleted={10} 
+          // successRateInPercentage={80}  
+          // successRateValue="80%"
+          // numberOfCustomerReviews={50} 
+          // customerRatingInPercentage={80} 
+          // customerRatingValue="4.5/5" 
+          // serviceFeeInNaira="15,000" 
+          role="agent"
+          profileData={agent}
         />
       </div>
 
