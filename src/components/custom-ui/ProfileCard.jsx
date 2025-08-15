@@ -6,7 +6,7 @@ import { Button } from "../ui/button";
 import { ProfileImage } from "../sections/userProfile/ProfileImage";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { PlusIcon, User } from "lucide-react";
+import { PlusIcon } from "lucide-react";
 
 const ProfileCard = ({
   role = "user",

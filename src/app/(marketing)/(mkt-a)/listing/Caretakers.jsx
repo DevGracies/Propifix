@@ -104,7 +104,7 @@ const Caretakers = () => {
                     <span className="text-sm md:text-base lg:text-lg italic">Rating:</span>
                     <Rating
                       name={`rating-${caretaker.id}`}
-                      value={caretaker.rating}
+                      value={caretaker.ratings.averageRating}
                       precision={0.5}
                       readOnly
                       className="!text-white ml-2"
