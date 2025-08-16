@@ -2,13 +2,14 @@
 import React, { useEffect, useState } from "react";
 import FindAgentForm from "../forms/FindAgentForm";
 import Image from "next/image";
-import MapComponent from "../MapContainer";
+import dynamic from "next/dynamic";
 
 const agents = [
   { id: 1, name: "Grace Olori", lat: 6.5244, lng: 3.3792 },
   { id: 2, name: "John Doe", lat: 6.6, lng: 3.35 },
 ];
 
+const MapComponent = dynamic(() => import("../MapContainer"), {ssr: false} )
 const FindAgent = () => {
   const [location, setLocation] = useState("Detecting location...");
 

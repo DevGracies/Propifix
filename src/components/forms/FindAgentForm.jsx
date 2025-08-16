@@ -73,6 +73,7 @@ const FindAgentForm = () => {
            if (fieldOption.type === "select") {
              return (
                <FormField
+               key={fieldOption.id || index}
                  control={form.control}
                  name="serviceCategory"
                  render={({ field }) => (

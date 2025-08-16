@@ -42,6 +42,7 @@ const Footer = () => {
                 <div className="flex space-x-4 ">
                   {SOCIALLINKS.map((link, i) => (
                     <Button
+                    key={link}
                       className={"rounded-full bg-white hover:bg-white/60"}
                       asChild
                     >

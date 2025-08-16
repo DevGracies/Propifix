@@ -28,7 +28,7 @@ const DiscoverMore = () => {
          View All
         </Button>
       </div>
-      <div class="grid grid-cols-[repeat(auto-fit,minmax(122px,1fr))] md:grid-rows-2 gap-4 h-[650px] md:h-[535px]">
+      <div className="grid grid-cols-[repeat(auto-fit,minmax(122px,1fr))] md:grid-rows-2 gap-4 h-[650px] md:h-[535px]">
         <Card
           desc={"Custom furniture and repair services tailored to your needs"}
           title={"carpentry"}
