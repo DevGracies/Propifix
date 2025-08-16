@@ -1,6 +1,6 @@
 "use client";
-import { useForm } from "react-hook-form";
-import * as Slider from "@radix-ui/react-slider"; 
+import { useForm, Controller } from "react-hook-form";
+import * as Slider from "@radix-ui/react-slider"; // Import Radix Slider
 import {
   Form,
   FormControl,
@@ -19,7 +19,6 @@ import {
   SelectValue,
 } from "../ui/select";
 import { Search } from "lucide-react";
-import React from "react";
 
 const FIELDS = [
   {
@@ -35,8 +34,6 @@ const FIELDS = [
     type: "select",
     items: [
       "house agent",
-      "caretaker",
-      "landlord",
       "carpentry",
       "electrical work",
       "dry cleaning",
@@ -53,26 +50,18 @@ const FIELDS = [
   },
 ];
 
-const FindAgentForm = ({ onFormChange, detectedLocation, isLoading }) => {
+const FindAgentForm = () => {
   const form = useForm({
     defaultValues: {
-      searchLocation: detectedLocation || "Ikeja, Lagos",
+      searchLocation: "Ikeja, Lagos",
       serviceCategory: "house agent",
-      radius: 10,
+      radius: 10, // Default radius in km
     },
   });
 
-  const watchedValues = form.watch();
-
   const onSubmit = (data) => {
-    onFormChange(data);
+    console.log(data);
   };
-
-  React.useEffect(() => {
-    if (detectedLocation && detectedLocation !== "Detecting location...") {
-      form.setValue("searchLocation", detectedLocation);
-    }
-  }, [detectedLocation, form]);
 
   return (
     <Form {...form}>
@@ -84,7 +73,7 @@ const FindAgentForm = ({ onFormChange, detectedLocation, isLoading }) => {
            if (fieldOption.type === "select") {
              return (
                <FormField
-                 key={index}
+               key={fieldOption.id || index}
                  control={form.control}
                  name="serviceCategory"
                  render={({ field }) => (
@@ -95,6 +84,7 @@ const FindAgentForm = ({ onFormChange, detectedLocation, isLoading }) => {
                        {fieldOption.label}
                      </FormLabel>
                      <Select
+                       key={index}
                        onValueChange={field.onChange}
                        defaultValue={field.value}
                      >
@@ -208,10 +198,9 @@ const FindAgentForm = ({ onFormChange, detectedLocation, isLoading }) => {
           type="submit"
           variant="outline"
           className="min-w-full bg-transparent capitalize"
-          disabled={isLoading}
         >
           <Search size={13} />
-          {isLoading ? "Searching..." : "Search Professionals"}
+          Search Professionals
         </Button>
       </form>
     </Form>
