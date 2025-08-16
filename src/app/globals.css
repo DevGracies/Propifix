@@ -207,3 +207,43 @@ html {
     display:none;
   }
 }
+
+.leaflet-popup-content-wrapper {
+  background-color: #9747FF !important; /* Purple background */
+  color: white !important;              /* White text */
+  border-radius: 10px !important;       /* Rounded corners */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.25) !important; /* Soft shadow */
+}
+
+.leaflet-popup-content {
+  margin: 8px 12px !important; /* Space inside popup */
+  font-size: 0.875rem;         /* 14px */
+  line-height: 1.4;
+  color: white;
+  text-decoration: white;
+}
+
+.leaflet-popup-tip {
+  background-color: #9747FF !important; 
+}
+
+.leaflet-popup-content p {
+  margin: 0;
+  color: white !important;
+}
+
+.leaflet-popup-content button {
+  background-color: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.leaflet-popup-content button:hover {
+  background-color: white;
+  color: #9747FF;
+}

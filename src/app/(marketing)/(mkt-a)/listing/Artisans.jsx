@@ -224,7 +224,7 @@ const Artisans = () => {
                     <span className="text-sm md:text-base lg:text-lg italic mr-2">Rating:</span>
                     <Rating
                       name={`rating-${artisan._id}`}
-                      value={4.5}
+                      value={artisan.ratings.averageRating}
                       precision={0.5}
                       readOnly
                       className="!text-white"

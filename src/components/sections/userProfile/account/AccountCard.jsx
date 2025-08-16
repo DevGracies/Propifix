@@ -7,6 +7,7 @@ import { Text } from '@/components/shared/Text'
 import { CustomImage } from '@/components/shared/Image'
 import profileBg from '../../../../../public/User_profile_bg.png'
 import { useRouter } from 'next/navigation'
+import { Bell } from 'lucide-react'
 
 export const AccountCard = ({account}) => {
   const router = useRouter()
@@ -35,12 +36,17 @@ export const AccountCard = ({account}) => {
         <AccountInfo title={`User's Name`} value={fullName} />
         <AccountInfo title={'Phone Number'} value={phone} />
         <AccountInfo title={'Email'} value={email} />
+        <div className='flex flex-row items-center gap-2'>
         <Button
           onClick={() => router.push(`/user/${_id || ''}`)}
-          className='bg-white text-black rounded-[12px] w-[185px] text-center text-[16px]'
+          className='bg-white hover:text-white text-black rounded-[12px] w-[185px] text-center text-[16px]'
         >
           <Text style='underline'>Edit account info</Text>
         </Button>
+        <button className='cursor-pointer' onClick={() => router.push('/notifications')}>
+          <Bell size={36} className='bg-white rounded-[12px] p-1 text-[#5D14AD]'/>
+        </button>
+        </div>
       </div>
       <ProfileImage />
     </div>
