@@ -74,7 +74,7 @@ const Hero = () => {
           Find Your Perfect Home with Trusted Landlords, Caretakers, or Agents
         </p>
 
-        <Form
+      <Form
           SELECTOPTIONS={options}
           calendarLabel={label}
           selectedTab={selectedTab}

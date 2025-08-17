@@ -171,7 +171,7 @@ const Agents = () => {
                         <span className="text-sm md:text-base lg:text-lg italic">Rating:</span>
                         <Rating
                           name={`rating-${agent.id}`}
-                          value={agent.rating}
+                          value={agent.ratings.averageRating}
                           precision={0.5}
                           readOnly
                           className="!text-white ml-2"
